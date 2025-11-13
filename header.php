@@ -28,7 +28,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		}
 
 		.ti-header__container {
-			max-width: 1400px;
+			max-width: 1360px;
 			margin: 0 auto;
 			padding: 12px 20px;
 			display: flex;
@@ -159,6 +159,42 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			height: 17px;
 			fill: #fff;
 		}
+		.ti-header__mobile-toggle {
+			display: none;
+			background: #d22f1e;
+			border: none;
+			width: 44px;
+			height: 44px;
+			border-radius: 4px;
+			cursor: pointer;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 5px;
+			padding: 0;
+			transition: background 0.3s;
+			z-index: 1001;
+		}
+		.ti-header__mobile-toggle:hover {
+			background: #b01e0f;
+		}
+		.ti-header__mobile-toggle span {
+			display: block;
+			width: 24px;
+			height: 3px;
+			background: #fff;
+			border-radius: 2px;
+			transition: all 0.3s ease;
+		}
+		.ti-header__mobile-toggle.is-active span:nth-child(1) {
+			transform: rotate(45deg) translate(7px, 7px);
+		}
+		.ti-header__mobile-toggle.is-active span:nth-child(2) {
+			opacity: 0;
+		}
+		.ti-header__mobile-toggle.is-active span:nth-child(3) {
+			transform: rotate(-45deg) translate(7px, -7px);
+		}
 		.ti-header__nav-menu {
 			display: flex;
 			gap: 12px;
@@ -182,9 +218,8 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			gap: 4px;
 			text-decoration: none;
 			color: #333;
-			font-size: 12px;
-			transition: opacity 0.2s;
 			font-size: 16px;
+			transition: opacity 0.2s;
 		}
 		.ti-header__menu-list a:hover {
 			opacity: 0.7;
@@ -192,6 +227,79 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		.ti-header__menu-list .current-menu-item a {
 			opacity: 0.7;
 			font-weight: 600;
+		}
+		/* Mobile Sidebar Menu */
+		.ti-header__mobile-menu {
+			position: fixed;
+			top: 0;
+			left: -100%;
+			width: 320px;
+			max-width: 85vw;
+			height: 100vh;
+			background: #fff;
+			box-shadow: 2px 0 15px rgba(0,0,0,0.15);
+			z-index: 1000;
+			overflow-y: auto;
+			transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+			padding: 80px 20px 20px;
+		}
+		.ti-header__mobile-menu.is-open {
+			left: 0;
+		}
+		.ti-header__mobile-menu-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0,0,0,0.6);
+			z-index: 999;
+			opacity: 0;
+			visibility: hidden;
+			transition: opacity 0.3s ease, visibility 0.3s ease;
+			backdrop-filter: blur(2px);
+		}
+		.ti-header__mobile-menu-overlay.is-active {
+			opacity: 1;
+			visibility: visible;
+		}
+		.ti-header__mobile-menu-list {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		.ti-header__mobile-menu-list li {
+			margin: 0 0 4px 0;
+		}
+		.ti-header__mobile-menu-list a {
+			display: block;
+			padding: 14px 16px;
+			text-decoration: none;
+			color: #333;
+			font-size: 16px;
+			border-radius: 6px;
+			transition: all 0.2s ease;
+			font-weight: 500;
+		}
+		.ti-header__mobile-menu-list a:hover {
+			background: #f5f5f5;
+			color: #d22f1e;
+			transform: translateX(4px);
+		}
+		.ti-header__mobile-menu-list .current-menu-item a {
+			background: #fff5f5;
+			color: #d22f1e;
+			border-left: 3px solid #d22f1e;
+			padding-left: 13px;
+		}
+		.ti-header__mobile-menu-list .sub-menu {
+			list-style: none;
+			margin: 0;
+			padding: 0 0 0 20px;
+		}
+		.ti-header__mobile-menu-list .sub-menu a {
+			font-size: 14px;
+			padding: 10px 16px;
 		}
 		.ti-header__right {
 			display: flex;
@@ -255,7 +363,14 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			left: auto;
 			right: 0;
 		}
-		/* Mobile Responsive */
+		[dir="rtl"] .ti-header__mobile-menu {
+			left: auto;
+			right: -100%;
+		}
+		[dir="rtl"] .ti-header__mobile-menu.is-open {
+			right: 0;
+		}
+		/* Tablet Responsive */
 		@media (max-width: 992px) {
 			.ti-header__container {
 				flex-wrap: wrap;
@@ -274,32 +389,95 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				gap: 8px;
 			}
 			.ti-header__menu-list a {
-				font-size: 11px;
+				font-size: 14px;
 			}
 			.ti-header__title {
 				font-size: 24px;
 			}
 		}
+		/* Mobile Responsive */
 		@media (max-width: 768px) {
 			.ti-header__container {
-				flex-direction: column;
-				align-items: stretch;
+				padding: 10px 15px;
+				position: relative;
 			}
-			.ti-header__left,
-			.ti-header__center,
-			.ti-header__right {
+			.ti-header__mobile-toggle {
+				display: flex;
+				order: 0;
+				margin-right: 12px;
+			}
+			.ti-header__nav-menu {
+				display: none;
+			}
+			.ti-header__left {
+				order: 3;
+				flex-direction: row;
+				gap: 8px;
 				width: 100%;
+				margin-top: 10px;
 			}
 			.ti-header__center {
-				order: 2;
+				order: 1;
+				width: auto;
 				margin-top: 0;
+				flex: 1;
+				justify-content: flex-start;
+				align-items: center;
 			}
 			.ti-header__right {
-				order: 1;
-				justify-content: space-between;
+				order: 2;
+				width: auto;
+				justify-content: flex-end;
+				margin-top: 0;
 			}
 			.ti-header__phone {
-				font-size: 16px;
+				font-size: 14px;
+			}
+			.ti-header__call-icon {
+				width: 28px;
+				height: 28px;
+			}
+			.ti-header__call-icon svg {
+				width: 14px;
+				height: 14px;
+			}
+			.ti-header__title {
+				font-size: 20px;
+			}
+			.ti-header__address {
+				font-size: 11px;
+			}
+			.ti-header__logo {
+				width: 60px;
+			}
+			.ti-header__brand {
+				display: none;
+			}
+		}
+		@media (max-width: 480px) {
+			.ti-header__container {
+				padding: 8px 10px;
+			}
+			.ti-header__left {
+				flex-direction: column;
+				gap: 6px;
+			}
+			.ti-header__lang-switcher {
+				font-size: 12px;
+				padding: 4px 8px;
+			}
+			.ti-header__search {
+				font-size: 12px;
+				padding: 6px 10px;
+			}
+			.ti-header__phone {
+				font-size: 12px;
+			}
+			.ti-header__title {
+				font-size: 18px;
+			}
+			.ti-header__brand {
+				gap: 2px;
 			}
 		}
 	</style>
@@ -349,6 +527,11 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 
 		<!-- Center Section: Phone & Navigation Menu -->
 		<div class="ti-header__center">
+			<button class="ti-header__mobile-toggle" aria-label="<?php esc_attr_e( 'Открыть меню', 'tipress' ); ?>" aria-expanded="false">
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
 			<a href="tel:033760386" class="ti-header__phone-link">
 				<span class="ti-header__phone">03-3760386</span>
 			</a>
@@ -406,5 +589,22 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		</div>
 	</div>
 </header>
+
+<!-- Mobile Sidebar Menu -->
+<div class="ti-header__mobile-menu-overlay"></div>
+<aside class="ti-header__mobile-menu" aria-label="<?php esc_attr_e( 'Мобильное меню', 'tipress' ); ?>">
+	<?php
+	wp_nav_menu(
+		[
+			'theme_location' => 'primary',
+			'menu_id'        => 'ti-mobile-menu',
+			'container'      => false,
+			'menu_class'     => 'ti-header__mobile-menu-list',
+			'fallback_cb'    => false,
+			'depth'          => 2,
+		]
+	);
+	?>
+</aside>
 
 <div id="content" class="site-content">

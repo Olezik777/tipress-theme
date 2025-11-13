@@ -16,6 +16,10 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php wp_head(); ?>
 	<style id="ti-header-styles">
+		/* Global Font Family */
+		html, body {
+			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+		}
 		/* Header Critical Styles - Inline for faster rendering */
 		.ti-header {
 			background: #fff;

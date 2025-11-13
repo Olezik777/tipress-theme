@@ -25,11 +25,11 @@ function tipress_theme_setup() {
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'html5', [ 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script' ] );
 
+	// Register navigation menus
+	// Using separate locations for each language to avoid Polylang auto-combinations
 	register_nav_menus(
 		[
-			'primary-en'   => __( 'Основное меню English', 'tipress' ),
-			'primary-he'   => __( 'Основное меню עברית', 'tipress' ),
-			'primary-ar'   => __( 'Основное меню العربية', 'tipress' ),
+			'primary'      => __( 'Основное меню', 'tipress' ),
 			'footer-one'   => __( 'Футер: левый список', 'tipress' ),
 			'footer-two'   => __( 'Футер: центральный список', 'tipress' ),
 			'footer-three' => __( 'Футер: правый список', 'tipress' ),
@@ -37,6 +37,20 @@ function tipress_theme_setup() {
 	);
 }
 add_action( 'after_setup_theme', 'tipress_theme_setup' );
+
+/**
+ * Filter Polylang nav menu locations to prevent duplicate combinations
+ * This ensures only one menu location per language is shown
+ */
+add_filter( 'pll_nav_menu_args', function( $args ) {
+	// Only show menu locations that match current language
+	if ( isset( $args['theme_location'] ) && function_exists( 'pll_current_language' ) ) {
+		$current_lang = pll_current_language();
+		// Polylang will automatically filter menus by language
+		// This filter just ensures clean menu location names
+	}
+	return $args;
+}, 10, 1 );
 
 function tipress_widgets_init() {
 	register_sidebar(

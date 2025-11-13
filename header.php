@@ -26,11 +26,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			position: relative;
 			z-index: 100;
 		}
-		.ti-header__top-bar {
-			background: #d4a574;
-			height: 4px;
-			width: 100%;
-		}
+
 		.ti-header__container {
 			max-width: 1400px;
 			margin: 0 auto;
@@ -310,7 +306,6 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 <?php wp_body_open(); ?>
 
 <header id="masthead" class="ti-header">
-	<div class="ti-header__top-bar"></div>
 	<div class="ti-header__container">
 		<!-- Left Section: Language & Search -->
 		<div class="ti-header__left">
@@ -360,30 +355,12 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 					<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
 				</svg>
 			</a>
-			<?php
-			// Determine menu location based on current language
-			$menu_location = 'primary-en'; // default
-			if ( function_exists( 'pll_current_language' ) ) {
-				$current_lang_code = pll_current_language();
-				switch ( $current_lang_code ) {
-					case 'he':
-						$menu_location = 'primary-he';
-						break;
-					case 'ar':
-						$menu_location = 'primary-ar';
-						break;
-					case 'en':
-					default:
-						$menu_location = 'primary-en';
-						break;
-				}
-			}
-			?>
 			<nav class="ti-header__nav-menu" aria-label="<?php esc_attr_e( 'Основная навигация', 'tipress' ); ?>">
 				<?php
+				// Polylang automatically shows the correct menu for current language
 				wp_nav_menu(
 					[
-						'theme_location' => $menu_location,
+						'theme_location' => 'primary',
 						'menu_id'        => 'ti-primary-menu',
 						'container'      => false,
 						'menu_class'     => 'ti-header__menu-list',

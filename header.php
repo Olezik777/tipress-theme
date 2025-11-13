@@ -46,6 +46,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			flex-direction: column;
 			gap: 8px;
 			min-width: 0;
+			position: relative;
 		}
 		.ti-header__lang-switcher {
 			display: inline-flex;
@@ -69,6 +70,37 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			height: 14px;
 			object-fit: cover;
 			border-radius: 2px;
+		}
+		.ti-header__lang-dropdown {
+			display: none;
+			position: absolute;
+			top: 100%;
+			left: 0;
+			margin-top: 8px;
+			background: #fff;
+			border: 1px solid #ddd;
+			border-radius: 6px;
+			padding: 8px;
+			z-index: 1000;
+			min-width: 150px;
+			box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+		}
+		.ti-header__lang-item {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			padding: 6px 12px;
+			text-decoration: none;
+			color: #333;
+			border-radius: 4px;
+			transition: background 0.2s;
+		}
+		.ti-header__lang-item:hover {
+			background: #f5f5f5;
+		}
+		.ti-header__lang-item .ti-header__lang-flag {
+			width: 20px;
+			height: 14px;
 		}
 		.ti-header__search {
 			display: flex;
@@ -131,12 +163,23 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			height: 20px;
 			fill: #fff;
 		}
-		.ti-header__nav-icons {
+		.ti-header__nav-menu {
 			display: flex;
 			gap: 12px;
 			align-items: center;
 		}
-		.ti-header__nav-item {
+		.ti-header__menu-list {
+			display: flex;
+			gap: 12px;
+			align-items: center;
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		.ti-header__menu-list li {
+			margin: 0;
+		}
+		.ti-header__menu-list a {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
@@ -146,15 +189,12 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			font-size: 12px;
 			transition: opacity 0.2s;
 		}
-		.ti-header__nav-item:hover {
+		.ti-header__menu-list a:hover {
 			opacity: 0.7;
 		}
-		.ti-header__nav-icon {
-			width: 32px;
-			height: 32px;
-			background-size: contain;
-			background-repeat: no-repeat;
-			background-position: center;
+		.ti-header__menu-list .current-menu-item a {
+			opacity: 0.7;
+			font-weight: 600;
 		}
 		.ti-header__right {
 			display: flex;
@@ -213,6 +253,10 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		[dir="rtl"] .ti-header__address {
 			flex-direction: row-reverse;
 		}
+		[dir="rtl"] .ti-header__lang-dropdown {
+			left: auto;
+			right: 0;
+		}
 		/* Mobile Responsive */
 		@media (max-width: 992px) {
 			.ti-header__container {
@@ -225,15 +269,14 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				justify-content: space-between;
 				margin-top: 10px;
 			}
-			.ti-header__nav-icons {
+			.ti-header__nav-menu {
 				gap: 8px;
 			}
-			.ti-header__nav-item {
-				font-size: 11px;
+			.ti-header__menu-list {
+				gap: 8px;
 			}
-			.ti-header__nav-icon {
-				width: 28px;
-				height: 28px;
+			.ti-header__menu-list a {
+				font-size: 11px;
 			}
 			.ti-header__title {
 				font-size: 24px;
@@ -286,11 +329,11 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 						<polyline points="3,5 6,8 9,5"></polyline>
 					</svg>
 				</button>
-				<div class="ti-header__lang-dropdown" style="display:none;position:absolute;background:#fff;border:1px solid #ddd;border-radius:6px;padding:8px;z-index:1000;margin-top:40px;">
+				<div class="ti-header__lang-dropdown">
 					<?php foreach ( $languages as $lang ) : ?>
-						<a href="<?php echo esc_url( $lang['url'] ); ?>" class="ti-header__lang-item" style="display:flex;align-items:center;gap:8px;padding:6px 12px;text-decoration:none;color:#333;">
+						<a href="<?php echo esc_url( $lang['url'] ); ?>" class="ti-header__lang-item">
 							<?php if ( ! empty( $lang['flag'] ) ) : ?>
-								<img src="<?php echo esc_url( $lang['flag'] ); ?>" alt="" style="width:20px;height:14px;">
+								<img src="<?php echo esc_url( $lang['flag'] ); ?>" alt="" class="ti-header__lang-flag">
 							<?php endif; ?>
 							<span><?php echo esc_html( $lang['name'] ); ?></span>
 						</a>
@@ -307,7 +350,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			</a>
 		</div>
 
-		<!-- Center Section: Phone & Navigation Icons -->
+		<!-- Center Section: Phone & Navigation Menu -->
 		<div class="ti-header__center">
 			<a href="tel:033760386" class="ti-header__phone-link">
 				<span class="ti-header__phone">03-3760386</span>
@@ -317,19 +360,38 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 					<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
 				</svg>
 			</a>
-			<nav class="ti-header__nav-icons" aria-label="<?php esc_attr_e( 'Быстрая навигация', 'tipress' ); ?>">
-				<a href="<?php echo esc_url( home_url( '/contactus/' ) ); ?>" class="ti-header__nav-item">
-					<div class="ti-header__nav-icon" style="background-image:url(<?php echo esc_url( $theme_uri . '/assets/images/menu-icons.png' ); ?>);background-position:0 0;"></div>
-					<span><?php esc_html_e( 'Связаться', 'tipress' ); ?></span>
-				</a>
-				<a href="<?php echo esc_url( home_url( '/departments/' ) ); ?>" class="ti-header__nav-item">
-					<div class="ti-header__nav-icon" style="background-image:url(<?php echo esc_url( $theme_uri . '/assets/images/menu-icons.png' ); ?>);background-position:-82px 0;"></div>
-					<span><?php esc_html_e( 'Отделения', 'tipress' ); ?></span>
-				</a>
-				<a href="<?php echo esc_url( home_url( '/doctors/' ) ); ?>" class="ti-header__nav-item">
-					<div class="ti-header__nav-icon" style="background-image:url(<?php echo esc_url( $theme_uri . '/assets/images/menu-icons.png' ); ?>);background-position:-164px 0;"></div>
-					<span><?php esc_html_e( 'Врачи', 'tipress' ); ?></span>
-				</a>
+			<?php
+			// Determine menu location based on current language
+			$menu_location = 'primary-en'; // default
+			if ( function_exists( 'pll_current_language' ) ) {
+				$current_lang_code = pll_current_language();
+				switch ( $current_lang_code ) {
+					case 'he':
+						$menu_location = 'primary-he';
+						break;
+					case 'ar':
+						$menu_location = 'primary-ar';
+						break;
+					case 'en':
+					default:
+						$menu_location = 'primary-en';
+						break;
+				}
+			}
+			?>
+			<nav class="ti-header__nav-menu" aria-label="<?php esc_attr_e( 'Основная навигация', 'tipress' ); ?>">
+				<?php
+				wp_nav_menu(
+					[
+						'theme_location' => $menu_location,
+						'menu_id'        => 'ti-primary-menu',
+						'container'      => false,
+						'menu_class'     => 'ti-header__menu-list',
+						'fallback_cb'    => false,
+						'depth'          => 1,
+					]
+				);
+				?>
 			</nav>
 		</div>
 

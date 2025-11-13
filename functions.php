@@ -27,7 +27,9 @@ function tipress_theme_setup() {
 
 	register_nav_menus(
 		[
-			'primary'      => __( 'Основное меню', 'tipress' ),
+			'primary-en'   => __( 'Основное меню English', 'tipress' ),
+			'primary-he'   => __( 'Основное меню עברית', 'tipress' ),
+			'primary-ar'   => __( 'Основное меню العربية', 'tipress' ),
 			'footer-one'   => __( 'Футер: левый список', 'tipress' ),
 			'footer-two'   => __( 'Футер: центральный список', 'tipress' ),
 			'footer-three' => __( 'Футер: правый список', 'tipress' ),

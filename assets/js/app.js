@@ -10,17 +10,29 @@ domReady(function () {
 	const langDropdown = document.querySelector('.ti-header__lang-dropdown');
 	if (langSwitcher && langDropdown) {
 		langSwitcher.addEventListener('click', function(e) {
-			e.preventDefault();
-			const isOpen = langDropdown.style.display !== 'none';
+			e.stopPropagation();
+			const isOpen = langDropdown.style.display === 'block';
 			langDropdown.style.display = isOpen ? 'none' : 'block';
-			this.setAttribute('aria-expanded', String(!isOpen));
+			langSwitcher.setAttribute('aria-expanded', String(!isOpen));
 		});
 		// Close on outside click
-		document.addEventListener('click', function(e) {
+		const closeDropdown = function(e) {
 			if (!langSwitcher.contains(e.target) && !langDropdown.contains(e.target)) {
 				langDropdown.style.display = 'none';
 				langSwitcher.setAttribute('aria-expanded', 'false');
 			}
+		};
+		document.addEventListener('click', closeDropdown);
+		// Close on language item click
+		const langItems = langDropdown.querySelectorAll('.ti-header__lang-item');
+		langItems.forEach(function(item) {
+			item.addEventListener('click', function() {
+				// Allow navigation, dropdown will close naturally
+				setTimeout(function() {
+					langDropdown.style.display = 'none';
+					langSwitcher.setAttribute('aria-expanded', 'false');
+				}, 100);
+			});
 		});
 	}
 

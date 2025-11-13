@@ -140,8 +140,8 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			color: inherit;
 		}
 		.ti-header__call-icon {
-			width: 40px;
-			height: 40px;
+			width: 30px;
+			height: 30px;
 			background: #2a7fc8;
 			border-radius: 50%;
 			display: flex;
@@ -155,8 +155,8 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			background: #1e6ba8;
 		}
 		.ti-header__call-icon svg {
-			width: 20px;
-			height: 20px;
+			width: 17px;
+			height: 17px;
 			fill: #fff;
 		}
 		.ti-header__nav-menu {
@@ -184,6 +184,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			color: #333;
 			font-size: 12px;
 			transition: opacity 0.2s;
+			font-size: 16px;
 		}
 		.ti-header__menu-list a:hover {
 			opacity: 0.7;
@@ -224,7 +225,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			flex-shrink: 0;
 		}
 		.ti-header__logo {
-			width: 80px;
+			width: 40px;
 			height: auto;
 			flex-shrink: 0;
 		}
@@ -241,10 +242,11 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			align-items: flex-end;
 		}
 		[dir="rtl"] .ti-header__right {
-			align-items: flex-start;
+			align-items: flex-end;
+			flex-direction: row-reverse;
 		}
 		[dir="rtl"] .ti-header__brand {
-			align-items: flex-end;
+			align-items: flex-start;
 		}
 		[dir="rtl"] .ti-header__address {
 			flex-direction: row-reverse;

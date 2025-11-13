@@ -3,9 +3,28 @@
 domReady(function () {
 	setCurrentMenuItemClass();
 	searchActive();
-	microModalHandler()
+	microModalHandler();
 
-	const menu = document.querySelector('.site-header');
+	// Language switcher dropdown
+	const langSwitcher = document.querySelector('.ti-header__lang-switcher');
+	const langDropdown = document.querySelector('.ti-header__lang-dropdown');
+	if (langSwitcher && langDropdown) {
+		langSwitcher.addEventListener('click', function(e) {
+			e.preventDefault();
+			const isOpen = langDropdown.style.display !== 'none';
+			langDropdown.style.display = isOpen ? 'none' : 'block';
+			this.setAttribute('aria-expanded', String(!isOpen));
+		});
+		// Close on outside click
+		document.addEventListener('click', function(e) {
+			if (!langSwitcher.contains(e.target) && !langDropdown.contains(e.target)) {
+				langDropdown.style.display = 'none';
+				langSwitcher.setAttribute('aria-expanded', 'false');
+			}
+		});
+	}
+
+	const menu = document.querySelector('.ti-header, .site-header');
 	const menuToggle = document.querySelector('.menu-toggle');
 	const primaryMenu = document.getElementById('primary-menu');
 

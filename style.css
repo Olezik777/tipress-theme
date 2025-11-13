@@ -1,0 +1,108 @@
+/*
+Theme Name: TI Press
+Author: The Viktor Team
+Author URI: https://www.topichilov.com
+Description: Classic WordPress theme for Top Ichilov with bespoke templates, converted from a block-based build to PHP templates for greater control.
+Requires at least: 6.0
+Tested up to: 6.4
+Requires PHP: 7.4
+Version: 2.0.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+Text Domain: tipress
+Tags: custom-menu, custom-logo, editor-style, featured-images, rtl-language-support, sticky-post, threaded-comments, translation-ready
+*/
+
+.wp-block-button__link {
+  padding: 10px 20px; /* Встановіть значення падіння, яке вам потрібно */
+}
+
+.wp-block-quote {
+	border: 1px solid red;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.block-spacing-0 > * + * {
+	margin-block-start: 0;
+	margin-block-end: 0;
+}
+
+
+
+
+table {
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+table thead {
+	background: #627580;
+}
+.wp-block-table th {
+	color: #ffffff;
+}
+
+table tr {
+	border-radius: 30px;
+	margin-bottom: 5px;
+	border: 2px solid #d4e5ec;
+}
+
+
+
+
+
+
+
+
+
+
+.wp-block-search__inside-wrapper {
+	border-color: #a1b5b8;
+	border-radius: 3px;
+	padding: 0;
+	height: 40px;
+}
+.wp-block-search__inside-wrapper .wp-element-button {
+	border-radius: 0;
+	padding: 20px;
+	padding-top: initial;
+	padding-bottom: initial;
+	background-color: #a1b5b8;
+}
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .reverse-mobile {
+        flex-direction: column-reverse;
+    }
+}
+
+.meow-faq-block {
+	border: 1px solid #eff4f6;
+}
+
+.meow-faq-block .meow-faq-question {
+	background-color: #eff4f6;
+	color: #000000;
+	border-radius: 6px;
+	padding: .5rem .5rem .5rem 2rem;
+}
+.meow-faq-block .meow-faq-question::before {
+    content: '';
+    position: absolute;
+    top: calc(50% - 13px);
+    left: 18px;
+    width: 25px;
+    height: 25px;
+    background: url(/wp-content/blocktop/assets/img/question.png);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}

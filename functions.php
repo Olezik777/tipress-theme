@@ -29,10 +29,10 @@ function tipress_theme_setup() {
 	// Using separate locations for each language to avoid Polylang auto-combinations
 	register_nav_menus(
 		[
-			'primary'      => __( 'Основное меню', 'tipress' ),
-			'footer-one'   => __( 'Футер: левый список', 'tipress' ),
-			'footer-two'   => __( 'Футер: центральный список', 'tipress' ),
-			'footer-three' => __( 'Футер: правый список', 'tipress' ),
+			'primary'         => __( 'Основное меню', 'tipress' ),
+			'footer-short'    => __( 'Футер: короткое меню', 'tipress' ),
+			'footer-main-left'  => __( 'Футер: большое меню (левая колонка)', 'tipress' ),
+			'footer-main-right' => __( 'Футер: большое меню (правая колонка)', 'tipress' ),
 		]
 	);
 }
@@ -62,6 +62,45 @@ function tipress_widgets_init() {
 			'after_widget'  => '</section>',
 			'before_title'  => '<h2 class="widget-title">',
 			'after_title'   => '</h2>',
+		]
+	);
+
+	// Footer Address Widget Area
+	register_sidebar(
+		[
+			'name'          => __( 'Футер: Адрес', 'tipress' ),
+			'id'            => 'footer-address',
+			'description'   => __( 'Виджет для отображения адреса в футере.', 'tipress' ),
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h3 class="widget-title">',
+			'after_title'   => '</h3>',
+		]
+	);
+
+	// Footer Disclaimer Widget Area
+	register_sidebar(
+		[
+			'name'          => __( 'Футер: Текст-дисклеймер', 'tipress' ),
+			'id'            => 'footer-disclaimer',
+			'description'   => __( 'Виджет для текста-дисклеймера в нижней части футера.', 'tipress' ),
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '',
+			'after_title'   => '',
+		]
+	);
+
+	// Footer Copyright Widget Area
+	register_sidebar(
+		[
+			'name'          => __( 'Футер: Копирайт', 'tipress' ),
+			'id'            => 'footer-copyright',
+			'description'   => __( 'Виджет для копирайта в нижней части футера.', 'tipress' ),
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '',
+			'after_title'   => '',
 		]
 	);
 }

@@ -10,225 +10,149 @@ $theme_uri = get_stylesheet_directory_uri();
 	</div><!-- #content -->
 
 	<footer id="colophon" class="site-footer">
-		<div class="wp-block-group alignfull has-background-color has-dark-color has-text-color has-background has-link-color footer-top" style="background:linear-gradient(180deg,rgb(255,255,255) 37%,rgb(34,130,194) 38%,rgb(34,130,194) 86%,rgb(245,248,255) 86%);padding-top:32px;padding-right:4%;padding-bottom:20px;padding-left:4%">
-			<div class="wp-block-columns">
-				<div class="wp-block-column" style="flex-basis:25%">
-					<figure class="wp-block-image aligncenter size-full">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/footer1.png' ); ?>" alt="">
-					</figure>
-					<p class="has-text-align-center has-white-color has-text-color"><strong><?php esc_html_e( 'Работаем без выходных: 24/7', 'tipress' ); ?></strong></p>
-				</div>
-				<div class="wp-block-column" style="flex-basis:25%">
-					<figure class="wp-block-image aligncenter size-full">
-						<img src="<?php echo esc_url( $theme_uri . '/assets/images/footer2.png' ); ?>" alt="">
-					</figure>
-					<p class="has-text-align-center has-white-color has-text-color"><strong><?php esc_html_e( 'Обслуживание на трех языках: иврит, русский и английский', 'tipress' ); ?></strong></p>
-				</div>
-				<div class="wp-block-column" style="flex-basis:50%">
-					<div style="height:30px" aria-hidden="true" class="wp-block-spacer"></div>
-					<div class="wp-block-group has-green-light-background-color has-background footer-callback" style="border-radius:9px;padding-top:20px;padding-right:20px;padding-bottom:20px;padding-left:20px">
-						<div class="wp-block-group" style="display:flex;flex-wrap:nowrap;gap:20px;align-items:center">
-							<figure class="wp-block-image size-full">
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/callcenter.png' ); ?>" alt="">
-							</figure>
-							<p class="has-text-align-center has-white-color has-text-color">
-								<strong><?php esc_html_e( 'Введите ваши данные и врач клиники перезвонит вам в течение часа', 'tipress' ); ?></strong>
-							</p>
-						</div>
-						<div class="wp-block-contact-form-7-contact-form-selector">
-							<?php echo do_shortcode( '[contact-form-7 id="48081" title="Callback"]' ); ?>
-						</div>
-						<div class="policy text_policy">
-							<input id="policy-check-3" type="checkbox" value="" class="wpcf7-form-control wpcf7-checkbox" checked>
-							<label for="policy-check-3" style="color:#ffffff;font-size:12px;"><?php esc_html_e( 'Соглашаюсь с политикой конфиденциальности. Прошу сохранить врачебную тайну.', 'tipress' ); ?></label>
-						</div>
-					</div>
-				</div>
+		<!-- Callback Form Section -->
+		<div class="footer-callback-section">
+			<div class="footer-callback-container">
+				<?php echo do_shortcode( '[contact-form-7 id="9fc7b4d" title="Callback_he"]' ); ?>
 			</div>
 		</div>
 
-		<div class="wp-block-group alignfull has-background-color has-dark-color has-text-color has-background has-link-color footer-middle" style="background-color:#f5f8ff;padding-top:32px;padding-right:4%;padding-bottom:20px;padding-left:4%">
-			<div class="wp-block-columns alignwide" style="gap:16px">
-				<div class="wp-block-column" style="flex-basis:28%">
-					<div class="wp-block-group has-background-color has-text-color footer-about">
-						<div class="wp-block-group" style="display:flex;flex-wrap:nowrap;gap:20px;align-items:center">
+		<!-- Main Footer Content -->
+		<div class="footer-main">
+			<div class="footer-main-container">
+				<div class="footer-columns">
+					<!-- Column 1: Logo + Social Media -->
+					<div class="footer-column footer-column--logo">
+						<div class="footer-logo">
 							<?php
 							if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) {
-								the_custom_logo();
+								$logo_id = get_theme_mod( 'custom_logo' );
+								$logo = wp_get_attachment_image_src( $logo_id, 'full' );
+								if ( $logo ) {
+									?>
+									<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-logo-link">
+										<img src="<?php echo esc_url( $logo[0] ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="footer-logo-img">
+									</a>
+									<?php
+								}
 							}
 							?>
-							<div class="wp-block-group" style="padding:var(--wp--preset--spacing--20);display:flex;flex-direction:column;gap:var(--wp--preset--spacing--20)">
-								<p class="has-black-color has-text-color" style="font-size:32px;font-style:normal;font-weight:600;line-height:1;text-transform:uppercase;margin:0"><?php bloginfo( 'name' ); ?></p>
-								<p style="font-style:normal;font-weight:600;text-transform:uppercase;margin:0"><?php esc_html_e( 'Официальный сайт', 'tipress' ); ?></p>
-								<div class="wp-block-group" style="display:flex;flex-wrap:nowrap;gap:8px;align-items:center">
-									<figure class="wp-block-image size-full" style="margin:0">
-										<img src="<?php echo esc_url( $theme_uri . '/assets/images/mini-icons.png' ); ?>" alt="">
-									</figure>
-									<p class="has-text-color" style="color:#d22f1e;font-size:12px;margin:0"><?php esc_html_e( 'Израиль, Тель-Авив, ул. Вайцман 14', 'tipress' ); ?></p>
-								</div>
-							</div>
 						</div>
-						<div style="height:10px" aria-hidden="true" class="wp-block-spacer"></div>
-						<div class="wp-block-group">
-							<a class="wp-block-hyperlink-group" href="tel:+972528780569">
-								<div class="wp-block-group" style="display:flex;flex-wrap:nowrap;gap:12px;align-items:center">
-									<figure class="wp-block-image size-full is-resized" style="margin:0">
-										<img src="<?php echo esc_url( $theme_uri . '/assets/images/phone-circle.png' ); ?>" alt="" width="36" height="36">
-									</figure>
-									<p class="has-dark-color has-text-color" style="margin:0">+972-528780569</p>
+						<div class="footer-social">
+							<?php
+							// Social media links - можно вынести в настройки темы или использовать виджет
+							$phone = '+972-528780569';
+							$whatsapp = '972528780569';
+							$viber = '+972528780569';
+							$email = 'doctors@topichilov.com';
+							?>
+							<a href="tel:<?php echo esc_attr( $phone ); ?>" class="footer-social-link footer-social-link--phone" aria-label="<?php esc_attr_e( 'Телефон', 'tipress' ); ?>">
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/phone-circle.png' ); ?>" alt="" width="36" height="36">
+								<span><?php echo esc_html( $phone ); ?></span>
+							</a>
+							<a href="https://api.whatsapp.com/send?phone=<?php echo esc_attr( $whatsapp ); ?>" class="footer-social-link footer-social-link--whatsapp" aria-label="WhatsApp" target="_blank" rel="noopener">
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/whatsapp-social.png' ); ?>" alt="" width="36" height="36">
+								<div>
+									<span class="footer-social-label">Whatsapp</span>
+									<span class="footer-social-value"><?php echo esc_html( $phone ); ?></span>
 								</div>
 							</a>
-							<a class="wp-block-hyperlink-group" href="https://api.whatsapp.com/send?phone=972528780569">
-								<div class="wp-block-group" style="display:flex;flex-wrap:nowrap;gap:12px;align-items:center">
-									<figure class="wp-block-image size-full is-resized" style="margin:0">
-										<img src="<?php echo esc_url( $theme_uri . '/assets/images/whatsapp-social.png' ); ?>" alt="" width="36" height="36">
-									</figure>
-									<div class="wp-block-group" style="display:flex;flex-direction:column;gap:0">
-										<p class="has-text-color" style="color:#00a541;font-size:12px;margin:0">Whatsapp</p>
-										<p class="has-dark-color has-text-color" style="margin:0">+972-528780569</p>
-									</div>
+							<a href="viber://chat?number=%2B<?php echo esc_attr( str_replace( '-', '', $viber ) ); ?>" class="footer-social-link footer-social-link--viber" aria-label="Viber">
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/viber-social.png' ); ?>" alt="" width="36" height="36">
+								<div>
+									<span class="footer-social-label">Viber</span>
+									<span class="footer-social-value"><?php echo esc_html( $phone ); ?></span>
 								</div>
 							</a>
-							<a class="wp-block-hyperlink-group" href="viber://chat?number=%2B972528780569">
-								<div class="wp-block-group" style="display:flex;flex-wrap:nowrap;gap:12px;align-items:center">
-									<figure class="wp-block-image size-full is-resized" style="margin:0">
-										<img src="<?php echo esc_url( $theme_uri . '/assets/images/viber-social.png' ); ?>" alt="" width="36" height="36">
-									</figure>
-									<div class="wp-block-group" style="display:flex;flex-direction:column;gap:0">
-										<p class="has-text-color" style="color:#7d3daf;font-size:12px;margin:0">Viber</p>
-										<p class="has-dark-color has-text-color" style="margin:0">+972-528780569</p>
-									</div>
+							<a href="mailto:<?php echo esc_attr( $email ); ?>" class="footer-social-link footer-social-link--email" aria-label="<?php esc_attr_e( 'Email', 'tipress' ); ?>">
+								<img src="<?php echo esc_url( $theme_uri . '/assets/images/mail-social.png' ); ?>" alt="" width="36" height="36">
+								<div>
+									<span class="footer-social-label">Mail</span>
+									<span class="footer-social-value"><?php echo esc_html( $email ); ?></span>
 								</div>
 							</a>
-							<a class="wp-block-hyperlink-group" href="mailto:doctors@topichilov.com">
-								<div class="wp-block-group" style="display:flex;flex-wrap:nowrap;gap:12px;align-items:center">
-									<figure class="wp-block-image size-full is-resized" style="margin:0">
-										<img src="<?php echo esc_url( $theme_uri . '/assets/images/mail-social.png' ); ?>" alt="" width="36" height="36">
-									</figure>
-									<div class="wp-block-group" style="display:flex;flex-direction:column;gap:0">
-										<p class="has-dark-color has-text-color" style="font-size:12px;margin:0">Mail</p>
-										<p class="has-dark-color has-text-color" style="margin:0"><a href="mailto:doctors@topichilov.com">doctors@topichilov.com</a></p>
-									</div>
-								</div>
-							</a>
-						</div>
-						<div style="height:10px" aria-hidden="true" class="wp-block-spacer"></div>
-						<div class="wp-block-buttons">
-							<div class="wp-block-button"><a class="wp-block-button__link has-white-color has-text-color wp-element-button" href="https://test.topichilov.com/contactus/"><?php esc_html_e( 'Связаться с нами', 'tipress' ); ?></a></div>
 						</div>
 					</div>
-				</div>
 
-				<div class="wp-block-column" style="flex-basis:17%">
-					<div class="wp-block-group footer-location">
-						<div class="wp-block-group" style="border-bottom:1px solid #abb7c27a;padding-bottom:12px;display:flex;flex-direction:column;gap:8px">
-							<div style="display:flex;gap:12px;align-items:center">
-								<p style="font-style:normal;font-weight:700;margin:0"><?php esc_html_e( 'Москва', 'tipress' ); ?></p>
-								<figure class="wp-block-image size-full is-resized" style="margin:0">
-									<img src="<?php echo esc_url( $theme_uri . '/assets/images/flag-ru.png' ); ?>" alt="" width="17" height="11">
-								</figure>
-							</div>
-							<p style="line-height:1;margin:0"><?php esc_html_e( 'Кутузовский пр-д, 31', 'tipress' ); ?></p>
-							<p style="line-height:1;margin:0"><a href="tel:74957773802"><?php esc_html_e( 'Тел: +7 (495) 777-38-02', 'tipress' ); ?></a></p>
+					<!-- Column 2: Contacts + Address Widget + Short Menu -->
+					<div class="footer-column footer-column--contacts">
+						<div class="footer-contacts">
+							<?php if ( is_active_sidebar( 'footer-address' ) ) : ?>
+								<div class="footer-address-widget">
+									<?php dynamic_sidebar( 'footer-address' ); ?>
+								</div>
+							<?php endif; ?>
 						</div>
-						<div class="wp-block-group" style="border-bottom:1px solid #abb7c27a;padding-bottom:12px;display:flex;flex-direction:column;gap:8px">
-							<div style="display:flex;gap:12px;align-items:center">
-								<p style="font-style:normal;font-weight:700;margin:0"><?php esc_html_e( 'Санкт-Петербург', 'tipress' ); ?></p>
-								<figure class="wp-block-image size-full is-resized" style="margin:0">
-									<img src="<?php echo esc_url( $theme_uri . '/assets/images/flag-ru.png' ); ?>" alt="" width="17" height="11">
-								</figure>
-							</div>
-							<p style="line-height:1;margin:0"><?php esc_html_e( 'ул. Фурштатская, 52', 'tipress' ); ?></p>
-							<p style="line-height:1;margin:0"><a href="tel:78125787764"><?php esc_html_e( 'Тел: +7 (812) 578-77-64', 'tipress' ); ?></a></p>
-						</div>
-						<div class="wp-block-group" style="border-bottom:1px solid #abb7c27a;padding-bottom:12px;display:flex;flex-direction:column;gap:8px">
-							<div style="display:flex;gap:12px;align-items:center">
-								<p style="font-style:normal;font-weight:700;margin:0"><?php esc_html_e( 'Киев', 'tipress' ); ?></p>
-								<figure class="wp-block-image size-full is-style-default" style="margin:0">
-									<img src="<?php echo esc_url( $theme_uri . '/assets/images/flag-ua.png' ); ?>" alt="">
-								</figure>
-							</div>
-							<p style="line-height:1.4;margin:0"><?php esc_html_e( 'ул. Н.Пимоненко, 10', 'tipress' ); ?></p>
-							<p style="line-height:1;margin:0"><a href="tel:380443922180"><?php esc_html_e( 'Тел: +38 (044) 392-21-80', 'tipress' ); ?></a></p>
-						</div>
+						<?php if ( has_nav_menu( 'footer-short' ) ) : ?>
+							<nav class="footer-short-menu" aria-label="<?php esc_attr_e( 'Короткое меню футера', 'tipress' ); ?>">
+								<?php
+								wp_nav_menu(
+									[
+										'theme_location' => 'footer-short',
+										'container'      => false,
+										'menu_class'     => 'footer-short-menu__list',
+										'depth'          => 1,
+									]
+								);
+								?>
+							</nav>
+						<?php endif; ?>
 					</div>
-				</div>
 
-				<div class="wp-block-column" style="flex-basis:15.24%;border-left:1px solid #abb7c27d;padding-left:1rem">
-					<div style="height:5px" aria-hidden="true" class="wp-block-spacer"></div>
-					<?php
-					if ( has_nav_menu( 'footer-one' ) ) {
-						wp_nav_menu(
-							[
-								'theme_location' => 'footer-one',
-								'container'      => 'nav',
-								'container_class'=> 'footer-menu footer-menu--one',
-								'menu_class'     => 'footer-menu__list',
-							]
-						);
-					}
-					?>
-				</div>
+					<!-- Column 3-4: Large Menu in 2 columns -->
+					<div class="footer-column footer-column--menu-left">
+						<?php if ( has_nav_menu( 'footer-main-left' ) ) : ?>
+							<nav class="footer-main-menu" aria-label="<?php esc_attr_e( 'Основное меню футера (левая колонка)', 'tipress' ); ?>">
+								<?php
+								wp_nav_menu(
+									[
+										'theme_location' => 'footer-main-left',
+										'container'      => false,
+										'menu_class'     => 'footer-main-menu__list',
+									]
+								);
+								?>
+							</nav>
+						<?php endif; ?>
+					</div>
 
-				<div class="wp-block-column" style="flex-basis:15.24%;border-left:1px solid #abb7c27d;padding-left:1rem">
-					<div style="height:5px" aria-hidden="true" class="wp-block-spacer"></div>
-					<p style="font-size:22px;font-style:normal;font-weight:600;margin:0">
-						<a href="https://test.topichilov.com/departments/"><?php esc_html_e( 'Отделения', 'tipress' ); ?></a>
-					</p>
-					<?php
-					if ( has_nav_menu( 'footer-two' ) ) {
-						wp_nav_menu(
-							[
-								'theme_location' => 'footer-two',
-								'container'      => 'nav',
-								'container_class'=> 'footer-menu footer-menu--two',
-								'menu_class'     => 'footer-menu__list',
-							]
-						);
-					}
-					?>
-				</div>
-
-				<div class="wp-block-column" style="flex-basis:15.24%;border-left:1px solid #abb7c27d;padding-left:1rem">
-					<div style="height:5px" aria-hidden="true" class="wp-block-spacer"></div>
-					<p style="font-size:22px;font-style:normal;font-weight:600;margin:0">
-						<a href="https://test.topichilov.com/departments/oncology/"><?php esc_html_e( 'Онкология', 'tipress' ); ?></a>
-					</p>
-					<?php
-					if ( has_nav_menu( 'footer-three' ) ) {
-						wp_nav_menu(
-							[
-								'theme_location' => 'footer-three',
-								'container'      => 'nav',
-								'container_class'=> 'footer-menu footer-menu--three',
-								'menu_class'     => 'footer-menu__list',
-							]
-						);
-					}
-					?>
+					<div class="footer-column footer-column--menu-right">
+						<?php if ( has_nav_menu( 'footer-main-right' ) ) : ?>
+							<nav class="footer-main-menu" aria-label="<?php esc_attr_e( 'Основное меню футера (правая колонка)', 'tipress' ); ?>">
+								<?php
+								wp_nav_menu(
+									[
+										'theme_location' => 'footer-main-right',
+										'container'      => false,
+										'menu_class'     => 'footer-main-menu__list',
+									]
+								);
+								?>
+							</nav>
+						<?php endif; ?>
+					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="wp-block-group alignfull has-background-color has-dark-color has-text-color has-background has-link-color footer-bottom" style="background-color:#f5f8ff;padding-top:32px;padding-right:4%;padding-bottom:20px;padding-left:4%">
-			<p class="has-text-align-center" style="font-size:12px">
-				<?php esc_html_e( 'Все материалы, размещенные на данном сайте, носят ознакомительный характер. Они не могут быть использованы как руководство для диагностики или лечения и ни в коем случае не могут заменить консультацию врача. Имеются противопоказания, проконсультируйтесь с врачом.', 'tipress' ); ?>
-			</p>
-			<hr class="wp-block-separator has-text-color has-alpha-channel-opacity has-background" style="background-color:#abb7c242;color:#abb7c242">
-			<p class="has-text-align-center" style="font-size:10px">
-				<?php
-				printf(
-					/* translators: %s: privacy policy url */
-					esc_html__( 'Официальный сайт клиники Топ Ихилов. Copyright © %1$s %2$s Политика конфиденциальности Ихилов Топ / Медицинский центр Ихилов (Тель-Авив). Все материалы сайта, включая фотоматериалы и дизайн, защищены российским и международным законодательством об авторских и смежных правах. Запрещается копирование или свободное изложение текста, размещенного на сайте, без изменения смыслового содержания.', 'tipress' ),
-					date_i18n( 'Y' ),
-					'<a href="https://test.topichilov.com/politika-konfidencialnosti/">' . esc_html__( 'Политика конфиденциальности', 'tipress' ) . '</a>'
-				);
-				?>
-			</p>
+		<!-- Footer Bottom: Disclaimer + Copyright -->
+		<div class="footer-bottom">
+			<div class="footer-bottom-container">
+				<?php if ( is_active_sidebar( 'footer-disclaimer' ) ) : ?>
+					<div class="footer-disclaimer">
+						<?php dynamic_sidebar( 'footer-disclaimer' ); ?>
+					</div>
+				<?php endif; ?>
+				
+				<?php if ( is_active_sidebar( 'footer-copyright' ) ) : ?>
+					<div class="footer-copyright">
+						<?php dynamic_sidebar( 'footer-copyright' ); ?>
+					</div>
+				<?php endif; ?>
+			</div>
 		</div>
 	</footer>
 
 	<?php wp_footer(); ?>
 </body>
 </html>
-

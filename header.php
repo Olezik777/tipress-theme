@@ -562,7 +562,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				$current  = pll_current_language();
 				$current_lang_data = isset( $languages[ $current ] ) ? $languages[ $current ] : null;
 				?>
-				<button class="ti-header__lang-switcher" type="button" aria-label="<?php esc_attr_e( 'Выбрать язык', 'tipress' ); ?>">
+				<button class="ti-header__lang-switcher" type="button" aria-label="<?php echo esc_attr( tipress_pll__( 'Выбрать язык' ) ); ?>">
 					<?php if ( $current_lang_data && ! empty( $current_lang_data['flag'] ) ) : ?>
 						<img src="<?php echo esc_url( $current_lang_data['flag'] ); ?>" alt="" class="ti-header__lang-flag">
 					<?php endif; ?>
@@ -588,13 +588,13 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 					<circle cx="11" cy="11" r="8"></circle>
 					<path d="m21 21-4.35-4.35"></path>
 				</svg>
-				<span><?php esc_html_e( 'Поиск', 'tipress' ); ?></span>
+				<span><?php echo esc_html( tipress_pll__( 'Поиск' ) ); ?></span>
 			</a>
 		</div>
 
 		<!-- Center Section: Phone & Navigation Menu -->
 		<div class="ti-header__center">
-			<button class="ti-header__mobile-toggle" aria-label="<?php esc_attr_e( 'Открыть меню', 'tipress' ); ?>" aria-expanded="false">
+			<button class="ti-header__mobile-toggle" aria-label="<?php echo esc_attr( tipress_pll__( 'Открыть меню' ) ); ?>" aria-expanded="false">
 				<span></span>
 				<span></span>
 				<span></span>
@@ -602,12 +602,12 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			<a href="tel:033760386" class="ti-header__phone-link">
 				<span class="ti-header__phone">03-3760386</span>
 			</a>
-			<a href="tel:033760386" class="ti-header__call-icon" aria-label="<?php esc_attr_e( 'Позвонить', 'tipress' ); ?>">
+			<a href="tel:033760386" class="ti-header__call-icon" aria-label="<?php echo esc_attr( tipress_pll__( 'Позвонить' ) ); ?>">
 				<svg viewBox="0 0 24 24">
 					<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
 				</svg>
 			</a>
-			<nav class="ti-header__nav-menu" aria-label="<?php esc_attr_e( 'Основная навигация', 'tipress' ); ?>">
+			<nav class="ti-header__nav-menu" aria-label="<?php echo esc_attr( tipress_pll__( 'Основная навигация' ) ); ?>">
 				<?php
 				// Polylang automatically shows the correct menu for current language
 				wp_nav_menu(
@@ -637,7 +637,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 						<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
 						<circle cx="12" cy="10" r="3"></circle>
 					</svg>
-					<span><?php esc_html_e( 'Тель-Авив, ул. Вайцман 14', 'tipress' ); ?></span>
+					<span><?php echo esc_html( tipress_pll__( 'Тель-Авив, ул. Вайцман 14' ) ); ?></span>
 				</p>
 			</div>
 			<div class="ti-header__logo">
@@ -659,7 +659,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 
 <!-- Mobile Sidebar Menu -->
 <div class="ti-header__mobile-menu-overlay"></div>
-<aside class="ti-header__mobile-menu" aria-label="<?php esc_attr_e( 'Мобильное меню', 'tipress' ); ?>">
+<aside class="ti-header__mobile-menu" aria-label="<?php echo esc_attr( tipress_pll__( 'Мобильное меню' ) ); ?>">
 	<?php
 	wp_nav_menu(
 		[

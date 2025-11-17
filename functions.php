@@ -427,11 +427,48 @@ function custom_posts_shortcode($atts) {
 }
 add_shortcode('custom_posts', 'custom_posts_shortcode');
 
+/**
+ * Safe Polylang translation function with fallback
+ */
+if ( ! function_exists( 'tipress_pll__' ) ) {
+	function tipress_pll__( $string ) {
+		if ( function_exists( 'pll__' ) ) {
+			return pll__( $string );
+		}
+		return $string;
+	}
+}
+
 add_action('init', function() {
+	if ( ! function_exists( 'pll_register_string' ) ) {
+		return;
+	}
+	
+	// SEO strings
     pll_register_string('seo_description', 'Описание', 'seo_tags');
 	pll_register_string('seo_title', 'Отделения', 'seo_tags');
 	pll_register_string('seo_description_doctors', 'Описание Врачи', 'seo_tags');
 	pll_register_string('seo_title_doctors', 'Заголовок Врачи', 'seo_tags');
+	
+	// Header strings
+	pll_register_string('Выбрать язык', 'Выбрать язык', 'Header');
+	pll_register_string('Поиск', 'Поиск', 'Header');
+	pll_register_string('Открыть меню', 'Открыть меню', 'Header');
+	pll_register_string('Позвонить', 'Позвонить', 'Header');
+	pll_register_string('Основная навигация', 'Основная навигация', 'Header');
+	pll_register_string('Мобильное меню', 'Мобильное меню', 'Header');
+	pll_register_string('Тель-Авив, ул. Вайцман 14', 'Тель-Авив, ул. Вайцман 14', 'Header');
+	
+	// Footer strings
+	pll_register_string('Телефон', 'Телефон', 'Footer');
+	pll_register_string('WhatsApp', 'WhatsApp', 'Footer');
+	pll_register_string('Whatsapp', 'Whatsapp', 'Footer');
+	pll_register_string('Viber', 'Viber', 'Footer');
+	pll_register_string('Email', 'Email', 'Footer');
+	pll_register_string('Mail', 'Mail', 'Footer');
+	pll_register_string('Короткое меню футера', 'Короткое меню футера', 'Footer');
+	pll_register_string('Основное меню футера (левая колонка)', 'Основное меню футера (левая колонка)', 'Footer');
+	pll_register_string('Основное меню футера (правая колонка)', 'Основное меню футера (правая колонка)', 'Footer');
 });
 
 //Функция переопределения SEO мета-тегов для Departments

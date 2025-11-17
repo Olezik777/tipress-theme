@@ -34,8 +34,21 @@ $theme_uri = get_stylesheet_directory_uri();
 									<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
 									<circle cx="12" cy="10" r="3"></circle>
 								</svg>
-								<span><?php esc_html_e( 'Тель-Авив, ул. Вайцман 14', 'tipress' ); ?></span>
+								<span><?php echo esc_html( tipress_pll__( 'Тель-Авив, ул. Вайцман 14' ) ); ?></span>
 							</p>
+						</div>
+						<div class="ti-header__logo">
+							<?php
+							if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) {
+								the_custom_logo();
+							} else {
+								?>
+								<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+									<img src="<?php echo esc_url( $theme_uri . '/assets/images/mini-icons.png' ); ?>" alt="<?php bloginfo( 'name' ); ?>">
+								</a>
+								<?php
+							}
+							?>
 						</div>
 						<div class="footer-social">
 							<?php
@@ -45,28 +58,28 @@ $theme_uri = get_stylesheet_directory_uri();
 							$viber = '+972528780569';
 							$email = 'doctors@topichilov.com';
 							?>
-							<a href="tel:<?php echo esc_attr( $phone ); ?>" class="footer-social-link footer-social-link--phone" aria-label="<?php esc_attr_e( 'Телефон', 'tipress' ); ?>">
+							<a href="tel:<?php echo esc_attr( $phone ); ?>" class="footer-social-link footer-social-link--phone" aria-label="<?php echo esc_attr( tipress_pll__( 'Телефон' ) ); ?>">
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/phone-circle.png' ); ?>" alt="" width="36" height="36">
 								<span><?php echo esc_html( $phone ); ?></span>
 							</a>
-							<a href="https://api.whatsapp.com/send?phone=<?php echo esc_attr( $whatsapp ); ?>" class="footer-social-link footer-social-link--whatsapp" aria-label="WhatsApp" target="_blank" rel="noopener">
+							<a href="https://api.whatsapp.com/send?phone=<?php echo esc_attr( $whatsapp ); ?>" class="footer-social-link footer-social-link--whatsapp" aria-label="<?php echo esc_attr( tipress_pll__( 'WhatsApp' ) ); ?>" target="_blank" rel="noopener">
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/whatsapp-social.png' ); ?>" alt="" width="36" height="36">
 								<div>
-									<span class="footer-social-label">Whatsapp</span>
+									<span class="footer-social-label"><?php echo esc_html( tipress_pll__( 'Whatsapp' ) ); ?></span>
 									<span class="footer-social-value"><?php echo esc_html( $phone ); ?></span>
 								</div>
 							</a>
-							<a href="viber://chat?number=%2B<?php echo esc_attr( str_replace( '-', '', $viber ) ); ?>" class="footer-social-link footer-social-link--viber" aria-label="Viber">
+							<a href="viber://chat?number=%2B<?php echo esc_attr( str_replace( '-', '', $viber ) ); ?>" class="footer-social-link footer-social-link--viber" aria-label="<?php echo esc_attr( tipress_pll__( 'Viber' ) ); ?>">
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/viber-social.png' ); ?>" alt="" width="36" height="36">
 								<div>
-									<span class="footer-social-label">Viber</span>
+									<span class="footer-social-label"><?php echo esc_html( tipress_pll__( 'Viber' ) ); ?></span>
 									<span class="footer-social-value"><?php echo esc_html( $phone ); ?></span>
 								</div>
 							</a>
-							<a href="mailto:<?php echo esc_attr( $email ); ?>" class="footer-social-link footer-social-link--email" aria-label="<?php esc_attr_e( 'Email', 'tipress' ); ?>">
+							<a href="mailto:<?php echo esc_attr( $email ); ?>" class="footer-social-link footer-social-link--email" aria-label="<?php echo esc_attr( tipress_pll__( 'Email' ) ); ?>">
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/mail-social.png' ); ?>" alt="" width="36" height="36">
 								<div>
-									<span class="footer-social-label">Mail</span>
+									<span class="footer-social-label"><?php echo esc_html( tipress_pll__( 'Mail' ) ); ?></span>
 									<span class="footer-social-value"><?php echo esc_html( $email ); ?></span>
 								</div>
 							</a>
@@ -83,7 +96,7 @@ $theme_uri = get_stylesheet_directory_uri();
 							<?php endif; ?>
 						</div>
 						<?php if ( has_nav_menu( 'footer-short' ) ) : ?>
-							<nav class="footer-short-menu" aria-label="<?php esc_attr_e( 'Короткое меню футера', 'tipress' ); ?>">
+							<nav class="footer-short-menu" aria-label="<?php echo esc_attr( tipress_pll__( 'Короткое меню футера' ) ); ?>">
 								<?php
 								wp_nav_menu(
 									[
@@ -101,7 +114,7 @@ $theme_uri = get_stylesheet_directory_uri();
 					<!-- Column 3-4: Large Menu in 2 columns -->
 					<div class="footer-column footer-column--menu-left">
 						<?php if ( has_nav_menu( 'footer-main-left' ) ) : ?>
-							<nav class="footer-main-menu" aria-label="<?php esc_attr_e( 'Основное меню футера (левая колонка)', 'tipress' ); ?>">
+							<nav class="footer-main-menu" aria-label="<?php echo esc_attr( tipress_pll__( 'Основное меню футера (левая колонка)' ) ); ?>">
 								<?php
 								wp_nav_menu(
 									[
@@ -117,7 +130,7 @@ $theme_uri = get_stylesheet_directory_uri();
 
 					<div class="footer-column footer-column--menu-right">
 						<?php if ( has_nav_menu( 'footer-main-right' ) ) : ?>
-							<nav class="footer-main-menu" aria-label="<?php esc_attr_e( 'Основное меню футера (правая колонка)', 'tipress' ); ?>">
+							<nav class="footer-main-menu" aria-label="<?php echo esc_attr( tipress_pll__( 'Основное меню футера (правая колонка)' ) ); ?>">
 								<?php
 								wp_nav_menu(
 									[

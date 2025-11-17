@@ -3265,6 +3265,15 @@ table.shop_table.woocommerce-checkout-review-order-table .order-total {
 	gap: 20px;
 }
 
+.footer-column--logo .ti-header__logo {
+	margin-top: 10px;
+}
+
+.footer-column--logo .ti-header__logo img {
+	max-width: 150px;
+	height: auto;
+}
+
 .footer-logo-link {
 	display: inline-block;
 }

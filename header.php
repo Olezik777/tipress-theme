@@ -20,6 +20,73 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		html, body {
 			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 		}
+		:root {
+                --wp--preset--aspect-ratio--square: 1;
+                --wp--preset--aspect-ratio--4-3: 4/3;
+                --wp--preset--aspect-ratio--3-4: 3/4;
+                --wp--preset--aspect-ratio--3-2: 3/2;
+                --wp--preset--aspect-ratio--2-3: 2/3;
+                --wp--preset--aspect-ratio--16-9: 16/9;
+                --wp--preset--aspect-ratio--9-16: 9/16;
+                --wp--preset--color--black: #000000;
+                --wp--preset--color--cyan-bluish-gray: #abb8c3;
+                --wp--preset--color--white: #ffffff;
+                --wp--preset--color--pale-pink: #f78da7;
+                --wp--preset--color--vivid-red: #ff0000;
+                --wp--preset--color--luminous-vivid-orange: #ff6900;
+                --wp--preset--color--luminous-vivid-amber: #fcb900;
+                --wp--preset--color--light-green-cyan: #7bdcb5;
+                --wp--preset--color--vivid-green-cyan: #00d084;
+                --wp--preset--color--pale-cyan-blue: #8ed1fc;
+                --wp--preset--color--vivid-cyan-blue: #0693e3;
+                --wp--preset--color--vivid-purple: #9b51e0;
+                --wp--preset--color--base: #c20f0f;
+                --wp--preset--color--dark: #000000;
+                --wp--preset--color--contrast: #018be6;
+                --wp--preset--color--green: #97bf0d;
+                --wp--preset--color--baige: #f5f8ff;
+                --wp--preset--color--green-light: #22b6af;
+                --wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);
+                --wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);
+                --wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);
+                --wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);
+                --wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);
+                --wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);
+                --wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);
+                --wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);
+                --wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);
+                --wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);
+                --wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);
+                --wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);
+                --wp--preset--font-size--small: .825rem;
+                --wp--preset--font-size--medium: clamp(0.875rem, 0.875rem + ((1vw - 0.2rem) * 0.256), 1rem);
+                --wp--preset--font-size--large: clamp(1.119rem, 1.119rem + ((1vw - 0.2rem) * 1.294), 1.75rem);
+                --wp--preset--font-size--x-large: clamp(1.378rem, 1.378rem + ((1vw - 0.2rem) * 1.789), 2.25rem);
+                --wp--preset--font-size--xx-large: clamp(1.624rem, 1.624rem + ((1vw - 0.2rem) * 2.31), 2.75rem);
+                --wp--preset--font-family--system-font: Arial, "Helvetica Neue", Helvetica, sans-serif;
+                --wp--preset--spacing--20: 0.25rem;
+                --wp--preset--spacing--30: 0.5rem;
+                --wp--preset--spacing--40: 0.75rem;
+                --wp--preset--spacing--50: 1rem;
+                --wp--preset--spacing--60: 1.25rem;
+                --wp--preset--spacing--70: 1.5rem;
+                --wp--preset--spacing--80: 1.75rem;
+                --wp--preset--spacing--90: 2rem;
+                --wp--preset--spacing--100: 2.25rem;
+                --wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);
+                --wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);
+                --wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);
+                --wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);
+                --wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);
+                --wp--preset--shadow--sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+                --wp--preset--shadow--md: 0 4px 10px 0 rgba( 0, 0, 0, 0.3 );
+                --wp--preset--shadow--lg: 0 8px 15px 0 rgba( 0, 0, 0, 0.3 );
+            }
+			
+		:root :where(.is-layout-flow) > * {
+			margin-block-start: var(--wp--preset--spacing--40);
+			margin-block-end: 0;
+		}
 		/* Header Critical Styles - Inline for faster rendering */
 		.ti-header {
 			background: #fff;

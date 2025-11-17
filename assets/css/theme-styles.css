@@ -3223,6 +3223,8 @@ table.shop_table.woocommerce-checkout-review-order-table .order-total {
 	border: none;
 	border-radius: 4px;
 	font-size: 16px;
+	max-width: 100%;
+	box-sizing: border-box;
 }
 
 .footer-callback-section input[type="submit"] {
@@ -3281,6 +3283,12 @@ table.shop_table.woocommerce-checkout-review-order-table .order-total {
 .footer-logo-img {
 	max-width: 150px;
 	height: auto;
+}
+
+.footer-logo {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
 }
 
 .footer-social {

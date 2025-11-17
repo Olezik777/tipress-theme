@@ -23,32 +23,34 @@ $theme_uri = get_stylesheet_directory_uri();
 				<div class="footer-columns">
 					<!-- Column 1: Logo + Social Media -->
 					<div class="footer-column footer-column--logo">
-						<div class="ti-header__brand">
-							<div class="ti-header__title">
-								<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" style="text-decoration:none;color:inherit;">
-									<?php bloginfo( 'name' ); ?>
-								</a>
+						<div class="footer-logo">
+							<div class="ti-header__brand">
+								<div class="ti-header__title">
+									<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" style="text-decoration:none;color:inherit;">
+										<?php bloginfo( 'name' ); ?>
+									</a>
+								</div>
+								<p class="ti-header__address">
+									<svg class="ti-header__address-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+										<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+										<circle cx="12" cy="10" r="3"></circle>
+									</svg>
+									<span><?php echo esc_html( tipress_pll__( 'Тель-Авив, ул. Вайцман 14' ) ); ?></span>
+								</p>
 							</div>
-							<p class="ti-header__address">
-								<svg class="ti-header__address-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-									<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-									<circle cx="12" cy="10" r="3"></circle>
-								</svg>
-								<span><?php echo esc_html( tipress_pll__( 'Тель-Авив, ул. Вайцман 14' ) ); ?></span>
-							</p>
-						</div>
-						<div class="ti-header__logo">
-							<?php
-							if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) {
-								the_custom_logo();
-							} else {
-								?>
-								<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-									<img src="<?php echo esc_url( $theme_uri . '/assets/images/mini-icons.png' ); ?>" alt="<?php bloginfo( 'name' ); ?>">
-								</a>
+							<div class="ti-header__logo">
 								<?php
-							}
-							?>
+								if ( function_exists( 'the_custom_logo' ) && has_custom_logo() ) {
+									the_custom_logo();
+								} else {
+									?>
+									<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
+										<img src="<?php echo esc_url( $theme_uri . '/assets/images/mini-icons.png' ); ?>" alt="<?php bloginfo( 'name' ); ?>">
+									</a>
+									<?php
+								}
+								?>
+							</div>
 						</div>
 						<div class="footer-social">
 							<?php

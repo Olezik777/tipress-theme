@@ -9,13 +9,13 @@ get_header();
 ?>
 
 <main id="primary" class="site-main archive-departments">
-	<div class="wp-block-group" style="max-width:1100px;margin:0 auto;padding:var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);">
-		<div class="wp-block-columns reverse-mobile">
-			<div class="wp-block-column" style="flex-basis:25%;padding-right:12px;">
+	<div class="wp-block-group single-template-container">
+		<div class="ti-columns reverse-mobile single-template-columns">
+			<div class="ti-column single-template-sidebar">
 				<?php get_sidebar(); ?>
 			</div>
-			<div class="wp-block-column" style="flex-basis:75%;">
-				<header class="page-header" style="border-left:3px solid var(--wp--preset--color--base);padding-left:16px;margin-bottom:var(--wp--preset--spacing--40);">
+			<div class="ti-column single-template-content">
+				<header class="page-header single-template-header">
 					<?php
 					the_archive_title( '<h1 class="page-title" style="text-transform:uppercase;font-style:normal;font-weight:700;">', '</h1>' );
 					the_archive_description( '<div class="archive-description">', '</div>' );

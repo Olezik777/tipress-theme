@@ -10,11 +10,11 @@ get_header();
 
 <main id="primary" class="site-main single-doctors">
 	<div class="wp-block-group single-template-container">
-		<div class="wp-block-columns reverse-mobile single-template-columns">
-			<div class="wp-block-column single-template-sidebar">
+		<div class="ti-columns reverse-mobile single-template-columns">
+			<div class="ti-column single-template-sidebar">
 				<?php get_sidebar(); ?>
 			</div>
-			<div class="wp-block-column single-template-content">
+			<div class="ti-column single-template-content">
 				<?php
 				while ( have_posts() ) :
 					the_post();

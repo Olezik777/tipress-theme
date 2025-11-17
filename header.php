@@ -82,7 +82,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
                 --wp--preset--shadow--md: 0 4px 10px 0 rgba( 0, 0, 0, 0.3 );
                 --wp--preset--shadow--lg: 0 8px 15px 0 rgba( 0, 0, 0, 0.3 );
             }
-			
+
 		:root :where(.is-layout-flow) > * {
 			margin-block-start: var(--wp--preset--spacing--40);
 			margin-block-end: 0;
@@ -627,11 +627,11 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		<!-- Right Section: Brand & Logo -->
 		<div class="ti-header__right">
 			<div class="ti-header__brand">
-				<h1 class="ti-header__title">
+				<div class="ti-header__title">
 					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" style="text-decoration:none;color:inherit;">
 						<?php bloginfo( 'name' ); ?>
 					</a>
-				</h1>
+				</div>
 				<p class="ti-header__address">
 					<svg class="ti-header__address-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 						<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>

@@ -3414,3 +3414,121 @@ margin-top:0
 		padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--20) !important;
 	}
 }
+
+/* ==== Search (sidebar) =================================================== */
+#secondary .search-form{
+	position: relative;
+	display: flex;
+	gap: 10px;
+	align-items: stretch;
+	width: 100%;
+	margin: 0 0 18px;
+  }
+  
+  /* убираем лишние отступы у label */
+  #secondary .search-form label{
+	flex: 1 1 auto;
+	margin: 0;
+	position: relative;
+  }
+  
+  /* поле */
+  #secondary .search-form .search-field{
+	width: 100%;
+	height: 44px;
+	padding-inline: 44px 14px;           /* для LTR: слева иконка, справа текст */
+	border: 1px solid #dbe5f5;
+	border-radius: 12px;
+	background: #fff;
+	color: #111;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0,0,0,.04);
+	transition: border-color .2s, box-shadow .2s, background-color .2s;
+	font-size: 15px;
+  }
+  
+  #secondary .search-form .search-field::placeholder{
+	color: #8aa0c6;
+  }
+  
+  /* иконка-лупа внутри поля */
+  #secondary .search-form label::before{
+	content: "";
+	position: absolute;
+	inset-inline-start: 12px;            /* 12px слева (или справа в RTL) */
+	top: 50%;
+	translate: 0 -50%;
+	width: 18px; height: 18px;
+	border: 2px solid #1155cc;
+	border-radius: 50%;
+	box-shadow: inset 0 0 0 2px transparent;
+  }
+  #secondary .search-form label::after{
+	content: "";
+	position: absolute;
+	top: 50%;
+	inset-inline-start: 28px;
+	translate: 0 calc(-50% + 7px);
+	width: 8px; height: 2px;
+	background: #1155cc;
+	border-radius: 2px;
+	rotate: 45deg;
+  }
+  
+  /* фокус: синее свечение и более тёмная рамка */
+  #secondary .search-form .search-field:focus,
+  #secondary .search-form .search-field:focus-visible{
+	border-color: #1155cc;
+	box-shadow: 0 0 0 3px rgba(17,85,204,.15), 0 3px 10px rgba(0,0,0,.06);
+  }
+  
+  /* кнопка */
+  #secondary .search-form .search-submit{
+	height: 44px;
+	padding: 0 16px;
+	border: 0;
+	border-radius: 12px;
+	background: #1155cc;
+	color: #fff;
+	font-weight: 700;
+	font-size: 14px;
+	letter-spacing: .2px;
+	cursor: pointer;
+	box-shadow: 0 2px 8px rgba(17,85,204,.25);
+	transition: transform .08s ease, box-shadow .2s ease, background-color .2s ease;
+  }
+  
+  #secondary .search-form .search-submit:hover{
+	background: #0f4bb5;                 /* на тон темнее */
+	box-shadow: 0 4px 12px rgba(17,85,204,.28);
+  }
+  
+  #secondary .search-form .search-submit:active{
+	transform: translateY(1px);
+  }
+  
+  /* RTL: меняем сторону иконки и внутренние отступы */
+  :root[dir="rtl"] #secondary .search-form .search-field{
+	padding-inline: 14px 44px;           /* справа иконка, слева текст */
+  }
+  :root[dir="rtl"] #secondary .search-form label::before{
+	inset-inline-start: auto;
+	inset-inline-end: 12px;
+  }
+  :root[dir="rtl"] #secondary .search-form label::after{
+	inset-inline-start: auto;
+	inset-inline-end: 28px;
+  }
+  
+  /* узкие экраны */
+  @media (max-width: 600px){
+	#secondary .search-form{
+	  gap: 8px;
+	}
+	#secondary .search-form .search-field,
+	#secondary .search-form .search-submit{
+	  height: 42px;
+	  border-radius: 10px;
+	}
+  }
+  

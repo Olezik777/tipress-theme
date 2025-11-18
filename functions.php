@@ -52,6 +52,7 @@ add_filter( 'pll_nav_menu_args', function( $args ) {
 	return $args;
 }, 10, 1 );
 
+
 function tipress_widgets_init() {
 	register_sidebar(
 		[
@@ -473,6 +474,10 @@ add_action('init', function() {
 	// Breadcrumbs strings
 	pll_register_string('Хлебные крошки', 'Хлебные крошки', 'Breadcrumbs');
 	pll_register_string('Главная', 'Главная', 'Breadcrumbs');
+	pll_register_string('Врачи', 'Врачи', 'Breadcrumbs');
+	pll_register_string('Отделения', 'Отделения', 'Breadcrumbs');
+	pll_register_string('Результаты поиска для: %s', 'Результаты поиска для: %s', 'Breadcrumbs');
+	pll_register_string('Страница не найдена', 'Страница не найдена', 'Breadcrumbs');
 });
 
 //Функция переопределения SEO мета-тегов для Departments
@@ -623,9 +628,9 @@ function custom_breadcrumbs_shortcode() {
 add_shortcode('custom_breadcrumbs', 'custom_breadcrumbs_shortcode');
 
 /**
- * Display breadcrumbs using All in One SEO with RTL support
+ * Custom breadcrumbs with Polylang support and Schema markup
  * 
- * @return string|void
+ * @return void
  */
 function tipress_display_breadcrumbs() {
 	// Не показываем на главной странице
@@ -639,59 +644,284 @@ function tipress_display_breadcrumbs() {
 		$breadcrumbs_class .= ' ti-breadcrumbs--rtl';
 	}
 
-	// Проверяем, доступен ли All in One SEO и включены ли хлебные крошки
-	if ( function_exists( 'aioseo_breadcrumbs' ) ) {
-		// Используем функцию All in One SEO
-		$breadcrumbs_html = aioseo_breadcrumbs( false );
-		
-		if ( ! empty( $breadcrumbs_html ) ) {
-			echo '<nav class="' . esc_attr( $breadcrumbs_class ) . '" aria-label="' . esc_attr( tipress_pll__( 'Хлебные крошки' ) ) . '">';
-			echo $breadcrumbs_html;
-			echo '</nav>';
-			return;
-		}
-	}
-
-	// Проверяем альтернативный метод через объект
-	if ( function_exists( 'aioseo' ) && isset( aioseo()->breadcrumbs ) && method_exists( aioseo()->breadcrumbs->frontend, 'display' ) ) {
-		ob_start();
-		aioseo()->breadcrumbs->frontend->display();
-		$breadcrumbs_html = ob_get_clean();
-		
-		if ( ! empty( $breadcrumbs_html ) ) {
-			echo '<nav class="' . esc_attr( $breadcrumbs_class ) . '" aria-label="' . esc_attr( tipress_pll__( 'Хлебные крошки' ) ) . '">';
-			echo $breadcrumbs_html;
-			echo '</nav>';
-			return;
-		}
-	}
-
-	// Fallback: простая навигация, если All in One SEO недоступен
-	$home_url = home_url( '/' );
-	$home_text = tipress_pll__( 'Главная' );
-	$breadcrumbs_class .= ' ti-breadcrumbs--simple';
-
-	echo '<nav class="' . esc_attr( $breadcrumbs_class ) . '" aria-label="' . esc_attr( tipress_pll__( 'Хлебные крошки' ) ) . '">';
-	echo '<ol class="ti-breadcrumbs__list">';
+	// Получаем текущий язык
+	$current_lang = function_exists( 'pll_current_language' ) ? pll_current_language() : null;
+	
+	// Собираем хлебные крошки
+	$breadcrumbs = [];
 	
 	// Главная страница
-	echo '<li class="ti-breadcrumbs__item"><a href="' . esc_url( $home_url ) . '" class="ti-breadcrumbs__link">' . esc_html( $home_text ) . '</a></li>';
-	
-	// Текущая страница
+	$home_url = function_exists( 'pll_home_url' ) && $current_lang ? pll_home_url( $current_lang ) : home_url( '/' );
+	$home_text = tipress_pll__( 'Главная' );
+	$breadcrumbs[] = [
+		'name' => $home_text,
+		'url'  => $home_url,
+	];
+
+	// Обрабатываем разные типы страниц
 	if ( is_singular() ) {
-		$title = get_the_title();
-		if ( ! empty( $title ) ) {
-			echo '<li class="ti-breadcrumbs__item ti-breadcrumbs__item--current" aria-current="page">' . esc_html( $title ) . '</li>';
+		$post = get_queried_object();
+		$post_type = get_post_type();
+		
+		// Для кастомных типов постов добавляем архив
+		if ( in_array( $post_type, [ 'doctors', 'departments' ] ) ) {
+			$archive_url = get_post_type_archive_link( $post_type );
+			
+			// Получаем перевод URL архива для текущего языка через Polylang
+			if ( function_exists( 'pll_translate_url' ) && $current_lang ) {
+				$archive_url = pll_translate_url( $archive_url, $current_lang );
+			}
+			
+			$archive_title = '';
+			if ( $post_type === 'doctors' ) {
+				$archive_title = tipress_pll__( 'Врачи' );
+			} elseif ( $post_type === 'departments' ) {
+				$archive_title = tipress_pll__( 'Отделения' );
+			}
+			
+			if ( $archive_url && $archive_title ) {
+				$breadcrumbs[] = [
+					'name' => $archive_title,
+					'url'  => $archive_url,
+				];
+			}
 		}
+		
+		// Для обычных постов добавляем категорию, если есть
+		if ( $post_type === 'post' ) {
+			$categories = get_the_category();
+			if ( ! empty( $categories ) ) {
+				$category = $categories[0];
+				$category_url = get_category_link( $category->term_id );
+				// Получаем перевод категории, если доступен
+				if ( function_exists( 'pll_get_term' ) && $current_lang ) {
+					$translated_term = pll_get_term( $category->term_id, $current_lang );
+					if ( $translated_term ) {
+						$category_url = get_term_link( $translated_term, 'category' );
+						$category = get_term( $translated_term, 'category' );
+					}
+				}
+				
+				$breadcrumbs[] = [
+					'name' => $category->name,
+					'url'  => $category_url,
+				];
+			}
+		}
+		
+		// Для страниц добавляем родительские страницы
+		if ( $post_type === 'page' ) {
+			$ancestors = get_post_ancestors( $post->ID );
+			if ( ! empty( $ancestors ) ) {
+				$ancestors = array_reverse( $ancestors );
+				foreach ( $ancestors as $ancestor_id ) {
+					$ancestor_url = get_permalink( $ancestor_id );
+					// Получаем перевод страницы, если доступен
+					if ( function_exists( 'pll_get_post' ) && $current_lang ) {
+						$translated_post_id = pll_get_post( $ancestor_id, $current_lang );
+						if ( $translated_post_id ) {
+							$ancestor_url = get_permalink( $translated_post_id );
+							$ancestor_title = get_the_title( $translated_post_id );
+						} else {
+							$ancestor_title = get_the_title( $ancestor_id );
+						}
+					} else {
+						$ancestor_title = get_the_title( $ancestor_id );
+					}
+					
+					$breadcrumbs[] = [
+						'name' => $ancestor_title,
+						'url'  => $ancestor_url,
+					];
+				}
+			}
+		}
+		
+		// Текущая страница
+		$current_title = get_the_title();
+		$current_url = get_permalink();
+		
+		$breadcrumbs[] = [
+			'name' => $current_title,
+			'url'  => $current_url,
+		];
+		
 	} elseif ( is_archive() ) {
-		$title = get_the_archive_title();
-		if ( ! empty( $title ) ) {
-			echo '<li class="ti-breadcrumbs__item ti-breadcrumbs__item--current" aria-current="page">' . esc_html( $title ) . '</li>';
+		if ( is_post_type_archive() ) {
+			$post_type = get_post_type();
+			$archive_title = '';
+			
+			if ( $post_type === 'doctors' ) {
+				$archive_title = tipress_pll__( 'Врачи' );
+			} elseif ( $post_type === 'departments' ) {
+				$archive_title = tipress_pll__( 'Отделения' );
+			} else {
+				$archive_title = post_type_archive_title( '', false );
+			}
+			
+			$archive_url = get_post_type_archive_link( $post_type );
+			
+			// Получаем перевод URL архива для текущего языка через Polylang
+			if ( function_exists( 'pll_translate_url' ) && $current_lang ) {
+				$archive_url = pll_translate_url( $archive_url, $current_lang );
+			}
+			
+			$breadcrumbs[] = [
+				'name' => $archive_title,
+				'url'  => $archive_url,
+			];
+			
+		} elseif ( is_category() ) {
+			$category = get_queried_object();
+			$category_url = get_category_link( $category->term_id );
+			
+			// Получаем перевод категории, если доступен
+			if ( function_exists( 'pll_get_term' ) && $current_lang ) {
+				$translated_term = pll_get_term( $category->term_id, $current_lang );
+				if ( $translated_term ) {
+					$category_url = get_term_link( $translated_term, 'category' );
+					$category = get_term( $translated_term, 'category' );
+				}
+			}
+			
+			$breadcrumbs[] = [
+				'name' => $category->name,
+				'url'  => $category_url,
+			];
+			
+		} elseif ( is_tag() ) {
+			$tag = get_queried_object();
+			$tag_url = get_tag_link( $tag->term_id );
+			
+			// Получаем перевод тега, если доступен
+			if ( function_exists( 'pll_get_term' ) && $current_lang ) {
+				$translated_term = pll_get_term( $tag->term_id, $current_lang );
+				if ( $translated_term ) {
+					$tag_url = get_term_link( $translated_term, 'post_tag' );
+					$tag = get_term( $translated_term, 'post_tag' );
+				}
+			}
+			
+			$breadcrumbs[] = [
+				'name' => $tag->name,
+				'url'  => $tag_url,
+			];
+			
+		} elseif ( is_tax() ) {
+			$term = get_queried_object();
+			$term_url = get_term_link( $term );
+			
+			// Получаем перевод термина, если доступен
+			if ( function_exists( 'pll_get_term' ) && $current_lang ) {
+				$translated_term = pll_get_term( $term->term_id, $current_lang );
+				if ( $translated_term ) {
+					$term_url = get_term_link( $translated_term, $term->taxonomy );
+					$term = get_term( $translated_term, $term->taxonomy );
+				}
+			}
+			
+			$breadcrumbs[] = [
+				'name' => $term->name,
+				'url'  => $term_url,
+			];
+			
+		} else {
+			$archive_title = get_the_archive_title();
+			$archive_url = get_post_type_archive_link( get_post_type() );
+			
+			if ( $archive_title ) {
+				$breadcrumbs[] = [
+					'name' => $archive_title,
+					'url'  => $archive_url ? $archive_url : '',
+				];
+			}
 		}
+		
+	} elseif ( is_search() ) {
+		$search_query = get_search_query();
+		$breadcrumbs[] = [
+			'name' => sprintf( tipress_pll__( 'Результаты поиска для: %s' ), $search_query ),
+			'url'  => get_search_link(),
+		];
+		
+	} elseif ( is_404() ) {
+		$breadcrumbs[] = [
+			'name' => tipress_pll__( 'Страница не найдена' ),
+			'url'  => '',
+		];
+	}
+
+	// Если нет крошек, не выводим ничего
+	if ( empty( $breadcrumbs ) ) {
+		return;
+	}
+
+	// Выводим HTML
+	echo '<nav class="' . esc_attr( $breadcrumbs_class ) . '" aria-label="' . esc_attr( tipress_pll__( 'Хлебные крошки' ) ) . '">';
+	echo '<ol class="ti-breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">';
+	
+	$position = 1;
+	foreach ( $breadcrumbs as $index => $crumb ) {
+		$is_last = ( $index === count( $breadcrumbs ) - 1 );
+		$item_class = 'ti-breadcrumbs__item';
+		if ( $is_last ) {
+			$item_class .= ' ti-breadcrumbs__item--current';
+		}
+		
+		echo '<li class="' . esc_attr( $item_class ) . '" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
+		
+		if ( $is_last || empty( $crumb['url'] ) ) {
+			echo '<span itemprop="name">' . esc_html( $crumb['name'] ) . '</span>';
+			echo '<meta itemprop="position" content="' . esc_attr( $position ) . '">';
+		} else {
+			echo '<a href="' . esc_url( $crumb['url'] ) . '" class="ti-breadcrumbs__link" itemprop="item">';
+			echo '<span itemprop="name">' . esc_html( $crumb['name'] ) . '</span>';
+			echo '</a>';
+			echo '<meta itemprop="position" content="' . esc_attr( $position ) . '">';
+		}
+		
+		echo '</li>';
+		$position++;
 	}
 	
 	echo '</ol>';
 	echo '</nav>';
+
+	// Выводим JSON-LD Schema разметку
+	$schema_items = [];
+	$schema_position = 1;
+	
+	foreach ( $breadcrumbs as $index => $crumb ) {
+		$is_last = ( $index === count( $breadcrumbs ) - 1 );
+		// Для последнего элемента используем текущий URL, если он пустой
+		$item_url = ! empty( $crumb['url'] ) ? $crumb['url'] : '';
+		if ( $is_last && empty( $item_url ) ) {
+			// Для последнего элемента используем текущий URL страницы
+			if ( is_singular() ) {
+				$item_url = get_permalink();
+			} elseif ( is_archive() ) {
+				$item_url = get_pagenum_link();
+			} else {
+				$item_url = home_url( $_SERVER['REQUEST_URI'] );
+			}
+		}
+		
+		$schema_items[] = [
+			'@type'    => 'ListItem',
+			'position' => $schema_position,
+			'name'     => $crumb['name'],
+			'item'     => $item_url,
+		];
+		$schema_position++;
+	}
+	
+	$schema = [
+		'@context' => 'https://schema.org',
+		'@type'    => 'BreadcrumbList',
+		'itemListElement' => $schema_items,
+	];
+	
+	echo '<script type="application/ld+json">' . wp_json_encode( $schema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE ) . '</script>';
 }
 
 

@@ -1,54 +1,164 @@
 <?php
 /**
- * Archive template for the doctors custom post type.
+ * Page template for /doctors/ landing.
  *
  * @package Tipress
  */
 
 get_header();
+
+// текущий язык для Polylang (если есть)
+$lang = function_exists( 'pll_current_language' )
+    ? pll_current_language()
+    : '';
+
 ?>
+<main id="primary" class="site-main page-doctors">
+  <div class="wp-block-group single-template-container">
+    <?php tipress_display_breadcrumbs(); ?>
 
-<main id="primary" class="site-main archive-doctors">
-	<div class="wp-block-group single-template-container">
-		<?php tipress_display_breadcrumbs(); ?>
-		<div class="ti-columns reverse-mobile single-template-columns">
-			<div class="ti-column single-template-sidebar">
-				<?php get_sidebar(); ?>
-			</div>
-			<div class="ti-column single-template-content">
-				<header class="page-header single-template-header">
-					<?php
-					the_archive_title( '<h1 class="page-title" style="text-transform:uppercase;font-style:normal;font-weight:700;">', '</h1>' );
-					the_archive_description( '<div class="archive-description">', '</div>' );
-					?>
-				</header>
+    <div class="ti-columns reverse-mobile single-template-columns">
+      <div class="ti-column single-template-sidebar">
+        <?php get_sidebar(); ?>
+      </div>
 
-				<?php if ( have_posts() ) : ?>
-					<div class="post-list">
-						<?php
-						while ( have_posts() ) :
-							the_post();
+      <div class="ti-column single-template-content">
+        <header class="page-header single-template-header">
+          <h1 class="page-title" style="text-transform:uppercase;font-style:normal;font-weight:700;">
+            <?php the_title(); ?>
+          </h1>
 
-							get_template_part( 'template-parts/content', 'doctors' );
+          <?php
+          // контент самой страницы (описание раздела / SEO-текст)
+          while ( have_posts() ) :
+            the_post();
+            if ( get_the_content() ) :
+              echo '<div class="page-intro">';
+              the_content();
+              echo '</div>';
+            endif;
+          endwhile;
+          // вернём глобальный $post на место для дальнейших WP_Query
+          wp_reset_postdata();
+          ?>
+        </header>
 
-						endwhile;
+        <?php
+        // 1. Получаем все специализации (таксономия specialization)
+        $spec_args = array(
+          'taxonomy'   => 'specialization',
+          'hide_empty' => true,
+          'orderby'    => 'name',
+          'order'      => 'ASC',
+        );
 
-						the_posts_pagination(
-							[
-								'prev_text' => esc_html__( 'Назад', 'tipress' ),
-								'next_text' => esc_html__( 'Вперед', 'tipress' ),
-							]
-						);
-						?>
-					</div>
-				<?php else : ?>
-					<?php get_template_part( 'template-parts/content', 'none' ); ?>
-				<?php endif; ?>
-			</div>
-		</div>
-	</div>
+        $specializations = get_terms( $spec_args );
+
+        if ( ! empty( $specializations ) && ! is_wp_error( $specializations ) ) : ?>
+          <!-- Навигация по специализациям -->
+          <nav class="doctors-spec-nav" aria-label="<?php esc_attr_e( 'Doctors specializations', 'tipress' ); ?>">
+            <ul class="doctors-spec-nav-list">
+              <?php foreach ( $specializations as $term ) : ?>
+                <li>
+                  <a href="#spec-<?php echo esc_attr( $term->slug ); ?>">
+                    <?php echo esc_html( $term->name ); ?>
+                  </a>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          </nav>
+
+          <!-- Секции по специализациям -->
+          <?php foreach ( $specializations as $term ) : ?>
+            <section id="spec-<?php echo esc_attr( $term->slug ); ?>" class="doctors-spec-section">
+              <h2 class="doctors-spec-title">
+                <?php echo esc_html( $term->name ); ?>
+              </h2>
+
+              <?php
+              // врачи по конкретной специализации
+              $doctors_by_spec = new WP_Query( array(
+                'post_type'      => 'doctors',
+                'posts_per_page' => -1,
+                'orderby'        => array(
+                  'menu_order' => 'ASC',
+                  'title'      => 'ASC',
+                ),
+                'tax_query'      => array(
+                  array(
+                    'taxonomy' => 'specialization',
+                    'field'    => 'term_id',
+                    'terms'    => $term->term_id,
+                  ),
+                ),
+                // для Polylang – фильтруем по текущему языку
+                'lang'           => $lang ?: null,
+              ) );
+
+              if ( $doctors_by_spec->have_posts() ) : ?>
+                <div class="doctors-grid">
+                  <?php
+                  while ( $doctors_by_spec->have_posts() ) :
+                    $doctors_by_spec->the_post();
+
+                    // можно переиспользовать существующий шаблон карточки
+                    get_template_part( 'template-parts/content', 'doctors' );
+                  endwhile;
+                  ?>
+                </div>
+              <?php else : ?>
+                <p class="no-doctors">
+                  <?php _e( 'Нет врачей с этой специализацией.', 'tipress' ); ?>
+                </p>
+              <?php
+              endif;
+              wp_reset_postdata();
+              ?>
+            </section>
+          <?php endforeach; ?>
+
+        <?php endif; ?>
+
+        <!-- Блок "Все врачи" -->
+        <section class="doctors-all-section">
+          <h2 class="doctors-spec-title">
+            <?php _e( 'Все врачи', 'tipress' ); ?>
+          </h2>
+
+          <?php
+          $all_doctors = new WP_Query( array(
+            'post_type'      => 'doctors',
+            'posts_per_page' => -1,
+            'orderby'        => array(
+              'menu_order' => 'ASC',
+              'title'      => 'ASC',
+            ),
+            'lang'           => $lang ?: null,
+          ) );
+
+          if ( $all_doctors->have_posts() ) : ?>
+            <div class="doctors-grid">
+              <?php
+              while ( $all_doctors->have_posts() ) :
+                $all_doctors->the_post();
+                get_template_part( 'template-parts/content', 'doctors' );
+              endwhile;
+              ?>
+            </div>
+          <?php else : ?>
+            <p class="no-doctors">
+              <?php _e( 'Врачи не найдены.', 'tipress' ); ?>
+            </p>
+          <?php
+          endif;
+          wp_reset_postdata();
+          ?>
+        </section>
+
+      </div><!-- /.ti-column -->
+    </div><!-- /.ti-columns -->
+  </div><!-- /.container -->
 </main>
 
 <?php
 get_footer();
-?>

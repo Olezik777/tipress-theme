@@ -3463,7 +3463,18 @@ margin-top:0
 	font-weight: 500;
 }
 
-/* Fallback Simple Breadcrumbs */
+/* Custom Breadcrumbs List */
+.ti-breadcrumbs__list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Fallback Simple Breadcrumbs (for backward compatibility) */
 .ti-breadcrumbs--simple .ti-breadcrumbs__list {
 	display: flex;
 	flex-wrap: wrap;
@@ -3507,6 +3518,7 @@ margin-top:0
 
 /* RTL Support */
 :dir(rtl) .ti-breadcrumbs .aioseo-breadcrumbs,
+:dir(rtl) .ti-breadcrumbs__list,
 :dir(rtl) .ti-breadcrumbs--simple .ti-breadcrumbs__list {
 	flex-direction: row-reverse;
 }
@@ -3525,6 +3537,7 @@ margin-top:0
 	}
 
 	.ti-breadcrumbs .aioseo-breadcrumbs,
+	.ti-breadcrumbs__list,
 	.ti-breadcrumbs--simple .ti-breadcrumbs__list {
 		gap: 6px;
 	}

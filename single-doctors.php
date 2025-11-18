@@ -10,6 +10,7 @@ get_header();
 
 <main id="primary" class="site-main single-doctors">
 	<div class="wp-block-group single-template-container">
+		<?php tipress_display_breadcrumbs(); ?>
 		<div class="ti-columns reverse-mobile single-template-columns">
 			<div class="ti-column single-template-sidebar">
 				<?php get_sidebar(); ?>

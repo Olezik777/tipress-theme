@@ -469,6 +469,10 @@ add_action('init', function() {
 	pll_register_string('Короткое меню футера', 'Короткое меню футера', 'Footer');
 	pll_register_string('Основное меню футера (левая колонка)', 'Основное меню футера (левая колонка)', 'Footer');
 	pll_register_string('Основное меню футера (правая колонка)', 'Основное меню футера (правая колонка)', 'Footer');
+	
+	// Breadcrumbs strings
+	pll_register_string('Хлебные крошки', 'Хлебные крошки', 'Breadcrumbs');
+	pll_register_string('Главная', 'Главная', 'Breadcrumbs');
 });
 
 //Функция переопределения SEO мета-тегов для Departments
@@ -617,6 +621,78 @@ function custom_breadcrumbs_shortcode() {
 
 // Регистрируем шорткод [custom_breadcrumbs]
 add_shortcode('custom_breadcrumbs', 'custom_breadcrumbs_shortcode');
+
+/**
+ * Display breadcrumbs using All in One SEO with RTL support
+ * 
+ * @return string|void
+ */
+function tipress_display_breadcrumbs() {
+	// Не показываем на главной странице
+	if ( is_front_page() ) {
+		return;
+	}
+
+	$is_rtl = is_rtl();
+	$breadcrumbs_class = 'ti-breadcrumbs';
+	if ( $is_rtl ) {
+		$breadcrumbs_class .= ' ti-breadcrumbs--rtl';
+	}
+
+	// Проверяем, доступен ли All in One SEO и включены ли хлебные крошки
+	if ( function_exists( 'aioseo_breadcrumbs' ) ) {
+		// Используем функцию All in One SEO
+		$breadcrumbs_html = aioseo_breadcrumbs( false );
+		
+		if ( ! empty( $breadcrumbs_html ) ) {
+			echo '<nav class="' . esc_attr( $breadcrumbs_class ) . '" aria-label="' . esc_attr( tipress_pll__( 'Хлебные крошки' ) ) . '">';
+			echo $breadcrumbs_html;
+			echo '</nav>';
+			return;
+		}
+	}
+
+	// Проверяем альтернативный метод через объект
+	if ( function_exists( 'aioseo' ) && isset( aioseo()->breadcrumbs ) && method_exists( aioseo()->breadcrumbs->frontend, 'display' ) ) {
+		ob_start();
+		aioseo()->breadcrumbs->frontend->display();
+		$breadcrumbs_html = ob_get_clean();
+		
+		if ( ! empty( $breadcrumbs_html ) ) {
+			echo '<nav class="' . esc_attr( $breadcrumbs_class ) . '" aria-label="' . esc_attr( tipress_pll__( 'Хлебные крошки' ) ) . '">';
+			echo $breadcrumbs_html;
+			echo '</nav>';
+			return;
+		}
+	}
+
+	// Fallback: простая навигация, если All in One SEO недоступен
+	$home_url = home_url( '/' );
+	$home_text = tipress_pll__( 'Главная' );
+	$breadcrumbs_class .= ' ti-breadcrumbs--simple';
+
+	echo '<nav class="' . esc_attr( $breadcrumbs_class ) . '" aria-label="' . esc_attr( tipress_pll__( 'Хлебные крошки' ) ) . '">';
+	echo '<ol class="ti-breadcrumbs__list">';
+	
+	// Главная страница
+	echo '<li class="ti-breadcrumbs__item"><a href="' . esc_url( $home_url ) . '" class="ti-breadcrumbs__link">' . esc_html( $home_text ) . '</a></li>';
+	
+	// Текущая страница
+	if ( is_singular() ) {
+		$title = get_the_title();
+		if ( ! empty( $title ) ) {
+			echo '<li class="ti-breadcrumbs__item ti-breadcrumbs__item--current" aria-current="page">' . esc_html( $title ) . '</li>';
+		}
+	} elseif ( is_archive() ) {
+		$title = get_the_archive_title();
+		if ( ! empty( $title ) ) {
+			echo '<li class="ti-breadcrumbs__item ti-breadcrumbs__item--current" aria-current="page">' . esc_html( $title ) . '</li>';
+		}
+	}
+	
+	echo '</ol>';
+	echo '</nav>';
+}
 
 
 /**

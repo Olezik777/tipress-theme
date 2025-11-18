@@ -10,6 +10,7 @@ get_header();
 
 <main id="primary" class="site-main">
 	<div class="wp-block-group" style="max-width:1100px;margin:0 auto;padding:var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);">
+		<?php tipress_display_breadcrumbs(); ?>
 		<?php if ( have_posts() ) : ?>
 			<header class="page-header">
 				<?php

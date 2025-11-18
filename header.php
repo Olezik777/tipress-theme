@@ -88,6 +88,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			margin-block-end: 0;
 		}
 		/* Header Critical Styles - Inline for faster rendering */
+		h1 { margin-top: 0; }
 		.ti-header {
 			background: #fff;
 			position: relative;

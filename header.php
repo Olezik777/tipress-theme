@@ -286,7 +286,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			gap: 4px;
 			text-decoration: none;
 			color: #333;
-			font-size: 16px;
+			font-size: 18px;
 			transition: opacity 0.2s;
 		}
 		.ti-header__menu-list a:hover {
@@ -600,10 +600,20 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				<span></span>
 				<span></span>
 			</button>
-			<a href="tel:033760386" class="ti-header__phone-link">
-				<span class="ti-header__phone">03-3760386</span>
+			<?php
+			// Определяем номер телефона в зависимости от языка
+			if ( $current_lang === 'he' ) {
+				$phone_number = '03-3760386';
+				$phone_tel = 'tel:033760386';
+			} else {
+				$phone_number = '+972-37621629';
+				$phone_tel = 'tel:+97237621629';
+			}
+			?>
+			<a href="<?php echo esc_attr( $phone_tel ); ?>" class="ti-header__phone-link">
+				<span class="ti-header__phone"><?php echo esc_html( $phone_number ); ?></span>
 			</a>
-			<a href="tel:033760386" class="ti-header__call-icon" aria-label="<?php echo esc_attr( tipress_pll__( 'Позвонить' ) ); ?>">
+			<a href="<?php echo esc_attr( $phone_tel ); ?>" class="ti-header__call-icon" aria-label="<?php echo esc_attr( tipress_pll__( 'Позвонить' ) ); ?>">
 				<svg viewBox="0 0 24 24">
 					<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
 				</svg>

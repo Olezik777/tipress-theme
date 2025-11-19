@@ -3718,10 +3718,9 @@ margin-top:0
   /* фильтры */
 .doctors-filter-nav {
 	margin: 20px 0 30px;
-	border-radius: 9999px;
+	border-radius: 20px;
 	background: #f5f8ff;
 	padding: 10px 16px;
-	overflow-x: auto;
   }
   .doctors-filter-nav-list {
 	display: flex;
@@ -3729,6 +3728,7 @@ margin-top:0
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	flex-wrap: wrap;
   }
   .doctors-filter-nav-list button {
 	border: 1px solid #dde5f5;

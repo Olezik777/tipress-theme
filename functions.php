@@ -994,7 +994,7 @@ add_filter( 'pll_rel_hreflang_attributes', function( $hreflangs ) {
 function tipress_render_doctors_grid( $term_slug = 'all', $paged = 1, $lang = '' ) {
     $args = array(
         'post_type'      => 'doctors',
-        'posts_per_page' => 30,
+        'posts_per_page' => 20,
         'paged'          => max( 1, (int) $paged ),
         'orderby'        => array(
             'menu_order' => 'ASC',

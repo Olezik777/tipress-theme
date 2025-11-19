@@ -986,3 +986,132 @@ add_filter( 'pll_rel_hreflang_attributes', function( $hreflangs ) {
 
     return $hreflangs;
 }, 20 );
+
+
+/**
+ * Рендер грида врачей (используется и в шаблоне, и в AJAX)
+ */
+function tipress_render_doctors_grid( $term_slug = 'all', $paged = 1, $lang = '' ) {
+    $args = array(
+        'post_type'      => 'doctors',
+        'posts_per_page' => 30,
+        'paged'          => max( 1, (int) $paged ),
+        'orderby'        => array(
+            'menu_order' => 'ASC',
+            'title'      => 'ASC',
+        ),
+    );
+
+    if ( $term_slug && $term_slug !== 'all' ) {
+        $args['tax_query'] = array(
+            array(
+                'taxonomy' => 'specialization',
+                'field'    => 'slug',
+                'terms'    => $term_slug,
+            ),
+        );
+    }
+
+    // Polylang: фильтруем по текущему языку
+    if ( $lang && function_exists( 'pll_current_language' ) ) {
+        $args['lang'] = $lang;
+    }
+
+    $q = new WP_Query( $args );
+
+    ob_start();
+    ?>
+
+    <div class="doctors-grid">
+        <?php if ( $q->have_posts() ) : ?>
+            <?php
+            while ( $q->have_posts() ) :
+                $q->the_post();
+                get_template_part( 'template-parts/content', 'doctors' );
+            endwhile;
+            ?>
+        <?php else : ?>
+            <p class="no-doctors"><?php _e( 'Врачи не найдены.', 'tipress' ); ?></p>
+        <?php endif; ?>
+    </div>
+
+    <?php if ( $q->max_num_pages > 1 ) : ?>
+        <nav class="doctors-pagination" aria-label="<?php esc_attr_e( 'Doctors pagination', 'tipress' ); ?>">
+            <ul>
+                <?php
+                $current = max( 1, (int) $paged );
+                $max     = (int) $q->max_num_pages;
+
+                // prev
+                if ( $current > 1 ) {
+                    echo '<li><a href="#" data-page="' . ( $current - 1 ) . '" class="prev">&laquo;</a></li>';
+                }
+
+                for ( $i = 1; $i <= $max; $i++ ) {
+                    $class = $i === $current ? ' class="is-current"' : '';
+                    echo '<li><a href="#" data-page="' . $i . '"' . $class . '>' . $i . '</a></li>';
+                }
+
+                // next
+                if ( $current < $max ) {
+                    echo '<li><a href="#" data-page="' . ( $current + 1 ) . '" class="next">&raquo;</a></li>';
+                }
+                ?>
+            </ul>
+        </nav>
+    <?php endif; ?>
+
+    <?php
+    wp_reset_postdata();
+
+    return ob_get_clean();
+}
+
+/**
+ * AJAX: фильтр врачей
+ */
+function tipress_ajax_doctors_filter() {
+    check_ajax_referer( 'tipress_doctors_filter', 'nonce' );
+
+    $term = isset( $_POST['term'] ) ? sanitize_text_field( $_POST['term'] ) : 'all';
+    $page = isset( $_POST['page'] ) ? (int) $_POST['page'] : 1;
+    $lang = isset( $_POST['lang'] ) ? sanitize_text_field( $_POST['lang'] ) : '';
+
+    $html = tipress_render_doctors_grid( $term, $page, $lang );
+
+    wp_send_json_success( array(
+        'html'  => $html,
+        'term'  => $term,
+        'page'  => $page,
+    ) );
+}
+add_action( 'wp_ajax_tipress_doctors_filter', 'tipress_ajax_doctors_filter' );
+add_action( 'wp_ajax_nopriv_tipress_doctors_filter', 'tipress_ajax_doctors_filter' );
+
+/**
+ * Скрипт фильтра для страницы doctors
+ */
+function tipress_enqueue_doctors_filter_assets() {
+    if ( ! is_page( 'doctors' ) ) {
+        return;
+    }
+
+    wp_enqueue_script(
+        'tipress-doctors-filter',
+        get_stylesheet_directory_uri() . '/assets/js/doctors-filter.js',
+        array( 'jquery' ),
+        filemtime( get_stylesheet_directory() . '/assets/js/doctors-filter.js' ),
+        true
+    );
+
+    wp_localize_script(
+        'tipress-doctors-filter',
+        'TipressDoctors',
+        array(
+            'ajax_url' => admin_url( 'admin-ajax.php' ),
+            'nonce'    => wp_create_nonce( 'tipress_doctors_filter' ),
+            'lang'     => function_exists( 'pll_current_language' ) ? pll_current_language() : '',
+        )
+    );
+}
+add_action( 'wp_enqueue_scripts', 'tipress_enqueue_doctors_filter_assets' );

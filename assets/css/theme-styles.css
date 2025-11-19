@@ -3715,3 +3715,102 @@ margin-top:0
 	flex-direction: row-reverse;
   }
   
+  /* фильтры */
+.doctors-filter-nav {
+	margin: 20px 0 30px;
+	border-radius: 9999px;
+	background: #f5f8ff;
+	padding: 10px 16px;
+	overflow-x: auto;
+  }
+  .doctors-filter-nav-list {
+	display: flex;
+	gap: 10px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+  }
+  .doctors-filter-nav-list button {
+	border: 1px solid #dde5f5;
+	background: #ffffff;
+	border-radius: 9999px;
+	padding: 6px 14px;
+	font-size: 14px;
+	cursor: pointer;
+	transition: background 0.2s, color 0.2s, border-color 0.2s;
+	white-space: nowrap;
+  }
+  .doctors-filter-nav-list button.is-active {
+	background: #1155cc;
+	border-color: #1155cc;
+	color: #fff;
+  }
+  
+  /* грид 3/2/1 */
+  .doctors-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 24px;
+  }
+  @media (max-width: 1024px) {
+	.doctors-grid {
+	  grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+  }
+  @media (max-width: 640px) {
+	.doctors-grid {
+	  grid-template-columns: 1fr;
+	}
+  }
+  
+  /* пагинация */
+  .doctors-pagination {
+	margin-top: 24px;
+	text-align: center;
+  }
+  .doctors-pagination ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: inline-flex;
+	gap: 6px;
+  }
+  .doctors-pagination a {
+	display: inline-block;
+	min-width: 32px;
+	padding: 6px 10px;
+	border-radius: 9999px;
+	border: 1px solid #dde5f5;
+	text-decoration: none;
+	font-size: 14px;
+  }
+  .doctors-pagination a.is-current {
+	background: #1155cc;
+	border-color: #1155cc;
+	color: #fff;
+  }
+  
+  /* анимация загрузки */
+  .doctors-grid-wrapper.is-loading {
+	opacity: 0.4;
+	pointer-events: none;
+  }
+  .doctors-grid-wrapper.is-loaded .doctors-grid {
+	animation: doctorsFadeIn 0.2s ease-out;
+  }
+  @keyframes doctorsFadeIn {
+	from {
+	  opacity: 0;
+	  transform: translateY(6px);
+	}
+	to {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+  }
+  
+  /* RTL: разворачиваем фильтры */
+  :root[dir="rtl"] .doctors-filter-nav-list {
+	flex-direction: row-reverse;
+  }
+  

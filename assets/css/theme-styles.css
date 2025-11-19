@@ -3642,3 +3642,76 @@ margin-top:0
 	}
   }
   
+
+  /* Навигация по специализациям */
+.doctors-spec-nav {
+	margin: 20px 0 30px;
+	border-radius: 9999px;
+	background: #f5f8ff;
+	padding: 10px 16px;
+	overflow-x: auto;
+  }
+  .doctors-spec-nav-list {
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 12px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+  }
+  .doctors-spec-nav-list a {
+	display: inline-block;
+	padding: 6px 14px;
+	border-radius: 9999px;
+	background: #fff;
+	text-decoration: none;
+	font-size: 14px;
+	white-space: nowrap;
+	border: 1px solid #dde5f5;
+	transition: background .2s, color .2s, border-color .2s;
+  }
+  .doctors-spec-nav-list a:hover {
+	background: #1155cc;
+	border-color: #1155cc;
+	color: #fff;
+  }
+  
+  /* Секции по специализациям */
+  .doctors-spec-section {
+	margin-bottom: 40px;
+  }
+  .doctors-spec-title {
+	font-size: 22px;
+	margin: 0 0 16px;
+  }
+  
+  /* Сетка врачей: 3/2/1 */
+  .doctors-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 24px;
+  }
+  
+  @media (max-width: 1024px) {
+	.doctors-grid {
+	  grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+  }
+  @media (max-width: 640px) {
+	.doctors-grid {
+	  grid-template-columns: 1fr;
+	}
+  }
+  
+  /* Низ страницы "Все врачи" */
+  .doctors-all-section {
+	margin-top: 50px;
+	border-top: 1px solid #e4e7f0;
+	padding-top: 30px;
+  }
+  
+  /* RTL мелочи */
+  :root[dir="rtl"] .doctors-spec-nav-list {
+	flex-direction: row-reverse;
+  }
+  

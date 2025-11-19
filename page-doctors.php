@@ -17,17 +17,8 @@ $lang = function_exists( 'pll_current_language' )
   <div class="wp-block-group single-template-container">
     <?php tipress_display_breadcrumbs(); ?>
 
-    <div class="ti-columns reverse-mobile single-template-columns">
-      <div class="ti-column single-template-sidebar">
-        <?php get_sidebar(); ?>
-      </div>
-
       <div class="ti-column single-template-content">
         <header class="page-header single-template-header">
-          <h1 class="page-title" style="text-transform:uppercase;font-style:normal;font-weight:700;">
-            <?php the_title(); ?>
-          </h1>
-
           <?php
           // контент самой страницы (описание раздела / SEO-текст)
           while ( have_posts() ) :
@@ -156,7 +147,6 @@ $lang = function_exists( 'pll_current_language' )
         </section>
 
       </div><!-- /.ti-column -->
-    </div><!-- /.ti-columns -->
   </div><!-- /.container -->
 </main>
 

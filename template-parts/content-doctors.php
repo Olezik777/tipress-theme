@@ -13,7 +13,7 @@
 		</a>
 	<?php endif; ?>
 	<div class="loop-body">
-		<?php the_title( '<h2 class="entry-title" style="margin-top:0"><a href="' . esc_url( get_permalink() ) . '">', '</a></h2>' ); ?>
+		<?php the_title( '<div class="entry-title" style="margin-top:0"><a href="' . esc_url( get_permalink() ) . '">', '</a></div>' ); ?>
 		<div class="entry-summary">
 			<?php the_excerpt(); ?>
 		</div>

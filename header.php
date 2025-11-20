@@ -19,6 +19,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		/* Global Font Family */
 		html, body {
 			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+			margin: 0;
 		}
 		:root {
                 --wp--preset--aspect-ratio--square: 1;
@@ -499,6 +500,8 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		}
 		.ti-header--rtl .ti-header__left {
 			align-items: flex-end;
+			order: -1;
+			flex-direction: row-reverse;
 		}
 		.ti-header--rtl .ti-header__right {
 			align-items: flex-end;
@@ -525,6 +528,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		.ti-header--rtl .ti-header__mobile-menu.is-open {
 			right: 0;
 		}
+		.ti-header--rtl .ti-header__menu-list a { font-size: 18px; }
 		/* Tablet Responsive */
 		@media (max-width: 992px) {
 			.ti-header__container {
@@ -699,7 +703,26 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			</button>
 			<?php
 			// Определяем номер телефона в зависимости от языка
-			if ( $current_lang === 'he' ) {
+			// Получаем текущий язык напрямую из Polylang
+			$current_lang_code = function_exists( 'pll_current_language' ) ? pll_current_language() : $current_lang;
+			
+			// Нормализуем код языка к нижнему регистру для сравнения
+			$lang_check = strtolower( trim( $current_lang_code ) );
+			
+			// Проверяем различные варианты кода иврита
+			// 'he' - стандартный код иврита (ISO 639-1)
+			// 'iw' - старый код иврита (до 1989 года)
+			// Также проверяем варианты с регионом: 'he_IL', 'iw_IL' и т.д.
+			$is_hebrew = ( $lang_check === 'he' || $lang_check === 'iw' )
+				|| strpos( $lang_check, 'he' ) === 0
+				|| strpos( $lang_check, 'iw' ) === 0;
+			
+			// Если не определили через код, используем RTL как индикатор (иврит - RTL язык)
+			if ( ! $is_hebrew && $is_rtl ) {
+				$is_hebrew = true;
+			}
+			
+			if ( $is_hebrew ) {
 				$phone_number = '03-3760386';
 				$phone_tel = 'tel:033760386';
 			} else {

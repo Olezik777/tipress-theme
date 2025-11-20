@@ -33,7 +33,7 @@ if ( $lang ) {
         case 'en': // английский
             $header_slug = 'departments-header-block___en';
             $links_slug  = 'departments-links-template___en';
-            $list_slug   = 'departments-list-treatments___en';
+            $list_slug   = '';
             $middle_slug = 'departments___en';
             $bottom_slug = 'departments-bottom-text___en';
             break;
@@ -95,7 +95,15 @@ if ( $lang ) {
             <div class="departments-template-part">
                 <?php
                 // 2. Список лечений
-                
+                if ( ! empty( $list_slug ) ) {
+					if ( function_exists( 'block_template_part' ) ) {
+						block_template_part( $list_slug );
+					} else {
+						echo do_blocks(
+							'<!-- wp:template-part {"slug":"' . esc_attr( $list_slug ) . '","theme":"tipress"} /-->'
+						);
+					}
+				}
 
                 // 3. Основной блок departments
                 if ( function_exists( 'block_template_part' ) ) {

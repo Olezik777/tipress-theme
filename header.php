@@ -144,13 +144,14 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		.ti-header__lang-dropdown {
 			position: absolute;
 			top: calc(100% + 8px);
-			left: 0;
+			right: 0;
 			background: #fff;
 			border: 1px solid #ddd;
 			border-radius: 6px;
 			padding: 8px;
 			z-index: 1000;
 			min-width: 150px;
+			max-width: calc(100vw - 40px);
 			box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 			opacity: 0;
 			visibility: hidden;
@@ -207,13 +208,14 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		.ti-header__search-form {
 			position: absolute;
 			top: calc(100% + 8px);
-			left: 0;
+			right: 0;
 			background: #fff;
 			border: 1px solid #ddd;
 			border-radius: 6px;
 			padding: 12px;
 			z-index: 1000;
 			min-width: 300px;
+			max-width: calc(100vw - 40px);
 			box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 			opacity: 0;
 			visibility: hidden;
@@ -514,12 +516,12 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			flex-direction: row-reverse;
 		}
 		.ti-header--rtl .ti-header__lang-dropdown {
-			left: auto;
-			right: 0;
+			left: 0;
+			right: auto;
 		}
 		.ti-header--rtl .ti-header__search-form {
-			left: auto;
-			right: 0;
+			left: 0;
+			right: auto;
 		}
 		.ti-header--rtl .ti-header__mobile-menu {
 			left: auto;
@@ -629,9 +631,24 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				width: 36px;
 				height: 36px;
 			}
+			.ti-header__lang-dropdown {
+				max-width: calc(100vw - 40px);
+				right: 0;
+				left: auto;
+			}
+			.ti-header--rtl .ti-header__lang-dropdown {
+				left: 0;
+				right: auto;
+			}
 			.ti-header__search-form {
 				min-width: calc(100vw - 40px);
-				max-width: 300px;
+				max-width: calc(100vw - 40px);
+				right: 0;
+				left: auto;
+			}
+			.ti-header--rtl .ti-header__search-form {
+				left: 0;
+				right: auto;
 			}
 			.ti-header__phone {
 				font-size: 12px;
@@ -809,6 +826,37 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 (function() {
 	'use strict';
 	
+	// Function to adjust dropdown position to stay within viewport
+	function adjustDropdownPosition(element, parent) {
+		if (!element || !parent) return;
+		
+		const rect = parent.getBoundingClientRect();
+		const dropdownRect = element.getBoundingClientRect();
+		const isRTL = document.documentElement.dir === 'rtl' || document.body.classList.contains('rtl');
+		
+		// Reset positioning
+		element.style.left = '';
+		element.style.right = '';
+		
+		if (isRTL) {
+			// For RTL: check if dropdown goes off left edge
+			if (dropdownRect.left < 20) {
+				element.style.left = '0';
+				element.style.right = 'auto';
+			}
+		} else {
+			// For LTR: check if dropdown goes off right edge
+			if (dropdownRect.right > window.innerWidth - 20) {
+				element.style.right = '0';
+				element.style.left = 'auto';
+				// If still too wide, adjust to fit
+				if (dropdownRect.width > window.innerWidth - 40) {
+					element.style.maxWidth = (window.innerWidth - 40) + 'px';
+				}
+			}
+		}
+	}
+	
 	// Language switcher toggle
 	const langSwitcher = document.querySelector('.ti-header__lang-switcher');
 	const langDropdown = document.querySelector('.ti-header__lang-dropdown');
@@ -832,6 +880,10 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			} else {
 				langDropdown.classList.add('is-open');
 				langSwitcher.setAttribute('aria-expanded', 'true');
+				// Adjust position after opening
+				setTimeout(function() {
+					adjustDropdownPosition(langDropdown, langSwitcher);
+				}, 10);
 			}
 		});
 		
@@ -873,13 +925,15 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			} else {
 				searchForm.classList.add('is-open');
 				searchButton.setAttribute('aria-expanded', 'true');
-				// Focus on input
-				const searchInput = searchForm.querySelector('input');
-				if (searchInput) {
-					setTimeout(function() {
+				// Adjust position after opening
+				setTimeout(function() {
+					adjustDropdownPosition(searchForm, searchButton);
+					// Focus on input
+					const searchInput = searchForm.querySelector('input');
+					if (searchInput) {
 						searchInput.focus();
-					}, 100);
-				}
+					}
+				}, 10);
 			}
 		});
 		
@@ -896,6 +950,22 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			if (e.key === 'Escape' && searchForm.classList.contains('is-open')) {
 				searchForm.classList.remove('is-open');
 				searchButton.setAttribute('aria-expanded', 'false');
+			}
+		});
+		
+		// Adjust position on window resize
+		window.addEventListener('resize', function() {
+			if (searchForm.classList.contains('is-open')) {
+				adjustDropdownPosition(searchForm, searchButton);
+			}
+		});
+	}
+	
+	// Adjust language dropdown on window resize
+	if (langDropdown && langSwitcher) {
+		window.addEventListener('resize', function() {
+			if (langDropdown.classList.contains('is-open')) {
+				adjustDropdownPosition(langDropdown, langSwitcher);
 			}
 		});
 	}

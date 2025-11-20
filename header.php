@@ -687,6 +687,46 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 	<div class="ti-header__container">
 		<!-- Left Section: Language & Search -->
 		<div class="ti-header__left">
+		<?php
+			// Определяем номер телефона в зависимости от языка
+			// Получаем текущий язык напрямую из Polylang
+			$current_lang_code = function_exists( 'pll_current_language' ) ? pll_current_language() : $current_lang;
+			
+			// Нормализуем код языка к нижнему регистру для сравнения
+			$lang_check = strtolower( trim( $current_lang_code ) );
+			
+			// Проверяем различные варианты кода иврита
+			// 'he' - стандартный код иврита (ISO 639-1)
+			// 'iw' - старый код иврита (до 1989 года)
+			// Также проверяем варианты с регионом: 'he_IL', 'iw_IL' и т.д.
+			$is_hebrew = ( $lang_check === 'he' || $lang_check === 'iw' )
+				|| strpos( $lang_check, 'he' ) === 0
+				|| strpos( $lang_check, 'iw' ) === 0;
+			
+			// Если не определили через код, используем RTL как индикатор (иврит - RTL язык)
+			if ( ! $is_hebrew && $is_rtl ) {
+				$is_hebrew = true;
+			}
+			
+			if ( $is_hebrew ) {
+				$phone_number = '03-3760386';
+				$phone_tel = 'tel:033760386';
+			} else {
+				$phone_number = '+972-37621629';
+				$phone_tel = 'tel:+97237621629';
+			}
+			?>
+			<div class="ti-header__phone-wrapper">
+				<a href="<?php echo esc_attr( $phone_tel ); ?>" class="ti-header__phone-link">
+					<span class="ti-header__phone"><?php echo esc_html( $phone_number ); ?></span>
+				</a>
+				<a href="<?php echo esc_attr( $phone_tel ); ?>" class="ti-header__call-icon" aria-label="<?php echo esc_attr( tipress_pll__( 'Позвонить' ) ); ?>">
+					<svg viewBox="0 0 24 24">
+						<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+					</svg>
+				</a>
+			</div>
+
 			<?php if ( function_exists( 'pll_the_languages' ) ) : ?>
 				<?php
 				$languages = pll_the_languages( [ 'raw' => 1, 'hide_if_empty' => 0 ] );
@@ -728,45 +768,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				</button>
 			</form>
 			
-			<?php
-			// Определяем номер телефона в зависимости от языка
-			// Получаем текущий язык напрямую из Polylang
-			$current_lang_code = function_exists( 'pll_current_language' ) ? pll_current_language() : $current_lang;
 			
-			// Нормализуем код языка к нижнему регистру для сравнения
-			$lang_check = strtolower( trim( $current_lang_code ) );
-			
-			// Проверяем различные варианты кода иврита
-			// 'he' - стандартный код иврита (ISO 639-1)
-			// 'iw' - старый код иврита (до 1989 года)
-			// Также проверяем варианты с регионом: 'he_IL', 'iw_IL' и т.д.
-			$is_hebrew = ( $lang_check === 'he' || $lang_check === 'iw' )
-				|| strpos( $lang_check, 'he' ) === 0
-				|| strpos( $lang_check, 'iw' ) === 0;
-			
-			// Если не определили через код, используем RTL как индикатор (иврит - RTL язык)
-			if ( ! $is_hebrew && $is_rtl ) {
-				$is_hebrew = true;
-			}
-			
-			if ( $is_hebrew ) {
-				$phone_number = '03-3760386';
-				$phone_tel = 'tel:033760386';
-			} else {
-				$phone_number = '+972-37621629';
-				$phone_tel = 'tel:+97237621629';
-			}
-			?>
-			<div class="ti-header__phone-wrapper">
-				<a href="<?php echo esc_attr( $phone_tel ); ?>" class="ti-header__phone-link">
-					<span class="ti-header__phone"><?php echo esc_html( $phone_number ); ?></span>
-				</a>
-				<a href="<?php echo esc_attr( $phone_tel ); ?>" class="ti-header__call-icon" aria-label="<?php echo esc_attr( tipress_pll__( 'Позвонить' ) ); ?>">
-					<svg viewBox="0 0 24 24">
-						<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-					</svg>
-				</a>
-			</div>
 		</div>
 
 		<!-- Center Section: Navigation Menu -->

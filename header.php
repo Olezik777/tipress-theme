@@ -506,10 +506,11 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			flex-direction: row-reverse;
 		}
 		.ti-header--rtl .ti-header__left {
-			align-items: flex-end;
+			align-items: center;
 			order: -1;
 			flex-direction: row-reverse;
 		}
+		.ti-header--rtl .ti-header__phone-wrapper { order: 1; }
 		/* Для RTL: при row-reverse порядок DOM элементов автоматически обращается */
 		/* DOM: Language, Search, Phone -> Визуально: Phone, Search, Language */
 		.ti-header--rtl .ti-header__right {

@@ -31,11 +31,11 @@ if ( $lang ) {
             break;
 
         case 'en': // английский
-            $header_slug = 'departments-header-block-en';
-            $links_slug  = 'departments-links-template-en';
-            $list_slug   = 'departments-list-treatments-en';
+            $header_slug = 'departments-header-block___en';
+            $links_slug  = 'departments-links-template___en';
+            $list_slug   = 'departments-list-treatments___en';
             $middle_slug = 'departments___en';
-            $bottom_slug = 'departments-bottom-text-en';
+            $bottom_slug = 'departments-bottom-text___en';
             break;
 
         case 'ar': // арабский

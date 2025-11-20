@@ -34,7 +34,7 @@ if ( $lang ) {
             $header_slug = 'departments-header-block-en';
             $links_slug  = 'departments-links-template-en';
             $list_slug   = 'departments-list-treatments-en';
-            $middle_slug = 'departments-en';
+            $middle_slug = 'departments___en';
             $bottom_slug = 'departments-bottom-text-en';
             break;
 

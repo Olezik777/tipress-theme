@@ -95,9 +95,7 @@ if ( $lang ) {
             <div class="departments-template-part">
                 <?php
                 // 2. Список лечений
-                if ( function_exists( 'block_template_part' ) ) {
-                    block_template_part( $list_slug );
-                } 
+                
 
                 // 3. Основной блок departments
                 if ( function_exists( 'block_template_part' ) ) {

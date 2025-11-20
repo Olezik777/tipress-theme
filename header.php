@@ -99,7 +99,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		.ti-header__container {
 			max-width: 1200px;
 			margin: 0 auto;
-			padding: 12px 20px;
+			padding: 5px 20px;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;

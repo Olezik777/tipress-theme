@@ -61,7 +61,7 @@ $theme_uri = get_stylesheet_directory_uri();
 							$email = 'doctors@topichilov.com';
 							?>
 							<a href="tel:<?php echo esc_attr( $phone ); ?>" class="footer-social-link footer-social-link--phone" aria-label="<?php echo esc_attr( tipress_pll__( 'Телефон' ) ); ?>">
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/phone-circle.png' ); ?>" alt="" width="36" height="36">
+								<img src="/wp-content/uploads/2023/12/phone-call.png" alt="" width="36" height="36">
 								<span><?php echo esc_html( $phone ); ?></span>
 							</a>
 							<a href="https://api.whatsapp.com/send?phone=<?php echo esc_attr( $whatsapp ); ?>" class="footer-social-link footer-social-link--whatsapp" aria-label="<?php echo esc_attr( tipress_pll__( 'WhatsApp' ) ); ?>" target="_blank" rel="noopener">

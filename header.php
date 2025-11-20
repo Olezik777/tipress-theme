@@ -94,6 +94,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			background: #fff;
 			position: relative;
 			z-index: 100;
+			box-shadow: 0 0 12px #d3d3d3;
 		}
 
 		.ti-header__container {
@@ -539,6 +540,15 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			right: 0;
 		}
 		.ti-header--rtl .ti-header__menu-list a { font-size: 18px; }
+
+		.sticky-header .ti-header__logo { width: 30px;}
+		.sticky-header .ti-header__title { font-size: 18px;}
+		.sticky-header .ti-header__phone { font-size: 14px;}
+		.sticky-header .ti-header__call-icon { width: 24px; height: 24px;}
+		.sticky-header .ti-header__call-icon svg { width: 12px; height: 12px;}
+		.sticky-header .ti-header__lang-switcher { width: 32px; height: 32px;}
+		.sticky-header .ti-header__lang-switcher img { width: 16px; height: 16px;}
+		.sticky-header .ti-header__lang-switcher span { font-size: 14px;}
 		/* Tablet Responsive */
 		@media (max-width: 992px) {
 			.ti-header__container {

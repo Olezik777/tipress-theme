@@ -97,11 +97,7 @@ if ( $lang ) {
                 // 2. Список лечений
                 if ( function_exists( 'block_template_part' ) ) {
                     block_template_part( $list_slug );
-                } else {
-                    echo do_blocks(
-                        '<!-- wp:template-part {"slug":"' . esc_attr( $list_slug ) . '","theme":"tipress"} /-->'
-                    );
-                }
+                } 
 
                 // 3. Основной блок departments
                 if ( function_exists( 'block_template_part' ) ) {

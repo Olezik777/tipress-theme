@@ -7,30 +7,35 @@
 
 get_header();
 
-// Определяем текущий язык (Polylang)
+// Текущий язык Polylang (he, en, ar и т.д.)
 $lang = function_exists( 'pll_current_language' )
     ? pll_current_language()
     : '';
 
-// Базовый slug template part
-$tpl_slug = 'departments-list-treatments';
+// Базовые слаги частей шаблона (по умолчанию)
+$links_slug = 'departments-links-template';
+$list_slug  = 'departments-list-treatments';
 
-// В зависимости от языка выбираем нужный template part.
-// Здесь подставь свои реальные слаги частей шаблона.
+// Подбираем слаги для конкретного языка
 if ( $lang ) {
     switch ( $lang ) {
         case 'he': // иврит
-            $tpl_slug = 'departments-list-treatments-he';
+            $links_slug = 'departments-links-template-he';
+            $list_slug  = 'departments-list-treatments-he';
             break;
+
         case 'en': // английский
-            $tpl_slug = 'departments-list-treatments-en';
+            $links_slug = 'departments-links-template-en';
+            $list_slug  = 'departments-list-treatments-en';
             break;
-        case 'ru': // русский
-            $tpl_slug = 'departments-list-treatments-ru';
+
+        case 'ar': // арабский
+            $links_slug = 'departments-links-template-ar';
+            $list_slug  = 'departments-list-treatments-ar';
             break;
+
         default:
-            // на всякий случай оставляем базовый
-            $tpl_slug = 'departments-list-treatments';
+            // остаются дефолтные slugs
             break;
     }
 }
@@ -43,7 +48,6 @@ if ( $lang ) {
         <div class="single-template-content">
             <header class="page-header single-template-header">
                 <?php
-                // Заголовок архива
                 the_archive_title(
                     '<h1 class="page-title" style="text-transform:uppercase;font-style:normal;font-weight:700;">',
                     '</h1>'
@@ -52,15 +56,25 @@ if ( $lang ) {
                 ?>
             </header>
 
+            <?php
+            // 1. Навигационные ссылки (departments-links-template-*)
+            if ( function_exists( 'block_template_part' ) ) {
+                block_template_part( $links_slug );
+            } else {
+                echo do_blocks(
+                    '<!-- wp:template-part {"slug":"' . esc_attr( $links_slug ) . '","theme":"tipress"} /-->'
+                );
+            }
+            ?>
+
             <div class="departments-template-part">
                 <?php
-                // Выводим нужную "Часть шаблона"
+                // 2. Основной список отделений/лечений (departments-list-treatments-*)
                 if ( function_exists( 'block_template_part' ) ) {
-                    block_template_part( $tpl_slug );
+                    block_template_part( $list_slug );
                 } else {
-                    // Фоллбек для старых версий WP
                     echo do_blocks(
-                        '<!-- wp:template-part {"slug":"' . esc_attr( $tpl_slug ) . '","theme":"tipress"} /-->'
+                        '<!-- wp:template-part {"slug":"' . esc_attr( $list_slug ) . '","theme":"tipress"} /-->'
                     );
                 }
                 ?>

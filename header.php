@@ -115,32 +115,34 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		.ti-header__lang-switcher {
 			display: inline-flex;
 			align-items: center;
-			gap: 6px;
-			padding: 6px 12px;
+			justify-content: center;
+			width: 40px;
+			height: 40px;
 			background: #f5f5f5;
 			border-radius: 6px;
 			border: none;
 			cursor: pointer;
-			font-size: 14px;
 			text-decoration: none;
 			color: #333;
 			transition: background 0.2s;
+			position: relative;
 		}
 		.ti-header__lang-switcher:hover {
 			background: #e8e8e8;
 		}
 		.ti-header__lang-flag {
-			width: 20px;
-			height: 14px;
+			width: 24px;
+			height: 18px;
 			object-fit: cover;
 			border-radius: 2px;
 		}
-		.ti-header__lang-dropdown {
+		.ti-header__lang-switcher span {
 			display: none;
+		}
+		.ti-header__lang-dropdown {
 			position: absolute;
-			top: 100%;
+			top: calc(100% + 8px);
 			left: 0;
-			margin-top: 8px;
 			background: #fff;
 			border: 1px solid #ddd;
 			border-radius: 6px;
@@ -148,6 +150,15 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			z-index: 1000;
 			min-width: 150px;
 			box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-10px);
+			transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+		}
+		.ti-header__lang-dropdown.is-open {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0);
 		}
 		.ti-header__lang-item {
 			display: flex;
@@ -167,25 +178,79 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			height: 14px;
 		}
 		.ti-header__search {
-			display: flex;
+			display: inline-flex;
 			align-items: center;
-			gap: 8px;
-			padding: 8px 12px;
+			justify-content: center;
+			width: 40px;
+			height: 40px;
 			background: #fff;
 			border: 1px solid #4a9fd8;
 			border-radius: 6px;
 			text-decoration: none;
 			color: #333;
-			font-size: 14px;
 			transition: border-color 0.2s;
+			position: relative;
 		}
 		.ti-header__search:hover {
 			border-color: #2a7fc8;
 		}
 		.ti-header__search-icon {
-			width: 16px;
-			height: 16px;
+			width: 20px;
+			height: 20px;
 			flex-shrink: 0;
+		}
+		.ti-header__search span {
+			display: none;
+		}
+		.ti-header__search-form {
+			position: absolute;
+			top: calc(100% + 8px);
+			left: 0;
+			background: #fff;
+			border: 1px solid #ddd;
+			border-radius: 6px;
+			padding: 12px;
+			z-index: 1000;
+			min-width: 300px;
+			box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+			opacity: 0;
+			visibility: hidden;
+			transform: translateY(-10px);
+			transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+		}
+		.ti-header__search-form.is-open {
+			opacity: 1;
+			visibility: visible;
+			transform: translateY(0);
+		}
+		.ti-header__search-form {
+			display: flex;
+			gap: 8px;
+		}
+		.ti-header__search-form input {
+			flex: 1;
+			padding: 8px 12px;
+			border: 1px solid #ddd;
+			border-radius: 4px;
+			font-size: 14px;
+			outline: none;
+			transition: border-color 0.2s;
+		}
+		.ti-header__search-form input:focus {
+			border-color: #4a9fd8;
+		}
+		.ti-header__search-form button {
+			padding: 8px 16px;
+			background: #4a9fd8;
+			color: #fff;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			font-size: 14px;
+			transition: background 0.2s;
+		}
+		.ti-header__search-form button:hover {
+			background: #2a7fc8;
 		}
 		.ti-header__center {
 			display: flex;
@@ -286,8 +351,10 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			gap: 4px;
 			text-decoration: none;
 			color: #333;
-			font-size: 18px;
+			font-size: 16px;
 			transition: opacity 0.2s;
+			text-transform: uppercase;
+			font-weight: 600;
 		}
 		.ti-header__menu-list a:hover {
 			opacity: 0.7;
@@ -410,32 +477,51 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			height: auto;
 			display: block;
 		}
+		/* LTR Support - Logo on left */
+		.ti-header--ltr .ti-header__container {
+			flex-direction: row;
+		}
+		.ti-header--ltr .ti-header__right {
+			order: -1;
+			flex-direction: row;
+		}
+		.ti-header--ltr .ti-header__right .ti-header__logo {
+			order: -1;
+			margin-right: 12px;
+		}
+		.ti-header--ltr .ti-header__right .ti-header__brand {
+			order: 1;
+		}
 		/* RTL Support */
-		[dir="rtl"] .ti-header__container {
+		.ti-header--rtl .ti-header__container {
 			flex-direction: row-reverse;
 		}
-		[dir="rtl"] .ti-header__left {
+		.ti-header--rtl .ti-header__left {
 			align-items: flex-end;
 		}
-		[dir="rtl"] .ti-header__right {
+		.ti-header--rtl .ti-header__right {
 			align-items: flex-end;
 			flex-direction: row-reverse;
 		}
-		[dir="rtl"] .ti-header__brand {
+		.ti-header--rtl .ti-header__brand {
 			align-items: flex-start;
 		}
-		[dir="rtl"] .ti-header__address {
+		.ti-header--rtl .ti-header__address {
 			flex-direction: row-reverse;
 		}
-		[dir="rtl"] .ti-header__lang-dropdown {
+		.ti-header--rtl .ti-header__lang-dropdown {
 			left: auto;
 			right: 0;
 		}
-		[dir="rtl"] .ti-header__mobile-menu {
+		.ti-header--rtl .ti-header__search-form {
+			left: auto;
+			right: 0;
+		}
+		.ti-header--rtl .ti-header__mobile-menu {
 			left: auto;
 			right: -100%;
 		}
-		[dir="rtl"] .ti-header__mobile-menu.is-open {
+		.ti-header--rtl .ti-header__mobile-menu.is-open {
 			right: 0;
 		}
 		/* Tablet Responsive */
@@ -527,16 +613,20 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				padding: 8px 10px;
 			}
 			.ti-header__left {
-				flex-direction: column;
-				gap: 6px;
+				flex-direction: row;
+				gap: 8px;
 			}
 			.ti-header__lang-switcher {
-				font-size: 12px;
-				padding: 4px 8px;
+				width: 36px;
+				height: 36px;
 			}
 			.ti-header__search {
-				font-size: 12px;
-				padding: 6px 10px;
+				width: 36px;
+				height: 36px;
+			}
+			.ti-header__search-form {
+				min-width: calc(100vw - 40px);
+				max-width: 300px;
 			}
 			.ti-header__phone {
 				font-size: 12px;
@@ -553,7 +643,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<header id="masthead" class="ti-header">
+<header id="masthead" class="ti-header<?php echo $is_rtl ? ' ti-header--rtl' : ' ti-header--ltr'; ?>">
 	<div class="ti-header__container">
 		<!-- Left Section: Language & Search -->
 		<div class="ti-header__left">
@@ -563,14 +653,11 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				$current  = pll_current_language();
 				$current_lang_data = isset( $languages[ $current ] ) ? $languages[ $current ] : null;
 				?>
-				<button class="ti-header__lang-switcher" type="button" aria-label="<?php echo esc_attr( tipress_pll__( 'Выбрать язык' ) ); ?>">
+				<button class="ti-header__lang-switcher" type="button" aria-label="<?php echo esc_attr( tipress_pll__( 'Выбрать язык' ) ); ?>" aria-expanded="false">
 					<?php if ( $current_lang_data && ! empty( $current_lang_data['flag'] ) ) : ?>
 						<img src="<?php echo esc_url( $current_lang_data['flag'] ); ?>" alt="" class="ti-header__lang-flag">
 					<?php endif; ?>
 					<span><?php echo esc_html( $current_lang_data ? $current_lang_data['name'] : strtoupper( $current ) ); ?></span>
-					<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2">
-						<polyline points="3,5 6,8 9,5"></polyline>
-					</svg>
 				</button>
 				<div class="ti-header__lang-dropdown">
 					<?php foreach ( $languages as $lang ) : ?>
@@ -584,13 +671,22 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				</div>
 			<?php endif; ?>
 			
-			<a href="<?php echo esc_url( home_url( '/?s=' ) ); ?>" class="ti-header__search">
+			<button class="ti-header__search" type="button" aria-label="<?php echo esc_attr( tipress_pll__( 'Поиск' ) ); ?>" aria-expanded="false">
 				<svg class="ti-header__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 					<circle cx="11" cy="11" r="8"></circle>
 					<path d="m21 21-4.35-4.35"></path>
 				</svg>
 				<span><?php echo esc_html( tipress_pll__( 'Поиск' ) ); ?></span>
-			</a>
+			</button>
+			<form class="ti-header__search-form" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<input type="search" name="s" placeholder="<?php echo esc_attr( tipress_pll__( 'Поиск...' ) ); ?>" value="<?php echo get_search_query(); ?>" autocomplete="off">
+				<button type="submit" aria-label="<?php echo esc_attr( tipress_pll__( 'Найти' ) ); ?>">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<circle cx="11" cy="11" r="8"></circle>
+						<path d="m21 21-4.35-4.35"></path>
+					</svg>
+				</button>
+			</form>
 		</div>
 
 		<!-- Center Section: Phone & Navigation Menu -->
@@ -684,5 +780,102 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 	);
 	?>
 </aside>
+
+<script>
+(function() {
+	'use strict';
+	
+	// Language switcher toggle
+	const langSwitcher = document.querySelector('.ti-header__lang-switcher');
+	const langDropdown = document.querySelector('.ti-header__lang-dropdown');
+	const searchButton = document.querySelector('.ti-header__search');
+	const searchForm = document.querySelector('.ti-header__search-form');
+	
+	if (langSwitcher && langDropdown) {
+		langSwitcher.addEventListener('click', function(e) {
+			e.stopPropagation();
+			const isOpen = langDropdown.classList.contains('is-open');
+			
+			// Close search form if open
+			if (searchForm && searchForm.classList.contains('is-open')) {
+				searchForm.classList.remove('is-open');
+				searchButton.setAttribute('aria-expanded', 'false');
+			}
+			
+			if (isOpen) {
+				langDropdown.classList.remove('is-open');
+				langSwitcher.setAttribute('aria-expanded', 'false');
+			} else {
+				langDropdown.classList.add('is-open');
+				langSwitcher.setAttribute('aria-expanded', 'true');
+			}
+		});
+		
+		// Close on outside click
+		document.addEventListener('click', function(e) {
+			if (!langSwitcher.contains(e.target) && !langDropdown.contains(e.target)) {
+				langDropdown.classList.remove('is-open');
+				langSwitcher.setAttribute('aria-expanded', 'false');
+			}
+		});
+		
+		// Close on language item click
+		const langItems = langDropdown.querySelectorAll('.ti-header__lang-item');
+		langItems.forEach(function(item) {
+			item.addEventListener('click', function() {
+				setTimeout(function() {
+					langDropdown.classList.remove('is-open');
+					langSwitcher.setAttribute('aria-expanded', 'false');
+				}, 100);
+			});
+		});
+	}
+	
+	// Search form toggle
+	if (searchButton && searchForm) {
+		searchButton.addEventListener('click', function(e) {
+			e.stopPropagation();
+			const isOpen = searchForm.classList.contains('is-open');
+			
+			// Close language dropdown if open
+			if (langDropdown && langDropdown.classList.contains('is-open')) {
+				langDropdown.classList.remove('is-open');
+				langSwitcher.setAttribute('aria-expanded', 'false');
+			}
+			
+			if (isOpen) {
+				searchForm.classList.remove('is-open');
+				searchButton.setAttribute('aria-expanded', 'false');
+			} else {
+				searchForm.classList.add('is-open');
+				searchButton.setAttribute('aria-expanded', 'true');
+				// Focus on input
+				const searchInput = searchForm.querySelector('input');
+				if (searchInput) {
+					setTimeout(function() {
+						searchInput.focus();
+					}, 100);
+				}
+			}
+		});
+		
+		// Close on outside click
+		document.addEventListener('click', function(e) {
+			if (!searchButton.contains(e.target) && !searchForm.contains(e.target)) {
+				searchForm.classList.remove('is-open');
+				searchButton.setAttribute('aria-expanded', 'false');
+			}
+		});
+		
+		// Close on escape key
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'Escape' && searchForm.classList.contains('is-open')) {
+				searchForm.classList.remove('is-open');
+				searchButton.setAttribute('aria-expanded', 'false');
+			}
+		});
+	}
+})();
+</script>
 
 <div id="content" class="site-content">

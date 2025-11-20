@@ -5,36 +5,7 @@ domReady(function () {
 	searchActive();
 	microModalHandler();
 
-	// Language switcher dropdown
-	const langSwitcher = document.querySelector('.ti-header__lang-switcher');
-	const langDropdown = document.querySelector('.ti-header__lang-dropdown');
-	if (langSwitcher && langDropdown) {
-		langSwitcher.addEventListener('click', function(e) {
-			e.stopPropagation();
-			const isOpen = langDropdown.style.display === 'block';
-			langDropdown.style.display = isOpen ? 'none' : 'block';
-			langSwitcher.setAttribute('aria-expanded', String(!isOpen));
-		});
-		// Close on outside click
-		const closeDropdown = function(e) {
-			if (!langSwitcher.contains(e.target) && !langDropdown.contains(e.target)) {
-				langDropdown.style.display = 'none';
-				langSwitcher.setAttribute('aria-expanded', 'false');
-			}
-		};
-		document.addEventListener('click', closeDropdown);
-		// Close on language item click
-		const langItems = langDropdown.querySelectorAll('.ti-header__lang-item');
-		langItems.forEach(function(item) {
-			item.addEventListener('click', function() {
-				// Allow navigation, dropdown will close naturally
-				setTimeout(function() {
-					langDropdown.style.display = 'none';
-					langSwitcher.setAttribute('aria-expanded', 'false');
-				}, 100);
-			});
-		});
-	}
+	// Language switcher dropdown - moved to header.php inline script
 
 	// Mobile menu toggle
 	const mobileToggle = document.querySelector('.ti-header__mobile-toggle');

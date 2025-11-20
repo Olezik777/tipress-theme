@@ -264,6 +264,11 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			justify-content: center;
 			min-width: 0;
 		}
+		.ti-header__phone-wrapper {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
 		.ti-header__phone {
 			font-size: 18px;
 			font-weight: 700;
@@ -505,6 +510,8 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			order: -1;
 			flex-direction: row-reverse;
 		}
+		/* Для RTL: при row-reverse порядок DOM элементов автоматически обращается */
+		/* DOM: Language, Search, Phone -> Визуально: Phone, Search, Language */
 		.ti-header--rtl .ti-header__right {
 			align-items: flex-end;
 			flex-direction: row-reverse;
@@ -650,8 +657,19 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				left: 0;
 				right: auto;
 			}
+			.ti-header__phone-wrapper {
+				gap: 6px;
+			}
 			.ti-header__phone {
-				font-size: 12px;
+				font-size: 14px;
+			}
+			.ti-header__call-icon {
+				width: 28px;
+				height: 28px;
+			}
+			.ti-header__call-icon svg {
+				width: 14px;
+				height: 14px;
 			}
 			.ti-header__title {
 				font-size: 18px;
@@ -709,15 +727,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 					</svg>
 				</button>
 			</form>
-		</div>
-
-		<!-- Center Section: Phone & Navigation Menu -->
-		<div class="ti-header__center">
-			<button class="ti-header__mobile-toggle" aria-label="<?php echo esc_attr( tipress_pll__( 'Открыть меню' ) ); ?>" aria-expanded="false">
-				<span></span>
-				<span></span>
-				<span></span>
-			</button>
+			
 			<?php
 			// Определяем номер телефона в зависимости от языка
 			// Получаем текущий язык напрямую из Polylang
@@ -747,14 +757,25 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				$phone_tel = 'tel:+97237621629';
 			}
 			?>
-			<a href="<?php echo esc_attr( $phone_tel ); ?>" class="ti-header__phone-link">
-				<span class="ti-header__phone"><?php echo esc_html( $phone_number ); ?></span>
-			</a>
-			<a href="<?php echo esc_attr( $phone_tel ); ?>" class="ti-header__call-icon" aria-label="<?php echo esc_attr( tipress_pll__( 'Позвонить' ) ); ?>">
-				<svg viewBox="0 0 24 24">
-					<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-				</svg>
-			</a>
+			<div class="ti-header__phone-wrapper">
+				<a href="<?php echo esc_attr( $phone_tel ); ?>" class="ti-header__phone-link">
+					<span class="ti-header__phone"><?php echo esc_html( $phone_number ); ?></span>
+				</a>
+				<a href="<?php echo esc_attr( $phone_tel ); ?>" class="ti-header__call-icon" aria-label="<?php echo esc_attr( tipress_pll__( 'Позвонить' ) ); ?>">
+					<svg viewBox="0 0 24 24">
+						<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+					</svg>
+				</a>
+			</div>
+		</div>
+
+		<!-- Center Section: Navigation Menu -->
+		<div class="ti-header__center">
+			<button class="ti-header__mobile-toggle" aria-label="<?php echo esc_attr( tipress_pll__( 'Открыть меню' ) ); ?>" aria-expanded="false">
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
 			<nav class="ti-header__nav-menu" aria-label="<?php echo esc_attr( tipress_pll__( 'Основная навигация' ) ); ?>">
 				<?php
 				// Polylang automatically shows the correct menu for current language

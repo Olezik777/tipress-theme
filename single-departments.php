@@ -21,7 +21,7 @@ $is_english = ( $current_lang === 'en' );
 				<?php get_sidebar(); ?>
 			</div>
 			<?php endif; ?>
-			<div class="ti-column single-template-content">
+			<div class="ti-column single-template-content"<?php echo $is_english ? ' style="flex-basis: 100%;"' : ''; ?>>
 				<?php
 				while ( have_posts() ) :
 					the_post();

@@ -271,7 +271,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			gap: 8px;
 		}
 		.ti-header__phone {
-			font-size: 18px;
+			font-size: clamp(14px, 1.8vw, 18px);
 			font-weight: 700;
 			color: #000;
 			white-space: nowrap;
@@ -361,7 +361,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			gap: 4px;
 			text-decoration: none;
 			color: #333;
-			font-size: 16px;
+			font-size: clamp(12px, 1.5vw, 16px);
 			transition: opacity 0.2s;
 			text-transform: uppercase;
 			font-weight: 600;
@@ -458,7 +458,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			gap: 4px;
 		}
 		.ti-header__title {
-			font-size: 28px;
+			font-size: clamp(20px, 2.5vw, 28px);
 			font-weight: 700;
 			color: #000;
 			line-height: 1.2;
@@ -468,7 +468,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			display: flex;
 			align-items: center;
 			gap: 4px;
-			font-size: 12px;
+			font-size: clamp(10px, 1.2vw, 12px);
 			color: #d22f1e;
 			margin: 0;
 		}
@@ -550,6 +550,17 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		.sticky-header .ti-header__lang-switcher img { width: 16px; height: 16px;}
 		.sticky-header .ti-header__lang-switcher span { font-size: 14px;}
 		/* Tablet Responsive */
+		@media (max-width: 1200px) {
+			.ti-header__title {
+				font-size: clamp(20px, 2.2vw, 26px);
+			}
+			.ti-header__phone {
+				font-size: clamp(14px, 1.6vw, 17px);
+			}
+			.ti-header__menu-list a {
+				font-size: clamp(12px, 1.3vw, 15px);
+			}
+		}
 		@media (max-width: 992px) {
 			.ti-header__container {
 				flex-wrap: wrap;
@@ -568,34 +579,71 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				gap: 8px;
 			}
 			.ti-header__menu-list a {
-				font-size: 14px;
+				font-size: clamp(12px, 1.2vw, 14px);
 			}
 			.ti-header__title {
-				font-size: 24px;
+				font-size: clamp(18px, 2vw, 24px);
 			}
 		}
 		/* Mobile Responsive */
-		@media (max-width: 768px) {
+		@media (max-width: 980px) {
 			.ti-header__container {
 				padding: 10px 15px;
 				position: relative;
 			}
 			.ti-header__mobile-toggle {
 				display: flex;
-				order: 0;
-				margin-right: 12px;
 			}
 			.ti-header__nav-menu {
 				display: none;
 			}
-			.ti-header__left {
+			/* LTR Mobile Layout: Logo left, Phone+Lang center, Toggle right */
+			.ti-header--ltr .ti-header__container {
+				justify-content: space-between;
+			}
+			.ti-header--ltr .ti-header__right {
+				order: 1;
+				width: auto;
+				margin-top: 0;
+				justify-content: flex-start;
+				flex-shrink: 0;
+			}
+			.ti-header--ltr .ti-header__left {
+				order: 2;
+				flex: 1;
+				justify-content: center;
+				width: auto;
+				margin-top: 0;
+				gap: 12px;
+				flex-shrink: 0;
+			}
+			.ti-header--ltr .ti-header__left .ti-header__search {
+				display: none;
+			}
+			.ti-header--ltr .ti-header__center {
+				order: 3;
+				width: auto;
+				margin-top: 0;
+				justify-content: flex-end;
+				flex-shrink: 0;
+			}
+			.ti-header--ltr .ti-header__mobile-toggle {
+				margin-left: 12px;
+			}
+			/* RTL Mobile Layout: Keep existing structure */
+			.ti-header--rtl .ti-header__mobile-toggle {
+				display: flex;
+				order: 0;
+				margin-right: 12px;
+			}
+			.ti-header--rtl .ti-header__left {
 				order: 3;
 				flex-direction: row;
 				gap: 8px;
 				width: 100%;
 				margin-top: 10px;
 			}
-			.ti-header__center {
+			.ti-header--rtl .ti-header__center {
 				order: 1;
 				width: auto;
 				margin-top: 0;
@@ -603,51 +651,55 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				justify-content: flex-start;
 				align-items: center;
 			}
-			.ti-header__right {
+			.ti-header--rtl .ti-header__right {
 				order: 2;
 				width: auto;
 				justify-content: flex-end;
 				margin-top: 0;
 			}
 			.ti-header__phone {
-				font-size: 14px;
+				font-size: clamp(13px, 1.5vw, 16px);
 			}
 			.ti-header__call-icon {
-				width: 28px;
-				height: 28px;
+				width: clamp(26px, 3vw, 30px);
+				height: clamp(26px, 3vw, 30px);
 			}
 			.ti-header__call-icon svg {
-				width: 14px;
-				height: 14px;
+				width: clamp(12px, 1.5vw, 15px);
+				height: clamp(12px, 1.5vw, 15px);
 			}
 			.ti-header__title {
-				font-size: 20px;
+				font-size: clamp(18px, 2vw, 22px);
 			}
 			.ti-header__address {
-				font-size: 11px;
+				font-size: clamp(10px, 1.1vw, 12px);
 			}
 			.ti-header__logo {
-				width: 60px;
+				width: clamp(35px, 4vw, 45px);
 			}
 			.ti-header__brand {
 				display: none;
 			}
+			.ti-header__lang-switcher {
+				width: clamp(36px, 4vw, 40px);
+				height: clamp(36px, 4vw, 40px);
+			}
 		}
 		@media (max-width: 480px) {
 			.ti-header__container {
-				padding: 8px 10px;
+				padding: clamp(6px, 1.5vw, 10px) clamp(8px, 2vw, 12px);
 			}
 			.ti-header__left {
 				flex-direction: row;
-				gap: 8px;
+				gap: clamp(6px, 1.5vw, 8px);
 			}
 			.ti-header__lang-switcher {
-				width: 36px;
-				height: 36px;
+				width: clamp(32px, 4vw, 36px);
+				height: clamp(32px, 4vw, 36px);
 			}
 			.ti-header__search {
-				width: 36px;
-				height: 36px;
+				width: clamp(32px, 4vw, 36px);
+				height: clamp(32px, 4vw, 36px);
 			}
 			.ti-header__lang-dropdown {
 				max-width: calc(100vw - 40px);
@@ -669,21 +721,21 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				right: auto;
 			}
 			.ti-header__phone-wrapper {
-				gap: 6px;
+				gap: clamp(4px, 1vw, 6px);
 			}
 			.ti-header__phone {
-				font-size: 14px;
+				font-size: clamp(12px, 1.4vw, 14px);
 			}
 			.ti-header__call-icon {
-				width: 28px;
-				height: 28px;
+				width: clamp(24px, 3vw, 28px);
+				height: clamp(24px, 3vw, 28px);
 			}
 			.ti-header__call-icon svg {
-				width: 14px;
-				height: 14px;
+				width: clamp(11px, 1.3vw, 14px);
+				height: clamp(11px, 1.3vw, 14px);
 			}
 			.ti-header__title {
-				font-size: 18px;
+				font-size: clamp(16px, 1.8vw, 18px);
 			}
 			.ti-header__brand {
 				gap: 2px;

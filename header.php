@@ -632,7 +632,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				margin-right: 12px;
 			}
 			.ti-header--rtl .ti-header__left {
-				order: 3;
+				order: 2;
 				flex-direction: row;
 				gap: 8px;
 				margin-top: 10px;
@@ -642,7 +642,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				width: auto;
 				margin-top: 0;
 				flex: 1;
-				justify-content: flex-start;
+				justify-content: flex-end;
 				align-items: center;
 			}
 			.ti-header--rtl .ti-header__right {

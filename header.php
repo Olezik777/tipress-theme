@@ -591,6 +591,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			.ti-header__nav-menu {
 				display: none;
 			}
+			.ti-header__center { flex: 0.1}
 			/* LTR Mobile Layout: Logo left, Phone+Lang center, Toggle right */
 			.ti-header--ltr .ti-header__container {
 				justify-content: space-between;

@@ -306,8 +306,8 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			display: none;
 			background: #d22f1e;
 			border: none;
-			width: 44px;
-			height: 44px;
+			width: 40px;
+			height: 40px;
 			border-radius: 4px;
 			cursor: pointer;
 			flex-direction: column;
@@ -323,7 +323,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		}
 		.ti-header__mobile-toggle span {
 			display: block;
-			width: 24px;
+			width: 20px;
 			height: 3px;
 			background: #fff;
 			border-radius: 2px;
@@ -566,12 +566,6 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				flex-wrap: wrap;
 				padding: 10px 15px;
 			}
-			.ti-header__center {
-				order: 3;
-				width: 100%;
-				justify-content: space-between;
-				margin-top: 10px;
-			}
 			.ti-header__nav-menu {
 				gap: 8px;
 			}
@@ -610,12 +604,13 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			}
 			.ti-header--ltr .ti-header__left {
 				order: 2;
-				flex: 1;
-				justify-content: center;
+				flex: 0 1 auto;
+				justify-content: flex-end;
 				width: auto;
 				margin-top: 0;
 				gap: 12px;
 				flex-shrink: 0;
+				margin-right: 12px;
 			}
 			.ti-header--ltr .ti-header__left .ti-header__search {
 				display: none;

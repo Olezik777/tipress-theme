@@ -1888,6 +1888,7 @@ margin-top:0
 	.post-carousel .wp-post-image {
 		max-height: 200px;
 	}
+	.ti-column { flex: auto; }
 }
 .slick-list {
     margin: 0 -10px;
@@ -3390,7 +3391,7 @@ margin-top:0
 	}
 
 	.single-template-columns {
-		flex-direction: column;
+		flex-direction: column-reverse;
 		gap: 20px;
 	}
 

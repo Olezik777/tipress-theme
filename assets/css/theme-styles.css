@@ -1337,6 +1337,9 @@ input[type="search"]:focus-within::-webkit-search-cancel-button {
 .head-contact img {
 	min-width: 16px;
 }
+
+.dep-nav .wp-block-columns { margin-bottom: 5px!important;}
+
 @media only screen and (min-width: 576px) {
 	.head-contact img {
 		min-width: 22px;

@@ -635,7 +635,6 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				order: 3;
 				flex-direction: row;
 				gap: 8px;
-				width: 100%;
 				margin-top: 10px;
 			}
 			.ti-header--rtl .ti-header__center {

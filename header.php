@@ -89,6 +89,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			margin-block-end: 0;
 		}
 		.has-dark-background-color { background-color: var(--wp--preset--color--dark) !important; }
+		.has-dark-color { color: var(--wp--preset--color--dark) !important;}
 		/* Header Critical Styles - Inline for faster rendering */
 		h1 { margin-top: 0; }
 		.ti-header {

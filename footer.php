@@ -17,6 +17,11 @@ $theme_uri = get_stylesheet_directory_uri();
 			</div>
 		</div>
 
+		<a href="#" class="float-call-me open-popup eng_lang bodmodal-open" aria-label="Call back button" style="cursor: pointer;">
+			<div class="call-me-shake"></div>
+			<div class="call-me-text"><?php echo esc_html( tipress_pll__( 'Please Call Back' ) ); ?></div>
+		</a>
+
 		<!-- Main Footer Content -->
 		<div class="footer-main">
 			<div class="footer-main-container">

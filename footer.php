@@ -190,7 +190,7 @@ $theme_uri = get_stylesheet_directory_uri();
 					if ( file_exists( get_stylesheet_directory() . '/assets/images/popup-bg.png' ) ) {
 						$popup_bg_url = $popup_bg;
 					} else {
-						$popup_bg_url = 'https://www.topichilov.com/wp-content/uploads/2023/12/popup-bg.png';
+						$popup_bg_url = '/wp-content/uploads/2023/12/popup-bg.png';
 					}
 					?>
 					<img loading="lazy" decoding="async" width="605" height="284" class="wp-block-cover__image-background" alt="" src="<?php echo esc_url( $popup_bg_url ); ?>" data-object-fit="cover">
@@ -217,60 +217,64 @@ $theme_uri = get_stylesheet_directory_uri();
 	(function() {
 		'use strict';
 		
-		// Popup open/close functionality
-		const popup = document.getElementById('callback-popup');
-		const openButtons = document.querySelectorAll('.bodmodal-open');
-		const closeButton = popup ? popup.querySelector('.bod-block-title-closer') : null;
-		
-		function openPopup() {
-			if (popup) {
+		function initPopup() {
+			const popup = document.getElementById('callback-popup');
+			if (!popup) return;
+			
+			const closeButton = popup.querySelector('.bod-block-title-closer');
+			
+			function openPopup() {
 				popup.classList.add('active');
-				popup.style.display = 'block';
+				popup.style.display = 'flex';
 				document.body.style.overflow = 'hidden';
 			}
-		}
-		
-		function closePopup() {
-			if (popup) {
+			
+			function closePopup() {
 				popup.classList.remove('active');
 				popup.style.display = 'none';
 				document.body.style.overflow = '';
 			}
-		}
-		
-		// Open popup on button click
-		if (openButtons.length > 0) {
-			openButtons.forEach(function(button) {
-				button.addEventListener('click', function(e) {
+			
+			// Open popup on button click - using event delegation for dynamically added elements
+			document.addEventListener('click', function(e) {
+				const target = e.target.closest('.bodmodal-open');
+				if (target) {
 					e.preventDefault();
+					e.stopPropagation();
 					openPopup();
+				}
+			});
+			
+			// Close popup on close button click
+			if (closeButton) {
+				closeButton.addEventListener('click', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+					closePopup();
 				});
-			});
-		}
-		
-		// Close popup on close button click
-		if (closeButton) {
-			closeButton.addEventListener('click', function(e) {
-				e.preventDefault();
-				closePopup();
-			});
-		}
-		
-		// Close popup on overlay click
-		if (popup) {
+			}
+			
+			// Close popup on overlay click
 			popup.addEventListener('click', function(e) {
 				if (e.target === popup) {
 					closePopup();
 				}
 			});
+			
+			// Close popup on Escape key
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Escape' && popup.classList.contains('active')) {
+					closePopup();
+				}
+			});
 		}
 		
-		// Close popup on Escape key
-		document.addEventListener('keydown', function(e) {
-			if (e.key === 'Escape' && popup && popup.classList.contains('active')) {
-				closePopup();
-			}
-		});
+		// Initialize when DOM is ready
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initPopup);
+		} else {
+			initPopup();
+		}
 	})();
 	</script>
 

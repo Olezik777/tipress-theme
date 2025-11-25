@@ -3387,7 +3387,8 @@ margin-top:0
 	direction: rtl;
 }
 
-*:dir(rtl) .footer-column--menu-left {
+*:dir(rtl) .footer-column--menu-left,
+*:dir(rtl) .footer-column--menu-right {
 	border-left: none;
 	border-right: 1px solid rgba(171, 183, 194, 0.5);
 	padding-left: 0;

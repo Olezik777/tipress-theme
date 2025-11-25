@@ -62,7 +62,6 @@ $theme_uri = get_stylesheet_directory_uri();
 							// Social media links - можно вынести в настройки темы или использовать виджет
 							$phone = '+972-528780569';
 							$whatsapp = '972528780569';
-							$viber = '+972528780569';
 							$email = 'doctors@topichilov.com';
 							?>
 							<a href="tel:<?php echo esc_attr( $phone ); ?>" class="footer-social-link footer-social-link--phone" aria-label="<?php echo esc_attr( tipress_pll__( 'Телефон' ) ); ?>">
@@ -73,13 +72,6 @@ $theme_uri = get_stylesheet_directory_uri();
 								<img src="<?php echo esc_url( $theme_uri . '/assets/images/whatsapp-social.png' ); ?>" alt="" width="36" height="36">
 								<div>
 									<span class="footer-social-label"><?php echo esc_html( tipress_pll__( 'Whatsapp' ) ); ?></span>
-									<span class="footer-social-value"><?php echo esc_html( $phone ); ?></span>
-								</div>
-							</a>
-							<a href="viber://chat?number=%2B<?php echo esc_attr( str_replace( '-', '', $viber ) ); ?>" class="footer-social-link footer-social-link--viber" aria-label="<?php echo esc_attr( tipress_pll__( 'Viber' ) ); ?>">
-								<img src="<?php echo esc_url( $theme_uri . '/assets/images/viber-social.png' ); ?>" alt="" width="36" height="36">
-								<div>
-									<span class="footer-social-label"><?php echo esc_html( tipress_pll__( 'Viber' ) ); ?></span>
 									<span class="footer-social-value"><?php echo esc_html( $phone ); ?></span>
 								</div>
 							</a>

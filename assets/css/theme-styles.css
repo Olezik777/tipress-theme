@@ -1361,9 +1361,8 @@ input[type="search"]:focus-within::-webkit-search-cancel-button {
 	.head-contact {
 		padding-left: 4px;
 	}
-	.ti-column { flex: auto!important; }
-	.ti-column { padding-right: 10px!important;}
-	.rtl .ti-column  { padding-right: 0!important; padding-left: 10px!important;}
+	.ti-header .ti-column { flex: auto!important; padding-right: 10px!important; }
+	.ti-header .rtl .ti-column  { padding-right: 0!important; padding-left: 10px!important;}
 }
 
 /* home page */

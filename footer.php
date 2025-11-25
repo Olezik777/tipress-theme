@@ -172,6 +172,108 @@ $theme_uri = get_stylesheet_directory_uri();
 		</div>
 	</footer>
 
+	<!-- Callback Popup Modal -->
+	<div role="dialog" aria-modal="true" aria-labelledby="bodModalAriaTitle2" aria-describedby="bodModalAriaContent2" class="bod-block-popup-wrap modal-1" id="callback-popup">
+		<div style="background-color:#ffffff;border-radius:10px" class="bod-block-popup size-m fade" data-transition="fade">
+			<div id="bodModalAriaTitle2" style="background-color:rgba(0,158,224,1);text-align:center" class="bod-modal-title">
+				<button type="button" style="font-size:33px" class="bod-block-title-closer" aria-label="Close">
+					<span aria-hidden="true">×</span>
+				</button>
+				<span style="color:rgba(255,255,255,1)" class="modal_title">
+					<?php echo esc_html( tipress_pll__( 'Получите консультацию врача' ) ); ?>
+				</span>
+			</div>
+			<div id="bodModalAriaContent2" class="bod-modal-content">
+				<div class="wp-block-cover with-text-alignment core-cover" style="padding-top:25px">
+					<?php
+					$popup_bg = $theme_uri . '/assets/images/popup-bg.png';
+					if ( file_exists( get_stylesheet_directory() . '/assets/images/popup-bg.png' ) ) {
+						$popup_bg_url = $popup_bg;
+					} else {
+						$popup_bg_url = 'https://www.topichilov.com/wp-content/uploads/2023/12/popup-bg.png';
+					}
+					?>
+					<img loading="lazy" decoding="async" width="605" height="284" class="wp-block-cover__image-background" alt="" src="<?php echo esc_url( $popup_bg_url ); ?>" data-object-fit="cover">
+					<span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span>
+					<div class="wp-block-cover__inner-container is-layout-constrained">
+						<div class="wp-block-group inner-group has-dark-color has-text-color has-link-color is-layout-constrained" style="margin-top:0;margin-bottom:var(--wp--preset--spacing--50)">
+							<p class="modal-text has-dark-color has-text-color has-link-color" style="font-size:clamp(14px, 0.875rem + ((1vw - 3.2px) * 0.641), 19px);">
+								<?php
+								$modal_text = tipress_pll__( 'Введите свой номер телефона, и с Вами свяжется в течение <strong>15 минут</strong> врач-консультант нашей клиники, который расскажет о методах лечения и сообщит <strong>точные цены</strong>.' );
+								echo wp_kses_post( $modal_text );
+								?>
+							</p>
+							<div class="wp-block-group is-nowrap is-layout-flex">
+								<?php echo do_shortcode( '[contact-form-7 id="e6b1ad4" title="Callback popup"]' ); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+	(function() {
+		'use strict';
+		
+		// Popup open/close functionality
+		const popup = document.getElementById('callback-popup');
+		const openButtons = document.querySelectorAll('.bodmodal-open');
+		const closeButton = popup ? popup.querySelector('.bod-block-title-closer') : null;
+		
+		function openPopup() {
+			if (popup) {
+				popup.classList.add('active');
+				popup.style.display = 'block';
+				document.body.style.overflow = 'hidden';
+			}
+		}
+		
+		function closePopup() {
+			if (popup) {
+				popup.classList.remove('active');
+				popup.style.display = 'none';
+				document.body.style.overflow = '';
+			}
+		}
+		
+		// Open popup on button click
+		if (openButtons.length > 0) {
+			openButtons.forEach(function(button) {
+				button.addEventListener('click', function(e) {
+					e.preventDefault();
+					openPopup();
+				});
+			});
+		}
+		
+		// Close popup on close button click
+		if (closeButton) {
+			closeButton.addEventListener('click', function(e) {
+				e.preventDefault();
+				closePopup();
+			});
+		}
+		
+		// Close popup on overlay click
+		if (popup) {
+			popup.addEventListener('click', function(e) {
+				if (e.target === popup) {
+					closePopup();
+				}
+			});
+		}
+		
+		// Close popup on Escape key
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'Escape' && popup && popup.classList.contains('active')) {
+				closePopup();
+			}
+		});
+	})();
+	</script>
+
 	<?php wp_footer(); ?>
 </body>
 </html>

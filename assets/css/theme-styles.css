@@ -133,7 +133,7 @@
 :dir(rtl) .site-content .kt-row-column-wrap .kt-blocks-accordion-header::before { left:auto; right:18px;}
 :dir(rtl) .kt-accordion-id46389_a1021c-3d .wp-block-kadence-pane .kt-accordion-header-wrap .kt-blocks-accordion-header { padding-left:30px!important; padding-right:60px!important;}
 :dir(rtl) .site-content .kt-accodion-icon-side-left .kt-blocks-accordion-icon-trigger { right:auto; left:15px;}
-:dir(rtl) .footer-logo {flex-direction: row-reverse;}
+:dir(rtl) .footer-logo {flex-direction: row-reverse;justify-content: flex-end;}
 
 @media only screen and (max-width: 1100px) {
 	:lang(en-GB) .wp-block-navigation ul { gap: 0.5em;}

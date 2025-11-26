@@ -92,6 +92,8 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		.single-template-content .wp-block-columns,
 		.single-template-content .wp-block-group,
 		.single-template-content .wp-block-group .doc-topbar  { margin: 0; }
+		.single-template-content .wp-block-buttons.is-content-justification-center { margin: 10px auto 20px;}
+		
 		.has-dark-background-color { background-color: var(--wp--preset--color--dark) !important; }
 		.has-dark-color { color: var(--wp--preset--color--dark) !important;}
 		/* Header Critical Styles - Inline for faster rendering */

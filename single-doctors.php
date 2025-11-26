@@ -21,9 +21,6 @@ get_header();
 					the_post();
 					?>
 					<article id="post-<?php the_ID(); ?>" <?php post_class( 'single-doctor' ); ?>>
-						<header class="entry-header single-template-header">
-							<?php the_title( '<h1 class="entry-title" style="text-transform:uppercase;font-style:normal;font-weight:700;">', '</h1>' ); ?>
-						</header>
 
 						<div class="entry-content">
 							<?php the_content(); ?>

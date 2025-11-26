@@ -454,6 +454,8 @@ add_action('init', function() {
 	// Header strings
 	pll_register_string('Выбрать язык', 'Выбрать язык', 'Header');
 	pll_register_string('Поиск', 'Поиск', 'Header');
+	pll_register_string('Поиск...', 'Поиск...', 'Header');
+	pll_register_string('Найти', 'Найти', 'Header');
 	pll_register_string('Открыть меню', 'Открыть меню', 'Header');
 	pll_register_string('Позвонить', 'Позвонить', 'Header');
 	pll_register_string('Основная навигация', 'Основная навигация', 'Header');

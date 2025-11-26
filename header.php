@@ -89,6 +89,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			margin-block-end: 0;
 		}
 		.is-layout-flex > :is(*, div),
+		.single-template-content .wp-block-columns,
 		.single-template-content .wp-block-group,
 		.single-template-content .wp-block-group .doc-topbar  { margin: 0; }
 		.has-dark-background-color { background-color: var(--wp--preset--color--dark) !important; }

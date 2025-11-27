@@ -2381,7 +2381,7 @@ margin-top:0
 	.single-departments .wp-block-buttons .wp-block-button {
 		flex-grow: unset;
 	}
-	.single-departments .wp-block-buttons .wp-block-button .wp-block-button__link {
+	.single-departments .content .wp-block-buttons .wp-block-button .wp-block-button__link {
 		width: 550px;
 	}
 }

@@ -381,6 +381,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			opacity: 0.7;
 			font-weight: 600;
 		}
+		.sidebar .wp-block-group .wp-block-button__link { max-width: 100%!important;}
 		/* Mobile Sidebar Menu */
 		.ti-header__mobile-menu {
 			position: fixed;

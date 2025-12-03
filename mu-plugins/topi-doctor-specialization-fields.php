@@ -14,6 +14,31 @@ declare(strict_types=1);
  * Привязка к таксономии specialization
  * Поля будут доступны при редактировании терминов таксономии specialization
  */
+
+/**
+ * Improve ACF post_object search for doctors
+ * This ensures search works correctly for post_type 'doctors'
+ */
+add_filter('acf/fields/post_object/query', function($args, $field, $post_id) {
+	// Apply to all doctor fields
+	if (isset($field['post_type']) && in_array('doctors', $field['post_type'])) {
+		// Ensure only published posts are shown
+		$args['post_status'] = 'publish';
+		
+		// ACF passes search term in $args['s'] for AJAX requests
+		// Make sure search is enabled
+		if (isset($args['s']) && !empty($args['s'])) {
+			// Search is already set, just ensure it works
+			$args['s'] = sanitize_text_field($args['s']);
+		}
+		
+		// Ensure proper query arguments for post_type
+		$args['post_type'] = 'doctors';
+		$args['posts_per_page'] = isset($args['posts_per_page']) ? $args['posts_per_page'] : 20;
+	}
+	return $args;
+}, 10, 3);
+
 add_action('acf/init', function() {
 	// Early return if ACF is not available
 	if (!function_exists('acf_add_local_field_group')) {
@@ -106,12 +131,14 @@ function get_specialization_fields(): array {
 			'class' => '',
 			'id' => '',
 		],
-		'post_type' => ['vrachi'],
-		'taxonomy' => '',
+		'post_type' => ['doctors'],
 		'allow_null' => 1,
 		'multiple' => 0,
 		'return_format' => 'id',
 		'ui' => 1,
+		'ajax' => 1,
+		'filters' => ['search'],
+		'search_placeholder' => 'Поиск врача...',
 	];
 
 	// Doctor position override
@@ -299,12 +326,14 @@ function get_specialization_fields(): array {
 				'class' => '',
 				'id' => '',
 			],
-			'post_type' => ['vrachi'],
-			'taxonomy' => '',
+			'post_type' => ['doctors'],
 			'allow_null' => 1,
 			'multiple' => 0,
 			'return_format' => 'id',
 			'ui' => 1,
+			'ajax' => 1,
+			'filters' => ['search'],
+			'search_placeholder' => 'Поиск врача...',
 		];
 
 		// Custom title for doctor

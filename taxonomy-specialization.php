@@ -17,67 +17,88 @@ $term_slug = $term->slug;
 	<div class="wp-block-group single-template-container">
 		<?php tipress_display_breadcrumbs(); ?>
 		
-		<?php
-		// Get ACF fields for taxonomy term
-		// For taxonomy terms, ACF accepts term object or format: 'taxonomy_term_id'
-		// Using term object is more reliable
-		$term_field_context = $term;
-		?>
+		<div class="ti-columns reverse-mobile single-template-columns">
+			<div class="ti-column single-template-sidebar">
+				<?php get_sidebar(); ?>
+			</div>
+			<div class="ti-column single-template-content">
+				<?php
+				// Get ACF fields for taxonomy term
+				// For taxonomy terms, ACF accepts term object or format: 'taxonomy_term_id'
+				// Using term object is more reliable
+				$term_field_context = $term;
+				?>
 
-		<!-- Hero Section -->
-		<?php
-		$hero_title = get_field( 'spec_hero_title', $term_field_context );
-		$hero_title = ! empty( $hero_title ) ? $hero_title : $term->name;
-		$hero_doctor_id = get_field( 'spec_hero_doctor', $term_field_context );
-		$hero_doctor_position = get_field( 'spec_hero_doctor_position', $term_field_context );
-		$hero_image_id = get_field( 'spec_hero_image', $term_field_context );
-		$hero_intro = get_field( 'spec_hero_intro', $term_field_context );
-		$hero_cta_label = get_field( 'spec_hero_cta_label', $term_field_context );
-		$hero_cta_url = get_field( 'spec_hero_cta_url', $term_field_context );
-		
-		// Get hero doctor data
-		$hero_doctor = null;
-		if ( $hero_doctor_id ) {
-			$hero_doctor = get_post( $hero_doctor_id );
-		}
-		
-		// Get benefits
-		$hero_benefits = [];
-		for ( $i = 1; $i <= 5; $i++ ) {
-			$benefit = get_field( 'spec_hero_benefit_' . $i, $term_field_context );
-			if ( ! empty( $benefit ) ) {
-				$hero_benefits[] = $benefit;
-			}
-		}
-		?>
-		<section class="spec-hero-section" style="margin-bottom: var(--wp--preset--spacing--90);">
-			<div class="wp-block-group" style="max-width: 1200px; margin: 0 auto; padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);">
-				<?php if ( $hero_image_id ) : ?>
-					<div class="spec-hero-image" style="margin-bottom: var(--wp--preset--spacing--50);">
-						<?php echo wp_get_attachment_image( $hero_image_id, 'large', false, [ 'style' => 'width: 100%; height: auto; border-radius: 12px;' ] ); ?>
-					</div>
-				<?php endif; ?>
+				<!-- Hero Section -->
+				<?php
+				$hero_title = get_field( 'spec_hero_title', $term_field_context );
+				$hero_title = ! empty( $hero_title ) ? $hero_title : $term->name;
+				$hero_doctor_id = get_field( 'spec_hero_doctor', $term_field_context );
+				$hero_doctor_position = get_field( 'spec_hero_doctor_position', $term_field_context );
+				$hero_image_id = get_field( 'spec_hero_image', $term_field_context );
+				$hero_intro = get_field( 'spec_hero_intro', $term_field_context );
+				$hero_cta_label = get_field( 'spec_hero_cta_label', $term_field_context );
+				$hero_cta_url = get_field( 'spec_hero_cta_url', $term_field_context );
 				
-				<header class="entry-header" style="margin-bottom: var(--wp--preset--spacing--50);">
-					<h1 class="entry-title" style="text-transform: uppercase; font-style: normal; font-weight: 700; margin-bottom: var(--wp--preset--spacing--40);">
-						<?php echo esc_html( $hero_title ); ?>
-					</h1>
-					
-					<?php if ( $hero_doctor ) : ?>
-						<div class="spec-hero-doctor" style="margin-bottom: var(--wp--preset--spacing--40);">
-							<h2 style="margin: 0 0 8px 0; font-size: 1.5rem;">
-								<a href="<?php echo esc_url( get_permalink( $hero_doctor->ID ) ); ?>" style="text-decoration: none; color: inherit;">
-									<?php echo esc_html( $hero_doctor->post_title ); ?>
-								</a>
-							</h2>
-							<?php if ( ! empty( $hero_doctor_position ) ) : ?>
-								<p style="margin: 0; color: #666; font-size: 1rem;">
-									<?php echo esc_html( $hero_doctor_position ); ?>
-								</p>
-							<?php endif; ?>
-						</div>
-					<?php endif; ?>
-				</header>
+				// Get hero doctor data
+				$hero_doctor = null;
+				if ( $hero_doctor_id ) {
+					$hero_doctor = get_post( $hero_doctor_id );
+				}
+				
+				// Get benefits
+				$hero_benefits = [];
+				for ( $i = 1; $i <= 5; $i++ ) {
+					$benefit = get_field( 'spec_hero_benefit_' . $i, $term_field_context );
+					if ( ! empty( $benefit ) ) {
+						$hero_benefits[] = $benefit;
+					}
+				}
+				?>
+				<section class="spec-hero-section" style="margin-bottom: var(--wp--preset--spacing--90);">
+					<div class="wp-block-group" style="max-width: 1200px; margin: 0 auto; padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);">
+						<?php if ( $hero_image_id ) : ?>
+							<div class="spec-hero-image" style="position: relative; margin-bottom: var(--wp--preset--spacing--50); border-radius: 12px; overflow: hidden;">
+								<?php echo wp_get_attachment_image( $hero_image_id, 'large', false, [ 'style' => 'width: 100%; height: auto; display: block;' ] ); ?>
+								<?php if ( ! empty( $hero_title ) ) : ?>
+									<div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%); padding: var(--wp--preset--spacing--70) var(--wp--preset--spacing--50) var(--wp--preset--spacing--50);">
+										<h1 class="entry-title" style="text-transform: uppercase; font-style: normal; font-weight: 700; color: #fff; margin: 0; font-size: clamp(1.5rem, 4vw, 3rem); text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
+											<?php echo esc_html( $hero_title ); ?>
+										</h1>
+									</div>
+								<?php endif; ?>
+							</div>
+						<?php else : ?>
+							<header class="entry-header" style="margin-bottom: var(--wp--preset--spacing--50);">
+								<h1 class="entry-title" style="text-transform: uppercase; font-style: normal; font-weight: 700; margin-bottom: var(--wp--preset--spacing--40);">
+									<?php echo esc_html( $hero_title ); ?>
+								</h1>
+							</header>
+						<?php endif; ?>
+						
+						<?php if ( $hero_doctor ) : ?>
+							<div class="spec-hero-doctor" style="margin-bottom: var(--wp--preset--spacing--40); display: flex; align-items: center; gap: var(--wp--preset--spacing--40);">
+								<?php if ( has_post_thumbnail( $hero_doctor->ID ) ) : ?>
+									<div class="spec-hero-doctor-image" style="flex-shrink: 0;">
+										<a href="<?php echo esc_url( get_permalink( $hero_doctor->ID ) ); ?>">
+											<?php echo get_the_post_thumbnail( $hero_doctor->ID, 'medium', [ 'style' => 'width: 120px; height: 120px; object-fit: cover; border-radius: 8px;' ] ); ?>
+										</a>
+									</div>
+								<?php endif; ?>
+								<div class="spec-hero-doctor-info">
+									<h2 style="margin: 0 0 8px 0; font-size: 1.5rem;">
+										<a href="<?php echo esc_url( get_permalink( $hero_doctor->ID ) ); ?>" style="text-decoration: none; color: inherit;">
+											<?php echo esc_html( $hero_doctor->post_title ); ?>
+										</a>
+									</h2>
+									<?php if ( ! empty( $hero_doctor_position ) ) : ?>
+										<p style="margin: 0; color: #666; font-size: 1rem;">
+											<?php echo esc_html( $hero_doctor_position ); ?>
+										</p>
+									<?php endif; ?>
+								</div>
+							</div>
+						<?php endif; ?>
 				
 				<?php if ( ! empty( $hero_intro ) ) : ?>
 					<div class="spec-hero-intro" style="margin-bottom: var(--wp--preset--spacing--50); font-size: 1.125rem; line-height: 1.6;">
@@ -415,10 +436,11 @@ $term_slug = $term->slug;
 			</section>
 		<?php endif; ?>
 
+			</div>
+		</div>
 	</div>
 </main>
 
 <?php
-get_sidebar();
 get_footer();
 

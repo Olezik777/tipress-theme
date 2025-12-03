@@ -795,7 +795,8 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				</a>
 			</div>
 
-			<?php if ( function_exists( 'pll_the_languages' ) ) : ?>
+			<?php /* Временно закомментировано
+			if ( function_exists( 'pll_the_languages' ) ) : ?>
 				<?php
 				$languages = pll_the_languages( [ 'raw' => 1, 'hide_if_empty' => 0 ] );
 				$current  = pll_current_language();
@@ -817,7 +818,8 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 						</a>
 					<?php endforeach; ?>
 				</div>
-			<?php endif; ?>
+			<?php endif;
+			*/ ?>
 			
 			<button class="ti-header__search" type="button" aria-label="<?php echo esc_attr( tipress_pll__( 'Поиск' ) ); ?>" aria-expanded="false">
 				<svg class="ti-header__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -948,13 +950,13 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		}
 	}
 	
-	// Language switcher toggle
-	const langSwitcher = document.querySelector('.ti-header__lang-switcher');
-	const langDropdown = document.querySelector('.ti-header__lang-dropdown');
+	// Language switcher toggle - временно закомментировано
+	/* const langSwitcher = document.querySelector('.ti-header__lang-switcher');
+	const langDropdown = document.querySelector('.ti-header__lang-dropdown'); */
 	const searchButton = document.querySelector('.ti-header__search');
 	const searchForm = document.querySelector('.ti-header__search-form');
 	
-	if (langSwitcher && langDropdown) {
+	/* if (langSwitcher && langDropdown) {
 		langSwitcher.addEventListener('click', function(e) {
 			e.stopPropagation();
 			const isOpen = langDropdown.classList.contains('is-open');
@@ -996,7 +998,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				}, 100);
 			});
 		});
-	}
+	} */
 	
 	// Search form toggle
 	if (searchButton && searchForm) {
@@ -1004,11 +1006,11 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			e.stopPropagation();
 			const isOpen = searchForm.classList.contains('is-open');
 			
-			// Close language dropdown if open
-			if (langDropdown && langDropdown.classList.contains('is-open')) {
+			// Close language dropdown if open - временно закомментировано
+			/* if (langDropdown && langDropdown.classList.contains('is-open')) {
 				langDropdown.classList.remove('is-open');
 				langSwitcher.setAttribute('aria-expanded', 'false');
-			}
+			} */
 			
 			if (isOpen) {
 				searchForm.classList.remove('is-open');
@@ -1052,14 +1054,14 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		});
 	}
 	
-	// Adjust language dropdown on window resize
-	if (langDropdown && langSwitcher) {
+	// Adjust language dropdown on window resize - временно закомментировано
+	/* if (langDropdown && langSwitcher) {
 		window.addEventListener('resize', function() {
 			if (langDropdown.classList.contains('is-open')) {
 				adjustDropdownPosition(langDropdown, langSwitcher);
 			}
 		});
-	}
+	} */
 })();
 </script>
 

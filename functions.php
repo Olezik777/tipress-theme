@@ -39,6 +39,17 @@ function tipress_theme_setup() {
 add_action( 'after_setup_theme', 'tipress_theme_setup' );
 
 /**
+ * Load mu-plugins from theme directory if they exist
+ * This allows mu-plugins to be versioned with the theme in git
+ * WordPress automatically loads mu-plugins from wp-content/mu-plugins/,
+ * but we also load from theme directory for version control
+ */
+$mu_plugin_file = get_template_directory() . '/mu-plugins/topi-doctor-specialization-fields.php';
+if ( file_exists( $mu_plugin_file ) ) {
+	require_once $mu_plugin_file;
+}
+
+/**
  * Filter Polylang nav menu locations to prevent duplicate combinations
  * This ensures only one menu location per language is shown
  */

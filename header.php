@@ -14,6 +14,12 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php
+	// Временно скрываем страницы таксономии specialization от поисковых систем
+	if ( is_tax( 'specialization' ) ) {
+		echo '<meta name="robots" content="noindex, nofollow">' . "\n";
+	}
+	?>
 	<?php wp_head(); ?>
 	<style id="ti-header-styles">
 		/* Global Font Family */

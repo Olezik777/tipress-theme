@@ -92,6 +92,8 @@ if ( $lang ) {
             }
             ?>
 
+            <?php
+            /*
             <div class="departments-template-part">
                 <?php
                 // 2. Список лечений
@@ -118,6 +120,8 @@ if ( $lang ) {
                 }
                 ?>
             </div>
+            */
+            ?>
 
         </div><!-- /.single-template-content -->
     </div><!-- /.single-template-container -->

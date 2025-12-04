@@ -1135,6 +1135,140 @@ function tipress_enqueue_doctors_filter_assets() {
 add_action( 'wp_enqueue_scripts', 'tipress_enqueue_doctors_filter_assets' );
 
 /**
+ * Навигационный блок departments - ссылки на блоки внизу страницы
+ * 
+ * @return void
+ */
+function tipress_render_departments_navigation() {
+	// Получаем текущий язык для Polylang
+	$current_lang = function_exists( 'pll_current_language' ) ? pll_current_language() : '';
+	
+	// Получаем все опубликованные departments для текущего языка
+	$args = array(
+		'post_type'      => 'departments',
+		'posts_per_page' => -1,
+		'post_status'    => 'publish',
+		'orderby'        => 'menu_order',
+		'order'          => 'ASC',
+	);
+	
+	// Фильтруем по языку, если Polylang активен
+	if ( $current_lang && function_exists( 'pll_current_language' ) ) {
+		$args['lang'] = $current_lang;
+	}
+	
+	$all_departments = get_posts( $args );
+	
+	if ( empty( $all_departments ) ) {
+		return;
+	}
+	
+	// Разделяем на родительские и дочерние
+	$parent_departments = array();
+	$children_by_parent = array();
+	
+	foreach ( $all_departments as $dept ) {
+		$parent_id = $dept->post_parent;
+		
+		if ( $parent_id == 0 ) {
+			// Это родительская страница
+			$parent_departments[] = $dept;
+		} else {
+			// Это дочерняя страница
+			// Проверяем, что родитель существует и опубликован
+			$parent_post = get_post( $parent_id );
+			if ( ! $parent_post || $parent_post->post_status !== 'publish' ) {
+				continue;
+			}
+			
+			// Если используется Polylang, проверяем, что родитель в том же языке
+			if ( $current_lang && function_exists( 'pll_get_post_language' ) ) {
+				$parent_lang = pll_get_post_language( $parent_id );
+				if ( $parent_lang !== $current_lang ) {
+					// Пытаемся найти перевод родителя в текущем языке
+					$parent_translated = pll_get_post( $parent_id, $current_lang );
+					if ( $parent_translated ) {
+						// Проверяем, что переведенный родитель есть в нашем списке
+						$parent_exists = false;
+						foreach ( $all_departments as $existing_parent ) {
+							if ( $existing_parent->ID == $parent_translated ) {
+								$parent_exists = true;
+								$parent_id = $parent_translated;
+								break;
+							}
+						}
+						if ( ! $parent_exists ) {
+							continue;
+						}
+					} else {
+						continue;
+					}
+				}
+			}
+			
+			if ( ! isset( $children_by_parent[ $parent_id ] ) ) {
+				$children_by_parent[ $parent_id ] = array();
+			}
+			$children_by_parent[ $parent_id ][] = $dept;
+		}
+	}
+	
+	// Фильтруем: оставляем только родительские, у которых есть дочерние
+	$parent_departments_with_children = array();
+	foreach ( $parent_departments as $parent ) {
+		$parent_id = $parent->ID;
+		
+		// Проверяем, есть ли дочерние записи для этого родителя
+		if ( isset( $children_by_parent[ $parent_id ] ) && ! empty( $children_by_parent[ $parent_id ] ) ) {
+			// Фильтруем дочерние только опубликованные
+			$published_children = array_filter( $children_by_parent[ $parent_id ], function( $child ) {
+				return $child->post_status === 'publish';
+			} );
+			
+			if ( ! empty( $published_children ) ) {
+				$parent_departments_with_children[] = $parent;
+			}
+		}
+	}
+	
+	if ( empty( $parent_departments_with_children ) ) {
+		return;
+	}
+	
+	// Выводим навигационную сетку
+	echo '<div class="departments-navigation-grid">';
+	
+	foreach ( $parent_departments_with_children as $parent ) {
+		$parent_id = $parent->ID;
+		$parent_title = get_the_title( $parent_id );
+		$parent_image = get_the_post_thumbnail( $parent_id, 'thumbnail' );
+		
+		// Создаем якорную ссылку на блок внизу
+		$anchor_id = 'department-' . $parent_id;
+		$anchor_url = '#' . $anchor_id;
+		
+		?>
+		<div class="department-nav-card">
+			<a href="<?php echo esc_url( $anchor_url ); ?>" class="department-nav-card__link" data-scroll-to="<?php echo esc_attr( $anchor_id ); ?>">
+				<?php if ( $parent_image ) : ?>
+					<div class="department-nav-card__icon">
+						<?php echo $parent_image; ?>
+					</div>
+				<?php endif; ?>
+				<div class="department-nav-card__title">
+					<?php echo esc_html( $parent_title ); ?>
+				</div>
+			</a>
+		</div>
+		<?php
+	}
+	
+	echo '</div>';
+	
+	wp_reset_postdata();
+}
+
+/**
  * Вывод родительских departments с дочерними записями
  * 
  * @return void
@@ -1264,8 +1398,11 @@ function tipress_render_departments_parents_with_children() {
 			return $order_a - $order_b;
 		} );
 		
+		// Создаем уникальный ID для якоря
+		$anchor_id = 'department-' . $parent_id;
+		
 		?>
-		<div class="department-card">
+		<div class="department-card" id="<?php echo esc_attr( $anchor_id ); ?>">
 			<div class="department-card__header">
 				<?php if ( $parent_image ) : ?>
 					<div class="department-card__icon">

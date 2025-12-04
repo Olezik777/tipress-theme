@@ -625,4 +625,33 @@ document.addEventListener('DOMContentLoaded', function () {
             input.setAttribute('placeholder', input.getAttribute('placeholder').replace("+7", "ХХ"));
         });
     }
+
+	// Smooth scroll for department navigation anchors
+	const departmentNavLinks = document.querySelectorAll('.department-nav-card__link[data-scroll-to]');
+	if (departmentNavLinks.length > 0) {
+		departmentNavLinks.forEach(function(link) {
+			link.addEventListener('click', function(e) {
+				const targetId = this.getAttribute('data-scroll-to');
+				const targetElement = document.getElementById(targetId);
+				
+				if (targetElement) {
+					e.preventDefault();
+					
+					// Calculate offset for header (adjust as needed)
+					const headerHeight = 100;
+					const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+					
+					window.scrollTo({
+						top: targetPosition,
+						behavior: 'smooth'
+					});
+					
+					// Update URL without triggering scroll
+					if (history.pushState) {
+						history.pushState(null, null, '#' + targetId);
+					}
+				}
+			});
+		});
+	}
 });

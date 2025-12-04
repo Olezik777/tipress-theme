@@ -82,7 +82,11 @@ if ( $lang ) {
             </header>
 
             <?php
-            // 1. Навигационные ссылки
+            // 1. Навигационные ссылки - кастомный блок
+            tipress_render_departments_navigation();
+            
+            // Старый блок ссылок закомментирован
+            /*
             if ( function_exists( 'block_template_part' ) ) {
                 block_template_part( $links_slug );
             } else {
@@ -90,6 +94,7 @@ if ( $lang ) {
                     '<!-- wp:template-part {"slug":"' . esc_attr( $links_slug ) . '","theme":"tipress"} /-->'
                 );
             }
+            */
             ?>
 
             <div class="departments-template-part">

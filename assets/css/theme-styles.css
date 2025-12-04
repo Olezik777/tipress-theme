@@ -3952,4 +3952,508 @@ margin-top:0
   :root[dir="rtl"] .doctors-filter-nav-list {
 	flex-direction: row-reverse;
   }
+
+/* ============================================
+   Specialization Taxonomy Template Styles
+   ============================================ */
+
+/* Hero Section */
+.spec-hero-section {
+	margin-bottom: var(--wp--preset--spacing--90);
+}
+
+.spec-hero-section .wp-block-group {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);
+}
+
+.spec-hero-image {
+	position: relative;
+	margin-bottom: var(--wp--preset--spacing--50);
+	border-radius: 12px;
+	overflow: hidden;
+}
+
+.spec-hero-image img {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+.spec-hero-image .entry-title {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+	text-transform: uppercase;
+	font-style: normal;
+	font-weight: 700;
+	color: #fff;
+	margin: 0;
+	font-size: clamp(1.5rem, 4vw, 3rem);
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+	width: 90%;
+	max-width: 100%;
+	z-index: 2;
+	padding: var(--wp--preset--spacing--30);
+	box-sizing: border-box;
+}
+
+.spec-hero-section .entry-header {
+	margin-bottom: var(--wp--preset--spacing--50);
+}
+
+.spec-hero-section .entry-header .entry-title {
+	text-transform: uppercase;
+	font-style: normal;
+	font-weight: 700;
+	margin-bottom: var(--wp--preset--spacing--40);
+}
+
+.spec-hero-image::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.3) 100%);
+	z-index: 1;
+}
+
+.spec-hero-doctor {
+	margin-bottom: var(--wp--preset--spacing--40);
+	display: flex;
+	align-items: center;
+	gap: var(--wp--preset--spacing--40);
+}
+
+.spec-hero-doctor-image {
+	flex-shrink: 0;
+}
+
+.spec-hero-doctor-image img {
+	width: 120px;
+	height: 120px;
+	object-fit: cover;
+	border-radius: 8px;
+}
+
+.spec-hero-doctor-info h2 {
+	margin: 0 0 8px 0;
+	font-size: 1.5rem;
+}
+
+.spec-hero-doctor-info h2 a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.spec-hero-doctor-info p {
+	margin: 0;
+	color: #666;
+	font-size: 1rem;
+}
+
+.spec-hero-intro {
+	margin-bottom: var(--wp--preset--spacing--50);
+	font-size: 1.125rem;
+	line-height: 1.6;
+}
+
+.spec-hero-benefits {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 var(--wp--preset--spacing--50) 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: var(--wp--preset--spacing--40);
+}
+
+.spec-hero-benefits li {
+	padding: var(--wp--preset--spacing--40);
+	background: #f5f8ff;
+	border-radius: 8px;
+	border-left: 3px solid var(--wp--preset--color--base);
+}
+
+.spec-hero-cta {
+	margin-top: var(--wp--preset--spacing--50);
+}
+
+.spec-hero-cta .wp-block-button__link {
+	display: inline-block;
+	padding: 12px 24px;
+	background: var(--wp--preset--color--base);
+	color: #fff;
+	text-decoration: none;
+	border-radius: 6px;
+	font-weight: 600;
+}
+
+/* Team Section */
+.spec-team-section {
+	margin-bottom: var(--wp--preset--spacing--90);
+	background: #f9f9f9;
+	padding: var(--wp--preset--spacing--90) var(--wp--preset--spacing--30);
+}
+
+.spec-team-section .wp-block-group {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.spec-team-section .wp-block-heading {
+	text-align: center;
+	margin-bottom: var(--wp--preset--spacing--70);
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.spec-team-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: var(--wp--preset--spacing--50);
+}
+
+.spec-team-doctor-card {
+	border-radius: 12px;
+	padding: var(--wp--preset--spacing--50);
+	text-align: center;
+}
+
+.spec-team-doctor-card figure {
+	margin: 0 0 var(--wp--preset--spacing--40) 0;
+}
+
+.spec-team-doctor-card figure img {
+	border-radius: 8px;
+}
+
+.spec-team-doctor-card h3 {
+	margin: 0 0 8px 0;
+}
+
+.spec-team-doctor-card h3 a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.spec-team-doctor-card p {
+	margin: 0;
+	color: #666;
+	font-size: 0.9rem;
+	line-height: 1.4;
+}
+
+/* Section 1: When to visit */
+.spec-section-1 {
+	margin-bottom: var(--wp--preset--spacing--90);
+}
+
+.spec-section-1 .wp-block-group {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);
+}
+
+.spec-section-1 .wp-block-heading {
+	margin-bottom: var(--wp--preset--spacing--50);
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.spec-sec1-intro {
+	margin-bottom: var(--wp--preset--spacing--50);
+	font-size: 1.125rem;
+	line-height: 1.6;
+}
+
+.spec-sec1-items {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	gap: var(--wp--preset--spacing--40);
+}
+
+.spec-sec1-items li {
+	padding: var(--wp--preset--spacing--40);
+	background: #fff;
+	border-left: 4px solid var(--wp--preset--color--base);
+	border-radius: 4px;
+	box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.spec-sec1-items li a {
+	text-decoration: none;
+	color: inherit;
+	font-weight: 600;
+	font-size: 1.1rem;
+}
+
+.spec-sec1-items li span {
+	font-weight: 600;
+	font-size: 1.1rem;
+}
+
+/* Section 2: Second opinion */
+.spec-section-2 {
+	margin-bottom: var(--wp--preset--spacing--90);
+	background: #f9f9f9;
+	padding: var(--wp--preset--spacing--90) var(--wp--preset--spacing--30);
+}
+
+.spec-section-2 .wp-block-group {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.spec-section-2 .wp-block-heading {
+	text-align: center;
+	margin-bottom: var(--wp--preset--spacing--50);
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.spec-sec2-intro {
+	margin-bottom: var(--wp--preset--spacing--70);
+	text-align: center;
+	font-size: 1.125rem;
+	line-height: 1.6;
+}
+
+.spec-sec2-columns {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: var(--wp--preset--spacing--70);
+}
+
+.spec-sec2-left h3,
+.spec-sec2-right h3 {
+	margin-bottom: var(--wp--preset--spacing--40);
+	font-size: 1.5rem;
+	font-weight: 700;
+}
+
+.spec-sec2-left ul,
+.spec-sec2-right ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.spec-sec2-left li,
+.spec-sec2-right li {
+	padding: var(--wp--preset--spacing--30) 0;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+	align-items: flex-start;
+	gap: var(--wp--preset--spacing--30);
+}
+
+.spec-sec2-left li > span:first-child,
+.spec-sec2-right li > span:first-child {
+	color: var(--wp--preset--color--base);
+	font-weight: bold;
+	flex-shrink: 0;
+}
+
+/* Section 3: Why private */
+.spec-section-3 {
+	margin-bottom: var(--wp--preset--spacing--90);
+}
+
+.spec-section-3 .wp-block-group {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);
+}
+
+.spec-section-3 .wp-block-heading {
+	margin-bottom: var(--wp--preset--spacing--50);
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.spec-sec3-intro {
+	margin-bottom: var(--wp--preset--spacing--50);
+	font-size: 1.125rem;
+	line-height: 1.6;
+}
+
+.spec-sec3-items {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: var(--wp--preset--spacing--40);
+}
+
+.spec-sec3-items > div {
+	padding: var(--wp--preset--spacing--50);
+	background: #f5f8ff;
+	border-radius: 8px;
+	border-top: 4px solid var(--wp--preset--color--base);
+}
+
+.spec-sec3-items p {
+	margin: 0;
+	font-weight: 600;
+	line-height: 1.5;
+}
+
+/* Author Section */
+.spec-author-section {
+	margin-bottom: var(--wp--preset--spacing--90);
+	padding: var(--wp--preset--spacing--50);
+	background: #f9f9f9;
+	border-left: 4px solid var(--wp--preset--color--base);
+	border-radius: 4px;
+}
+
+.spec-author-section .wp-block-group {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.spec-author-section p {
+	margin: 0 0 8px 0;
+	font-size: 0.9rem;
+	color: #666;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.spec-author-section h3 {
+	margin: 0;
+	font-size: 1.25rem;
+	font-weight: 700;
+}
+
+.spec-author-section h3 a {
+	text-decoration: none;
+	color: inherit;
+}
+
+/* Taxonomy Description */
+.spec-term-description {
+	margin-bottom: var(--wp--preset--spacing--90);
+}
+
+.spec-term-description .wp-block-group {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);
+}
+
+/* Doctors Archive */
+.spec-doctors-archive {
+	margin-bottom: var(--wp--preset--spacing--90);
+}
+
+.spec-doctors-archive .wp-block-group {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);
+}
+
+.spec-doctors-archive .wp-block-heading {
+	margin-bottom: var(--wp--preset--spacing--50);
+	font-size: 2rem;
+	font-weight: 700;
+}
+
+.spec-doctors-archive .doctors-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	gap: var(--wp--preset--spacing--50);
+}
+
+/* RTL Support */
+:root[dir="rtl"] .spec-hero-benefits li {
+	border-left: none;
+	border-right: 3px solid var(--wp--preset--color--base);
+}
+
+:root[dir="rtl"] .spec-sec1-items li {
+	border-left: none;
+	border-right: 4px solid var(--wp--preset--color--base);
+}
+
+:root[dir="rtl"] .spec-sec3-items > div {
+	border-top: none;
+	border-bottom: 4px solid var(--wp--preset--color--base);
+}
+
+:root[dir="rtl"] .spec-author-section {
+	border-left: none;
+	border-right: 4px solid var(--wp--preset--color--base);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+	.spec-hero-image .entry-title {
+		font-size: clamp(1.25rem, 5vw, 2rem);
+		padding: var(--wp--preset--spacing--30);
+	}
+	
+	.spec-hero-doctor {
+		flex-direction: column;
+		text-align: center;
+	}
+	
+	.spec-hero-doctor-image img {
+		width: 100px;
+		height: 100px;
+	}
+	
+	.spec-team-grid {
+		grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+		gap: var(--wp--preset--spacing--40);
+	}
+	
+	.spec-sec2-columns {
+		grid-template-columns: 1fr;
+		gap: var(--wp--preset--spacing--50);
+	}
+	
+	.spec-sec3-items {
+		grid-template-columns: 1fr;
+	}
+	
+	.spec-doctors-archive .doctors-list {
+		grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	}
+}
+
+@media (max-width: 768px) {
+	.spec-hero-section .wp-block-group,
+	.spec-section-1 .wp-block-group,
+	.spec-section-3 .wp-block-group,
+	.spec-term-description .wp-block-group,
+	.spec-doctors-archive .wp-block-group {
+		padding: var(--wp--preset--spacing--40) var(--wp--preset--spacing--20);
+	}
+	
+	.spec-team-section {
+		padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--20);
+	}
+	
+	.spec-section-2 {
+		padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--20);
+	}
+	
+	.spec-hero-benefits {
+		grid-template-columns: 1fr;
+	}
+	
+	.spec-team-grid {
+		grid-template-columns: 1fr;
+	}
+	
+	.spec-doctors-archive .doctors-list {
+		grid-template-columns: 1fr;
+	}
+}
   

@@ -55,44 +55,42 @@ $term_slug = $term->slug;
 					}
 				}
 				?>
-				<section class="spec-hero-section" style="margin-bottom: var(--wp--preset--spacing--90);">
-					<div class="wp-block-group" style="max-width: 1200px; margin: 0 auto; padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);">
+				<section class="spec-hero-section">
+					<div class="wp-block-group">
 						<?php if ( $hero_image_id ) : ?>
-							<div class="spec-hero-image" style="position: relative; margin-bottom: var(--wp--preset--spacing--50); border-radius: 12px; overflow: hidden;">
-								<?php echo wp_get_attachment_image( $hero_image_id, 'large', false, [ 'style' => 'width: 100%; height: auto; display: block;' ] ); ?>
+							<div class="spec-hero-image">
+								<?php echo wp_get_attachment_image( $hero_image_id, 'large', false ); ?>
 								<?php if ( ! empty( $hero_title ) ) : ?>
-									<div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, transparent 100%); padding: var(--wp--preset--spacing--70) var(--wp--preset--spacing--50) var(--wp--preset--spacing--50);">
-										<h1 class="entry-title" style="text-transform: uppercase; font-style: normal; font-weight: 700; color: #fff; margin: 0; font-size: clamp(1.5rem, 4vw, 3rem); text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
-											<?php echo esc_html( $hero_title ); ?>
-										</h1>
-									</div>
+									<h1 class="entry-title">
+										<?php echo esc_html( $hero_title ); ?>
+									</h1>
 								<?php endif; ?>
 							</div>
 						<?php else : ?>
-							<header class="entry-header" style="margin-bottom: var(--wp--preset--spacing--50);">
-								<h1 class="entry-title" style="text-transform: uppercase; font-style: normal; font-weight: 700; margin-bottom: var(--wp--preset--spacing--40);">
+							<header class="entry-header">
+								<h1 class="entry-title">
 									<?php echo esc_html( $hero_title ); ?>
 								</h1>
 							</header>
 						<?php endif; ?>
 						
 						<?php if ( $hero_doctor ) : ?>
-							<div class="spec-hero-doctor" style="margin-bottom: var(--wp--preset--spacing--40); display: flex; align-items: center; gap: var(--wp--preset--spacing--40);">
+							<div class="spec-hero-doctor">
 								<?php if ( has_post_thumbnail( $hero_doctor->ID ) ) : ?>
-									<div class="spec-hero-doctor-image" style="flex-shrink: 0;">
+									<div class="spec-hero-doctor-image">
 										<a href="<?php echo esc_url( get_permalink( $hero_doctor->ID ) ); ?>">
-											<?php echo get_the_post_thumbnail( $hero_doctor->ID, 'medium', [ 'style' => 'width: 120px; height: 120px; object-fit: cover; border-radius: 8px;' ] ); ?>
+											<?php echo get_the_post_thumbnail( $hero_doctor->ID, 'medium' ); ?>
 										</a>
 									</div>
 								<?php endif; ?>
 								<div class="spec-hero-doctor-info">
-									<h2 style="margin: 0 0 8px 0; font-size: 1.5rem;">
-										<a href="<?php echo esc_url( get_permalink( $hero_doctor->ID ) ); ?>" style="text-decoration: none; color: inherit;">
+									<h2>
+										<a href="<?php echo esc_url( get_permalink( $hero_doctor->ID ) ); ?>">
 											<?php echo esc_html( $hero_doctor->post_title ); ?>
 										</a>
 									</h2>
 									<?php if ( ! empty( $hero_doctor_position ) ) : ?>
-										<p style="margin: 0; color: #666; font-size: 1rem;">
+										<p>
 											<?php echo esc_html( $hero_doctor_position ); ?>
 										</p>
 									<?php endif; ?>
@@ -100,31 +98,31 @@ $term_slug = $term->slug;
 							</div>
 						<?php endif; ?>
 				
-				<?php if ( ! empty( $hero_intro ) ) : ?>
-					<div class="spec-hero-intro" style="margin-bottom: var(--wp--preset--spacing--50); font-size: 1.125rem; line-height: 1.6;">
-						<?php echo wp_kses_post( $hero_intro ); ?>
+						<?php if ( ! empty( $hero_intro ) ) : ?>
+							<div class="spec-hero-intro">
+								<?php echo wp_kses_post( $hero_intro ); ?>
+							</div>
+						<?php endif; ?>
+						
+						<?php if ( ! empty( $hero_benefits ) ) : ?>
+							<ul class="spec-hero-benefits">
+								<?php foreach ( $hero_benefits as $benefit ) : ?>
+									<li>
+										<?php echo esc_html( $benefit ); ?>
+									</li>
+								<?php endforeach; ?>
+							</ul>
+						<?php endif; ?>
+						
+						<?php if ( ! empty( $hero_cta_label ) && ! empty( $hero_cta_url ) ) : ?>
+							<div class="spec-hero-cta">
+								<a href="<?php echo esc_url( $hero_cta_url ); ?>" class="wp-block-button__link wp-element-button">
+									<?php echo esc_html( $hero_cta_label ); ?>
+								</a>
+							</div>
+						<?php endif; ?>
 					</div>
-				<?php endif; ?>
-				
-				<?php if ( ! empty( $hero_benefits ) ) : ?>
-					<ul class="spec-hero-benefits" style="list-style: none; padding: 0; margin: 0 0 var(--wp--preset--spacing--50) 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--wp--preset--spacing--40);">
-						<?php foreach ( $hero_benefits as $benefit ) : ?>
-							<li style="padding: var(--wp--preset--spacing--40); background: #f5f8ff; border-radius: 8px; border-left: 3px solid var(--wp--preset--color--base);">
-								<?php echo esc_html( $benefit ); ?>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				<?php endif; ?>
-				
-				<?php if ( ! empty( $hero_cta_label ) && ! empty( $hero_cta_url ) ) : ?>
-					<div class="spec-hero-cta" style="margin-top: var(--wp--preset--spacing--50);">
-						<a href="<?php echo esc_url( $hero_cta_url ); ?>" class="wp-block-button__link wp-element-button" style="display: inline-block; padding: 12px 24px; background: var(--wp--preset--color--base); color: #fff; text-decoration: none; border-radius: 6px; font-weight: 600;">
-							<?php echo esc_html( $hero_cta_label ); ?>
-						</a>
-					</div>
-				<?php endif; ?>
-			</div>
-		</section>
+				</section>
 
 		<!-- Team Section -->
 		<?php
@@ -146,36 +144,36 @@ $term_slug = $term->slug;
 		
 		if ( ! empty( $team_doctors ) ) :
 			?>
-			<section class="spec-team-section" style="margin-bottom: var(--wp--preset--spacing--90); background: #f9f9f9; padding: var(--wp--preset--spacing--90) var(--wp--preset--spacing--30);">
-				<div class="wp-block-group" style="max-width: 1200px; margin: 0 auto;">
+			<section class="spec-team-section">
+				<div class="wp-block-group">
 					<?php if ( ! empty( $team_title ) ) : ?>
-						<h2 class="wp-block-heading" style="text-align: center; margin-bottom: var(--wp--preset--spacing--70); font-size: 2rem; font-weight: 700;">
+						<h2 class="wp-block-heading">
 							<?php echo esc_html( $team_title ); ?>
 						</h2>
 					<?php endif; ?>
 					
-					<div class="spec-team-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--wp--preset--spacing--50);">
+					<div class="spec-team-grid">
 						<?php foreach ( $team_doctors as $team_doctor_data ) : 
 							$team_doctor = $team_doctor_data['post'];
 							$team_custom_title = $team_doctor_data['custom_title'];
 							?>
-							<div class="spec-team-doctor-card wp-block-group has-baige-background-color has-background" style="border-radius: 12px; padding: var(--wp--preset--spacing--50); text-align: center;">
+							<div class="spec-team-doctor-card wp-block-group has-baige-background-color has-background">
 								<?php if ( has_post_thumbnail( $team_doctor->ID ) ) : ?>
-									<figure class="wp-block-image aligncenter size-full" style="margin: 0 0 var(--wp--preset--spacing--40) 0;">
+									<figure class="wp-block-image aligncenter size-full">
 										<a href="<?php echo esc_url( get_permalink( $team_doctor->ID ) ); ?>">
-											<?php echo get_the_post_thumbnail( $team_doctor->ID, 'medium', [ 'style' => 'border-radius: 8px;' ] ); ?>
+											<?php echo get_the_post_thumbnail( $team_doctor->ID, 'medium' ); ?>
 										</a>
 									</figure>
 								<?php endif; ?>
 								
-								<h3 style="margin: 0 0 8px 0;">
-									<a href="<?php echo esc_url( get_permalink( $team_doctor->ID ) ); ?>" style="text-decoration: none; color: inherit;">
+								<h3>
+									<a href="<?php echo esc_url( get_permalink( $team_doctor->ID ) ); ?>">
 										<?php echo esc_html( $team_doctor->post_title ); ?>
 									</a>
 								</h3>
 								
 								<?php if ( ! empty( $team_custom_title ) ) : ?>
-									<p style="margin: 0; color: #666; font-size: 0.9rem; line-height: 1.4;">
+									<p>
 										<?php echo esc_html( $team_custom_title ); ?>
 									</p>
 								<?php endif; ?>
@@ -204,30 +202,30 @@ $term_slug = $term->slug;
 		
 		if ( ! empty( $sec1_title ) || ! empty( $sec1_intro ) || ! empty( $sec1_items ) ) :
 			?>
-			<section class="spec-section-1" style="margin-bottom: var(--wp--preset--spacing--90);">
-				<div class="wp-block-group" style="max-width: 1200px; margin: 0 auto; padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);">
+			<section class="spec-section-1">
+				<div class="wp-block-group">
 					<?php if ( ! empty( $sec1_title ) ) : ?>
-						<h2 class="wp-block-heading" style="margin-bottom: var(--wp--preset--spacing--50); font-size: 2rem; font-weight: 700;">
+						<h2 class="wp-block-heading">
 							<?php echo esc_html( $sec1_title ); ?>
 						</h2>
 					<?php endif; ?>
 					
 					<?php if ( ! empty( $sec1_intro ) ) : ?>
-						<div class="spec-sec1-intro" style="margin-bottom: var(--wp--preset--spacing--50); font-size: 1.125rem; line-height: 1.6;">
+						<div class="spec-sec1-intro">
 							<?php echo wp_kses_post( $sec1_intro ); ?>
 						</div>
 					<?php endif; ?>
 					
 					<?php if ( ! empty( $sec1_items ) ) : ?>
-						<ul class="spec-sec1-items" style="list-style: none; padding: 0; margin: 0; display: grid; gap: var(--wp--preset--spacing--40);">
+						<ul class="spec-sec1-items">
 							<?php foreach ( $sec1_items as $item ) : ?>
-								<li style="padding: var(--wp--preset--spacing--40); background: #fff; border-left: 4px solid var(--wp--preset--color--base); border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+								<li>
 									<?php if ( ! empty( $item['url'] ) ) : ?>
-										<a href="<?php echo esc_url( $item['url'] ); ?>" style="text-decoration: none; color: inherit; font-weight: 600; font-size: 1.1rem;">
+										<a href="<?php echo esc_url( $item['url'] ); ?>">
 											<?php echo esc_html( $item['text'] ); ?>
 										</a>
 									<?php else : ?>
-										<span style="font-weight: 600; font-size: 1.1rem;">
+										<span>
 											<?php echo esc_html( $item['text'] ); ?>
 										</span>
 									<?php endif; ?>
@@ -261,32 +259,32 @@ $term_slug = $term->slug;
 		
 		if ( ! empty( $sec2_title ) || ! empty( $sec2_intro ) || ! empty( $sec2_left_items ) || ! empty( $sec2_right_items ) ) :
 			?>
-			<section class="spec-section-2" style="margin-bottom: var(--wp--preset--spacing--90); background: #f9f9f9; padding: var(--wp--preset--spacing--90) var(--wp--preset--spacing--30);">
-				<div class="wp-block-group" style="max-width: 1200px; margin: 0 auto;">
+			<section class="spec-section-2">
+				<div class="wp-block-group">
 					<?php if ( ! empty( $sec2_title ) ) : ?>
-						<h2 class="wp-block-heading" style="text-align: center; margin-bottom: var(--wp--preset--spacing--50); font-size: 2rem; font-weight: 700;">
+						<h2 class="wp-block-heading">
 							<?php echo esc_html( $sec2_title ); ?>
 						</h2>
 					<?php endif; ?>
 					
 					<?php if ( ! empty( $sec2_intro ) ) : ?>
-						<div class="spec-sec2-intro" style="margin-bottom: var(--wp--preset--spacing--70); text-align: center; font-size: 1.125rem; line-height: 1.6;">
+						<div class="spec-sec2-intro">
 							<?php echo wp_kses_post( $sec2_intro ); ?>
 						</div>
 					<?php endif; ?>
 					
-					<div class="spec-sec2-columns" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--wp--preset--spacing--70);">
+					<div class="spec-sec2-columns">
 						<?php if ( ! empty( $sec2_left_items ) ) : ?>
 							<div class="spec-sec2-left">
 								<?php if ( ! empty( $sec2_left_title ) ) : ?>
-									<h3 style="margin-bottom: var(--wp--preset--spacing--40); font-size: 1.5rem; font-weight: 700;">
+									<h3>
 										<?php echo esc_html( $sec2_left_title ); ?>
 									</h3>
 								<?php endif; ?>
-								<ul style="list-style: none; padding: 0; margin: 0;">
+								<ul>
 									<?php foreach ( $sec2_left_items as $item ) : ?>
-										<li style="padding: var(--wp--preset--spacing--30) 0; border-bottom: 1px solid #ddd; display: flex; align-items: flex-start; gap: var(--wp--preset--spacing--30);">
-											<span style="color: var(--wp--preset--color--base); font-weight: bold; flex-shrink: 0;">•</span>
+										<li>
+											<span>•</span>
 											<span><?php echo esc_html( $item ); ?></span>
 										</li>
 									<?php endforeach; ?>
@@ -297,14 +295,14 @@ $term_slug = $term->slug;
 						<?php if ( ! empty( $sec2_right_items ) ) : ?>
 							<div class="spec-sec2-right">
 								<?php if ( ! empty( $sec2_right_title ) ) : ?>
-									<h3 style="margin-bottom: var(--wp--preset--spacing--40); font-size: 1.5rem; font-weight: 700;">
+									<h3>
 										<?php echo esc_html( $sec2_right_title ); ?>
 									</h3>
 								<?php endif; ?>
-								<ul style="list-style: none; padding: 0; margin: 0;">
+								<ul>
 									<?php foreach ( $sec2_right_items as $item ) : ?>
-										<li style="padding: var(--wp--preset--spacing--30) 0; border-bottom: 1px solid #ddd; display: flex; align-items: flex-start; gap: var(--wp--preset--spacing--30);">
-											<span style="color: var(--wp--preset--color--base); font-weight: bold; flex-shrink: 0;">•</span>
+										<li>
+											<span>•</span>
 											<span><?php echo esc_html( $item ); ?></span>
 										</li>
 									<?php endforeach; ?>
@@ -330,25 +328,25 @@ $term_slug = $term->slug;
 		
 		if ( ! empty( $sec3_title ) || ! empty( $sec3_intro ) || ! empty( $sec3_items ) ) :
 			?>
-			<section class="spec-section-3" style="margin-bottom: var(--wp--preset--spacing--90);">
-				<div class="wp-block-group" style="max-width: 1200px; margin: 0 auto; padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);">
+			<section class="spec-section-3">
+				<div class="wp-block-group">
 					<?php if ( ! empty( $sec3_title ) ) : ?>
-						<h2 class="wp-block-heading" style="margin-bottom: var(--wp--preset--spacing--50); font-size: 2rem; font-weight: 700;">
+						<h2 class="wp-block-heading">
 							<?php echo esc_html( $sec3_title ); ?>
 						</h2>
 					<?php endif; ?>
 					
 					<?php if ( ! empty( $sec3_intro ) ) : ?>
-						<div class="spec-sec3-intro" style="margin-bottom: var(--wp--preset--spacing--50); font-size: 1.125rem; line-height: 1.6;">
+						<div class="spec-sec3-intro">
 							<?php echo wp_kses_post( $sec3_intro ); ?>
 						</div>
 					<?php endif; ?>
 					
 					<?php if ( ! empty( $sec3_items ) ) : ?>
-						<div class="spec-sec3-items" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: var(--wp--preset--spacing--40);">
+						<div class="spec-sec3-items">
 							<?php foreach ( $sec3_items as $item ) : ?>
-								<div style="padding: var(--wp--preset--spacing--50); background: #f5f8ff; border-radius: 8px; border-top: 4px solid var(--wp--preset--color--base);">
-									<p style="margin: 0; font-weight: 600; line-height: 1.5;">
+								<div>
+									<p>
 										<?php echo esc_html( $item ); ?>
 									</p>
 								</div>
@@ -367,22 +365,22 @@ $term_slug = $term->slug;
 		
 		if ( ! empty( $author_name ) ) :
 			?>
-			<section class="spec-author-section" style="margin-bottom: var(--wp--preset--spacing--90); padding: var(--wp--preset--spacing--50); background: #f9f9f9; border-left: 4px solid var(--wp--preset--color--base); border-radius: 4px;">
-				<div class="wp-block-group" style="max-width: 1200px; margin: 0 auto;">
+			<section class="spec-author-section">
+				<div class="wp-block-group">
 					<?php if ( ! empty( $author_label ) ) : ?>
-						<p style="margin: 0 0 8px 0; font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">
+						<p>
 							<?php echo esc_html( $author_label ); ?>
 						</p>
 					<?php endif; ?>
 					
 					<?php if ( ! empty( $author_link ) ) : ?>
-						<a href="<?php echo esc_url( $author_link ); ?>" style="text-decoration: none; color: inherit;">
-							<h3 style="margin: 0; font-size: 1.25rem; font-weight: 700;">
+						<a href="<?php echo esc_url( $author_link ); ?>">
+							<h3>
 								<?php echo esc_html( $author_name ); ?>
 							</h3>
 						</a>
 					<?php else : ?>
-						<h3 style="margin: 0; font-size: 1.25rem; font-weight: 700;">
+						<h3>
 							<?php echo esc_html( $author_name ); ?>
 						</h3>
 					<?php endif; ?>
@@ -392,8 +390,8 @@ $term_slug = $term->slug;
 
 		<!-- Taxonomy Description (if any) -->
 		<?php if ( ! empty( $term->description ) ) : ?>
-			<section class="spec-term-description" style="margin-bottom: var(--wp--preset--spacing--90);">
-				<div class="wp-block-group" style="max-width: 1200px; margin: 0 auto; padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);">
+			<section class="spec-term-description">
+				<div class="wp-block-group">
 					<div class="entry-content">
 						<?php echo wp_kses_post( wpautop( $term->description ) ); ?>
 					</div>
@@ -417,13 +415,13 @@ $term_slug = $term->slug;
 		
 		if ( $doctors_query->have_posts() ) :
 			?>
-			<section class="spec-doctors-archive" style="margin-bottom: var(--wp--preset--spacing--90);">
-				<div class="wp-block-group" style="max-width: 1200px; margin: 0 auto; padding: var(--wp--preset--spacing--50) var(--wp--preset--spacing--30);">
-					<h2 class="wp-block-heading" style="margin-bottom: var(--wp--preset--spacing--50); font-size: 2rem; font-weight: 700;">
+			<section class="spec-doctors-archive">
+				<div class="wp-block-group">
+					<h2 class="wp-block-heading">
 						<?php echo esc_html( tipress_pll__( 'Врачи специализации' ) ); ?>
 					</h2>
 					
-					<div class="doctors-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--wp--preset--spacing--50);">
+					<div class="doctors-list">
 						<?php
 						while ( $doctors_query->have_posts() ) :
 							$doctors_query->the_post();

@@ -105,14 +105,8 @@ if ( $lang ) {
 					}
 				}
 
-                // 3. Основной блок departments
-                if ( function_exists( 'block_template_part' ) ) {
-                    block_template_part( $middle_slug );
-                } else {
-                    echo do_blocks(
-                        '<!-- wp:template-part {"slug":"' . esc_attr( $middle_slug ) . '","theme":"tipress"} /-->'
-                    );
-                }
+                // 3. Основной блок departments - вывод родительских с дочерними
+                tipress_render_departments_parents_with_children();
 
                 // 4. Нижний текст
                 if ( function_exists( 'block_template_part' ) ) {

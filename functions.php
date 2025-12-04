@@ -1133,3 +1133,169 @@ function tipress_enqueue_doctors_filter_assets() {
     );
 }
 add_action( 'wp_enqueue_scripts', 'tipress_enqueue_doctors_filter_assets' );
+
+/**
+ * Вывод родительских departments с дочерними записями
+ * 
+ * @return void
+ */
+function tipress_render_departments_parents_with_children() {
+	// Получаем текущий язык для Polylang
+	$current_lang = function_exists( 'pll_current_language' ) ? pll_current_language() : '';
+	
+	// Получаем все опубликованные departments для текущего языка
+	$args = array(
+		'post_type'      => 'departments',
+		'posts_per_page' => -1,
+		'post_status'    => 'publish',
+		'orderby'        => 'menu_order',
+		'order'          => 'ASC',
+	);
+	
+	// Фильтруем по языку, если Polylang активен
+	if ( $current_lang && function_exists( 'pll_current_language' ) ) {
+		$args['lang'] = $current_lang;
+	}
+	
+	$all_departments = get_posts( $args );
+	
+	if ( empty( $all_departments ) ) {
+		return;
+	}
+	
+	// Разделяем на родительские и дочерние
+	$parent_departments = array();
+	$children_by_parent = array();
+	
+	foreach ( $all_departments as $dept ) {
+		$parent_id = $dept->post_parent;
+		
+		if ( $parent_id == 0 ) {
+			// Это родительская страница
+			$parent_departments[] = $dept;
+		} else {
+			// Это дочерняя страница
+			// Проверяем, что родитель существует и опубликован
+			$parent_post = get_post( $parent_id );
+			if ( ! $parent_post || $parent_post->post_status !== 'publish' ) {
+				continue;
+			}
+			
+			// Если используется Polylang, проверяем, что родитель в том же языке
+			if ( $current_lang && function_exists( 'pll_get_post_language' ) ) {
+				$parent_lang = pll_get_post_language( $parent_id );
+				if ( $parent_lang !== $current_lang ) {
+					// Пытаемся найти перевод родителя в текущем языке
+					$parent_translated = pll_get_post( $parent_id, $current_lang );
+					if ( $parent_translated ) {
+						// Проверяем, что переведенный родитель есть в нашем списке
+						$parent_exists = false;
+						foreach ( $all_departments as $existing_parent ) {
+							if ( $existing_parent->ID == $parent_translated ) {
+								$parent_exists = true;
+								$parent_id = $parent_translated;
+								break;
+							}
+						}
+						if ( ! $parent_exists ) {
+							continue;
+						}
+					} else {
+						continue;
+					}
+				}
+			}
+			
+			if ( ! isset( $children_by_parent[ $parent_id ] ) ) {
+				$children_by_parent[ $parent_id ] = array();
+			}
+			$children_by_parent[ $parent_id ][] = $dept;
+		}
+	}
+	
+	// Фильтруем: оставляем только родительские, у которых есть дочерние
+	$parent_departments_with_children = array();
+	foreach ( $parent_departments as $parent ) {
+		$parent_id = $parent->ID;
+		
+		// Проверяем, есть ли дочерние записи для этого родителя
+		if ( isset( $children_by_parent[ $parent_id ] ) && ! empty( $children_by_parent[ $parent_id ] ) ) {
+			// Фильтруем дочерние только опубликованные
+			$published_children = array_filter( $children_by_parent[ $parent_id ], function( $child ) {
+				return $child->post_status === 'publish';
+			} );
+			
+			if ( ! empty( $published_children ) ) {
+				$parent_departments_with_children[] = $parent;
+			}
+		}
+	}
+	
+	if ( empty( $parent_departments_with_children ) ) {
+		return;
+	}
+	
+	// Выводим карточки
+	echo '<div class="departments-grid">';
+	
+	foreach ( $parent_departments_with_children as $parent ) {
+		$parent_id = $parent->ID;
+		$parent_title = get_the_title( $parent_id );
+		$parent_url = get_permalink( $parent_id );
+		$parent_image = get_the_post_thumbnail( $parent_id, 'medium' );
+		$children = isset( $children_by_parent[ $parent_id ] ) ? $children_by_parent[ $parent_id ] : array();
+		
+		// Фильтруем дочерние только опубликованные
+		$published_children = array_filter( $children, function( $child ) {
+			return $child->post_status === 'publish';
+		} );
+		
+		if ( empty( $published_children ) ) {
+			continue;
+		}
+		
+		// Сортируем дочерние по menu_order или title
+		usort( $published_children, function( $a, $b ) {
+			$order_a = get_post_field( 'menu_order', $a->ID );
+			$order_b = get_post_field( 'menu_order', $b->ID );
+			if ( $order_a == $order_b ) {
+				return strcmp( get_the_title( $a->ID ), get_the_title( $b->ID ) );
+			}
+			return $order_a - $order_b;
+		} );
+		
+		?>
+		<div class="department-card">
+			<div class="department-card__header">
+				<?php if ( $parent_image ) : ?>
+					<div class="department-card__icon">
+						<a href="<?php echo esc_url( $parent_url ); ?>">
+							<?php echo $parent_image; ?>
+						</a>
+					</div>
+				<?php endif; ?>
+				<h3 class="department-card__title">
+					<a href="<?php echo esc_url( $parent_url ); ?>">
+						<?php echo esc_html( $parent_title ); ?>
+					</a>
+				</h3>
+			</div>
+			<?php if ( ! empty( $published_children ) ) : ?>
+				<ul class="department-card__list">
+					<?php foreach ( $published_children as $child ) : ?>
+						<li class="department-card__item">
+							<a href="<?php echo esc_url( get_permalink( $child->ID ) ); ?>">
+								<?php echo esc_html( get_the_title( $child->ID ) ); ?>
+							</a>
+						</li>
+					<?php endforeach; ?>
+				</ul>
+			<?php endif; ?>
+		</div>
+		<?php
+	}
+	
+	echo '</div>';
+	
+	wp_reset_postdata();
+}

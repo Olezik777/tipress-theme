@@ -93,11 +93,11 @@ if ( $lang ) {
             ?>
 
             <?php
-            /*
+            
             <div class="departments-template-part">
                 <?php
                 // 2. Список лечений
-                if ( ! empty( $list_slug ) ) {
+               /* if ( ! empty( $list_slug ) ) {
 					if ( function_exists( 'block_template_part' ) ) {
 						block_template_part( $list_slug );
 					} else {
@@ -105,7 +105,7 @@ if ( $lang ) {
 							'<!-- wp:template-part {"slug":"' . esc_attr( $list_slug ) . '","theme":"tipress"} /-->'
 						);
 					}
-				}
+				}*/
 
                 // 3. Основной блок departments - вывод родительских с дочерними
                 tipress_render_departments_parents_with_children();
@@ -120,7 +120,7 @@ if ( $lang ) {
                 }
                 ?>
             </div>
-            */
+            
             ?>
 
         </div><!-- /.single-template-content -->

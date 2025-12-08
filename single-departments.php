@@ -25,6 +25,12 @@ $is_english = ( $current_lang === 'en' );
 				<?php
 				while ( have_posts() ) :
 					the_post();
+					
+					// Проверяем, что пост опубликован
+					if ( get_post_status() !== 'publish' ) {
+						wp_redirect( home_url() );
+						exit;
+					}
 					?>
 					<article id="post-<?php the_ID(); ?>" <?php post_class( 'single-department' ); ?>>
 						<?php if ( ! $is_english ) : ?>

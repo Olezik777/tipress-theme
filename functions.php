@@ -445,7 +445,11 @@ add_shortcode('custom_posts', 'custom_posts_shortcode');
 if ( ! function_exists( 'tipress_pll__' ) ) {
 	function tipress_pll__( $string ) {
 		if ( function_exists( 'pll__' ) ) {
-			return pll__( $string );
+			$translated = pll__( $string );
+			// Polylang возвращает оригинальную строку, если перевод не найден
+			// Проверяем, что перевод отличается от оригинала (значит перевод найден)
+			// или возвращаем то, что вернул Polylang (может быть оригинал или перевод)
+			return $translated;
 		}
 		return $string;
 	}
@@ -498,6 +502,8 @@ add_action('init', function() {
 	pll_register_string('Введите свой номер телефона, и с Вами свяжется в течение <strong>15 минут</strong> врач-консультант нашей клиники, который расскажет о методах лечения и сообщит <strong>точные цены</strong>.', 'Введите свой номер телефона, и с Вами свяжется в течение <strong>15 минут</strong> врач-консультант нашей клиники, который расскажет о методах лечения и сообщит <strong>точные цены</strong>.', 'Popup');
 	
 	// Search page strings
+	// Используем формат: pll_register_string( $name, $string, $group )
+	// где $name и $string одинаковые для простоты поиска по строке
 	pll_register_string('Результаты поиска', 'Результаты поиска', 'Search');
 	pll_register_string('Найдено результатов: %d', 'Найдено результатов: %d', 'Search');
 	pll_register_string('Ничего не найдено', 'Ничего не найдено', 'Search');

@@ -17,6 +17,7 @@ get_header();
 				<h1 class="page-title">
 					<?php
 					$search_query = get_search_query();
+					// Используем строку из Breadcrumbs, так как она уже зарегистрирована там
 					printf(
 						tipress_pll__( 'Результаты поиска для: %s' ),
 						'<span class="search-query">' . esc_html( $search_query ) . '</span>'

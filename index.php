@@ -21,7 +21,7 @@ get_header();
 					);
 				} else {
 					?>
-					<h1 class="page-title"><?php esc_html_e( 'Последние публикации', 'tipress' ); ?></h1>
+					<h1 class="page-title"><?php echo esc_html( tipress_pll__( 'Последние публикации' ) ); ?></h1>
 					<?php
 				}
 				?>
@@ -38,8 +38,8 @@ get_header();
 
 				the_posts_pagination(
 					[
-						'prev_text' => esc_html__( 'Назад', 'tipress' ),
-						'next_text' => esc_html__( 'Вперед', 'tipress' ),
+						'prev_text' => esc_html( tipress_pll__( 'Назад' ) ),
+						'next_text' => esc_html( tipress_pll__( 'Вперед' ) ),
 					]
 				);
 				?>

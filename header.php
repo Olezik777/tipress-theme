@@ -575,6 +575,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			.ti-header__menu-list a {
 				font-size: clamp(12px, 1.3vw, 15px);
 			}
+			.single-template-container { padding: 0 40px}
 		}
 		@media (max-width: 992px) {
 			.ti-header__container {

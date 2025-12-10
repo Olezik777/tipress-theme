@@ -1762,9 +1762,6 @@ margin-top:0
 	font-size: 18px;
 	display: inline-block;
 	vertical-align: middle;
-	position: absolute;
-    top: 4px;
-    right: -5px;
 }
 
 .department-card__item:last-child {

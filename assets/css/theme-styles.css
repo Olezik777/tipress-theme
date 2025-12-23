@@ -4545,7 +4545,7 @@ margin-top:0
 
 /* Feature Cards */
 .hebrew-feature-card {
-	background-color: #E4EDF6;
+	background-color: #fff;
 	border-radius: 12px;
 	padding: 25px 20px;
 	display: flex;
@@ -4572,15 +4572,16 @@ margin-top:0
 	flex-shrink: 0;
 }
 
-.hebrew-feature-icon svg {
+.hebrew-feature-icon img {
 	width: 60px;
 	height: 60px;
 	display: block;
+	object-fit: contain;
 }
 
 .hebrew-feature-text {
-	color: #336699;
-	font-size: 16px;
+	color: #4D7AE8;
+	font-size: 19px;
 	line-height: 1.6;
 	margin: 0;
 	font-weight: 500;
@@ -4770,9 +4771,10 @@ margin-top:0
 		margin-bottom: 12px;
 	}
 
-	.hebrew-feature-icon svg {
+	.hebrew-feature-icon img {
 		width: 50px;
 		height: 50px;
+		object-fit: contain;
 	}
 
 	.hebrew-feature-text {
@@ -4825,9 +4827,10 @@ margin-top:0
 		padding: 18px 15px;
 	}
 
-	.hebrew-feature-icon svg {
+	.hebrew-feature-icon img {
 		width: 45px;
 		height: 45px;
+		object-fit: contain;
 	}
 
 	.hebrew-feature-text {

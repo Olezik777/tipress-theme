@@ -25,12 +25,7 @@ $is_hebrew = ( $current_lang === 'he' || $current_lang === 'he_IL' || ( $is_rtl 
 					<!-- Top Left Card: Fast Appointments -->
 					<div class="hebrew-feature-card hebrew-card-top-left">
 						<div class="hebrew-feature-icon">
-							<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<circle cx="30" cy="30" r="30" fill="#E4EDF6"/>
-								<circle cx="30" cy="30" r="18" fill="#5DC68C"/>
-								<path d="M30 20V30L38 38" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
-								<path d="M30 12L30 16M30 44L30 48M12 30L16 30M44 30L48 30" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
-							</svg>
+							<img src="https://topichilov.co.il/wp-content/uploads/2025/12/v1.svg" alt="Fast Appointments" />
 						</div>
 						<p class="hebrew-feature-text">תורים מהירים - תוך 24-48 שעות לכל מומחה!</p>
 					</div>
@@ -38,13 +33,7 @@ $is_hebrew = ( $current_lang === 'he' || $current_lang === 'he_IL' || ( $is_rtl 
 					<!-- Top Right Card: Consultation Duration -->
 					<div class="hebrew-feature-card hebrew-card-top-right">
 						<div class="hebrew-feature-icon">
-							<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<circle cx="30" cy="30" r="30" fill="#E4EDF6"/>
-								<circle cx="20" cy="25" r="8" fill="#336699" opacity="0.8"/>
-								<circle cx="40" cy="25" r="8" fill="#336699" opacity="0.8"/>
-								<path d="M20 33C20 37 23 40 27 40C31 40 34 37 34 33M40 33C40 37 43 40 47 40" stroke="#336699" stroke-width="2" stroke-linecap="round"/>
-								<path d="M15 35L20 30M45 30L50 35" stroke="#336699" stroke-width="2" stroke-linecap="round"/>
-							</svg>
+							<img src="https://topichilov.co.il/wp-content/uploads/2025/12/v2.svg" alt="Consultation Duration" />
 						</div>
 						<p class="hebrew-feature-text">כל ייעוץ נמשך כשעה – או יותר, לפי הצורך</p>
 					</div>
@@ -61,12 +50,7 @@ $is_hebrew = ( $current_lang === 'he' || $current_lang === 'he_IL' || ( $is_rtl 
 					<!-- Bottom Left Card: Second Opinion -->
 					<div class="hebrew-feature-card hebrew-card-bottom-left">
 						<div class="hebrew-feature-icon">
-							<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<circle cx="30" cy="30" r="30" fill="#E4EDF6"/>
-								<circle cx="30" cy="30" r="12" stroke="#5DC68C" stroke-width="2" fill="none"/>
-								<path d="M30 18V30L38 38" stroke="#5DC68C" stroke-width="2" stroke-linecap="round"/>
-								<path d="M20 30L27 37L40 24" stroke="#5DC68C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
+							<img src="https://topichilov.co.il/wp-content/uploads/2025/12/v3.svg" alt="Second Opinion" />
 						</div>
 						<p class="hebrew-feature-text">חוות דעת שנייה ממיטב הרופאים של איכילוב</p>
 					</div>
@@ -74,11 +58,7 @@ $is_hebrew = ( $current_lang === 'he' || $current_lang === 'he_IL' || ( $is_rtl 
 					<!-- Bottom Right Card: Confidentiality -->
 					<div class="hebrew-feature-card hebrew-card-bottom-right">
 						<div class="hebrew-feature-icon">
-							<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<circle cx="30" cy="30" r="30" fill="#E4EDF6"/>
-								<path d="M30 18L35 22L40 18V28C40 35 35 40 30 42C25 40 20 35 20 28V18L25 22L30 18Z" fill="#336699"/>
-								<circle cx="30" cy="30" r="3" fill="#FFFFFF"/>
-							</svg>
+							<img src="https://topichilov.co.il/wp-content/uploads/2025/12/v4.svg" alt="Confidentiality" />
 						</div>
 						<p class="hebrew-feature-text">סודיות מלאה ואפשרות לייעוץ אנונימי</p>
 					</div>

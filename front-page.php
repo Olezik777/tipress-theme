@@ -20,38 +20,10 @@ $is_hebrew = ( $current_lang === 'he' || $current_lang === 'he_IL' || ( $is_rtl 
 		<!-- Hebrew Homepage Hero Block -->
 		<section class="hebrew-hero-block">
 			<div class="hebrew-hero-container">
-				<!-- Green Header Block with H1 -->
-				<div class="hebrew-hero-header">
-					<h1 class="hebrew-hero-title">טופ איכילוב</h1>
-				</div>
-
-				<!-- Doctors Illustration Section -->
-				<div class="hebrew-hero-illustration">
-					<div class="hebrew-doctors-image">
-						<!-- Doctors illustration placeholder - can be replaced with actual image -->
-						<div class="hebrew-doctors-placeholder">
-							<!-- Three doctors illustration will be displayed here -->
-						</div>
-					</div>
-				</div>
-
-				<!-- Features Grid -->
-				<div class="hebrew-hero-features">
-					<!-- Card 1: Second Opinion -->
-					<div class="hebrew-feature-card">
-						<div class="hebrew-feature-icon">
-							<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<circle cx="30" cy="30" r="30" fill="#E4EDF6"/>
-								<circle cx="30" cy="30" r="12" stroke="#5DC68C" stroke-width="2" fill="none"/>
-								<path d="M30 18V30L38 38" stroke="#5DC68C" stroke-width="2" stroke-linecap="round"/>
-								<path d="M20 30L27 37L40 24" stroke="#5DC68C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-							</svg>
-						</div>
-						<p class="hebrew-feature-text">חוות דעת שנייה ממיטב הרופאים של איכילוב</p>
-					</div>
-
-					<!-- Card 2: Fast Appointments -->
-					<div class="hebrew-feature-card">
+				<!-- Main Content Grid: Doctors in center, cards around -->
+				<div class="hebrew-hero-main-grid">
+					<!-- Top Left Card: Fast Appointments -->
+					<div class="hebrew-feature-card hebrew-card-top-left">
 						<div class="hebrew-feature-icon">
 							<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<circle cx="30" cy="30" r="30" fill="#E4EDF6"/>
@@ -63,8 +35,8 @@ $is_hebrew = ( $current_lang === 'he' || $current_lang === 'he_IL' || ( $is_rtl 
 						<p class="hebrew-feature-text">תורים מהירים - תוך 24-48 שעות לכל מומחה!</p>
 					</div>
 
-					<!-- Card 3: Consultation Duration -->
-					<div class="hebrew-feature-card">
+					<!-- Top Right Card: Consultation Duration -->
+					<div class="hebrew-feature-card hebrew-card-top-right">
 						<div class="hebrew-feature-icon">
 							<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<circle cx="30" cy="30" r="30" fill="#E4EDF6"/>
@@ -77,8 +49,30 @@ $is_hebrew = ( $current_lang === 'he' || $current_lang === 'he_IL' || ( $is_rtl 
 						<p class="hebrew-feature-text">כל ייעוץ נמשך כשעה – או יותר, לפי הצורך</p>
 					</div>
 
-					<!-- Card 4: Confidentiality -->
-					<div class="hebrew-feature-card">
+					<!-- Center: Doctors Illustration -->
+					<div class="hebrew-hero-illustration">
+						<div class="hebrew-doctors-image">
+							<div class="hebrew-doctors-placeholder">
+								<!-- Three doctors illustration will be displayed here -->
+							</div>
+						</div>
+					</div>
+
+					<!-- Bottom Left Card: Second Opinion -->
+					<div class="hebrew-feature-card hebrew-card-bottom-left">
+						<div class="hebrew-feature-icon">
+							<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<circle cx="30" cy="30" r="30" fill="#E4EDF6"/>
+								<circle cx="30" cy="30" r="12" stroke="#5DC68C" stroke-width="2" fill="none"/>
+								<path d="M30 18V30L38 38" stroke="#5DC68C" stroke-width="2" stroke-linecap="round"/>
+								<path d="M20 30L27 37L40 24" stroke="#5DC68C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+							</svg>
+						</div>
+						<p class="hebrew-feature-text">חוות דעת שנייה ממיטב הרופאים של איכילוב</p>
+					</div>
+
+					<!-- Bottom Right Card: Confidentiality -->
+					<div class="hebrew-feature-card hebrew-card-bottom-right">
 						<div class="hebrew-feature-icon">
 							<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<circle cx="30" cy="30" r="30" fill="#E4EDF6"/>
@@ -90,9 +84,17 @@ $is_hebrew = ( $current_lang === 'he' || $current_lang === 'he_IL' || ( $is_rtl 
 					</div>
 				</div>
 
-				<!-- Blue Description Block -->
-				<div class="hebrew-hero-description">
-					<p class="hebrew-description-text">מרפאה פרטית מתקדמת, ממוקמת ליד איכילוב. צוות רופאים מומחים, זמינות מיידית, שירות אישי ומקצועי. מענה רפואי כולל למגוון תחומים, ללא המתנות ארוכות.</p>
+				<!-- Bottom Section: Green H1 Block and Blue Description -->
+				<div class="hebrew-hero-bottom-section">
+					<!-- Green Header Block with H1 -->
+					<div class="hebrew-hero-header">
+						<h1 class="hebrew-hero-title">טופ איכילוב</h1>
+					</div>
+
+					<!-- Blue Description Block -->
+					<div class="hebrew-hero-description">
+						<p class="hebrew-description-text">מרפאה פרטית מתקדמת, ממוקמת ליד איכילוב. צוות רופאים מומחים, זמינות מיידית, שירות אישי ומקצועי. מענה רפואי כולל למגוון תחומים, ללא המתנות ארוכות.</p>
+					</div>
 				</div>
 			</div>
 		</section>

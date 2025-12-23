@@ -4441,4 +4441,282 @@ margin-top:0
 		grid-template-columns: 1fr;
 	}
 }
+
+/* Hebrew Homepage Hero Block Styles */
+.hebrew-hero-block {
+	position: relative;
+	width: 100%;
+	min-height: 800px;
+	background-image: url('https://topichilov.co.il/wp-content/uploads/2025/12/background_min.webp');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-color: #E4EDF6; /* Fallback color if image doesn't load */
+	padding: 60px 20px;
+	overflow: hidden;
+}
+
+.hebrew-hero-block::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(255, 255, 255, 0.1);
+	z-index: 0;
+}
+
+.hebrew-hero-container {
+	max-width: 1200px;
+	margin: 0 auto;
+	position: relative;
+	z-index: 1;
+	width: 100%;
+}
+
+/* Green Header Block with H1 */
+.hebrew-hero-header {
+	background-color: #5DC68C;
+	border-radius: 12px;
+	padding: 25px 40px;
+	margin-bottom: 40px;
+	text-align: center;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hebrew-hero-title {
+	color: #FFFFFF;
+	font-size: 42px;
+	font-weight: bold;
+	margin: 0;
+	line-height: 1.2;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+/* Doctors Illustration Section */
+.hebrew-hero-illustration {
+	width: 100%;
+	height: 300px;
+	margin: 40px 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+.hebrew-doctors-image {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.hebrew-doctors-placeholder {
+	width: 100%;
+	max-width: 600px;
+	height: 100%;
+	background: transparent;
+	/* Placeholder for doctors illustration - can be replaced with actual image */
+	/* background-image: url('path-to-doctors-image.png'); */
+	/* background-size: contain; */
+	/* background-position: center; */
+	/* background-repeat: no-repeat; */
+}
+
+/* Features Grid - 2x2 on desktop */
+.hebrew-hero-features {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 20px;
+	margin: 40px 0;
+}
+
+.hebrew-feature-card {
+	background-color: #E4EDF6;
+	border-radius: 12px;
+	padding: 25px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	border: 1px solid rgba(51, 102, 153, 0.1);
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	min-height: 180px;
+	justify-content: flex-start;
+}
+
+.hebrew-feature-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.hebrew-feature-icon {
+	margin-bottom: 15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+.hebrew-feature-icon svg {
+	width: 60px;
+	height: 60px;
+	display: block;
+}
+
+.hebrew-feature-text {
+	color: #336699;
+	font-size: 16px;
+	line-height: 1.6;
+	margin: 0;
+	font-weight: 500;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+/* Blue Description Block */
+.hebrew-hero-description {
+	background-color: #336699;
+	border-radius: 12px;
+	padding: 30px 40px;
+	margin-top: 40px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hebrew-description-text {
+	color: #FFFFFF;
+	font-size: 18px;
+	line-height: 1.8;
+	margin: 0;
+	text-align: right;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+/* RTL Support */
+:dir(rtl) .hebrew-hero-block,
+[dir="rtl"] .hebrew-hero-block {
+	direction: rtl;
+	text-align: right;
+}
+
+:dir(rtl) .hebrew-feature-card,
+[dir="rtl"] .hebrew-feature-card {
+	text-align: center;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+	.hebrew-hero-block {
+		min-height: auto;
+		padding: 40px 15px;
+		background-size: cover;
+		background-position: center;
+	}
+
+	.hebrew-hero-container {
+		padding: 0;
+	}
+
+	.hebrew-hero-header {
+		padding: 20px 25px;
+		margin-bottom: 30px;
+		border-radius: 10px;
+	}
+
+	.hebrew-hero-title {
+		font-size: 32px;
+		line-height: 1.3;
+	}
+
+	.hebrew-hero-illustration {
+		height: 200px;
+		margin: 30px 0;
+	}
+
+	.hebrew-doctors-placeholder {
+		max-width: 100%;
+	}
+
+	/* Features Grid - 1 column on mobile */
+	.hebrew-hero-features {
+		grid-template-columns: 1fr;
+		gap: 15px;
+		margin: 30px 0;
+	}
+
+	.hebrew-feature-card {
+		padding: 20px 18px;
+		border-radius: 10px;
+	}
+
+	.hebrew-feature-icon {
+		margin-bottom: 12px;
+	}
+
+	.hebrew-feature-icon svg {
+		width: 50px;
+		height: 50px;
+	}
+
+	.hebrew-feature-text {
+		font-size: 15px;
+		line-height: 1.5;
+	}
+
+	.hebrew-hero-description {
+		padding: 25px 20px;
+		margin-top: 30px;
+		border-radius: 10px;
+	}
+
+	.hebrew-description-text {
+		font-size: 16px;
+		line-height: 1.7;
+		text-align: right;
+	}
+}
+
+@media (max-width: 480px) {
+	.hebrew-hero-block {
+		padding: 30px 10px;
+	}
+
+	.hebrew-hero-header {
+		padding: 18px 20px;
+		margin-bottom: 25px;
+	}
+
+	.hebrew-hero-title {
+		font-size: 28px;
+	}
+
+	.hebrew-hero-illustration {
+		height: 150px;
+		margin: 25px 0;
+	}
+
+	.hebrew-feature-card {
+		padding: 18px 15px;
+	}
+
+	.hebrew-feature-icon svg {
+		width: 45px;
+		height: 45px;
+	}
+
+	.hebrew-feature-text {
+		font-size: 14px;
+		line-height: 1.4;
+	}
+
+	.hebrew-hero-description {
+		padding: 20px 15px;
+	}
+
+	.hebrew-description-text {
+		font-size: 15px;
+		line-height: 1.6;
+	}
+}
   

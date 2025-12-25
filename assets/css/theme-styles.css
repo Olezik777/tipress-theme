@@ -4549,7 +4549,7 @@ margin-top:0
 	border-radius: 12px;
 	padding: 25px 20px;
 	display: flex;
-	flex-direction: row;
+	flex-direction: row-reverse;
 	align-items: center;
 	text-align: center;
 	border: 1px solid rgba(51, 102, 153, 0.1);
@@ -4557,6 +4557,7 @@ margin-top:0
 	min-height: 80px;
 	justify-content: flex-start;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+	gap: 10px;
 }
 
 .hebrew-feature-card:hover {

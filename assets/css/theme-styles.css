@@ -4478,7 +4478,7 @@ margin-top:0
 /* Main Grid: Cards around doctors (3x3 grid) */
 .hebrew-hero-main-grid {
 	display: grid;
-	grid-template-columns: 1fr 1.5fr 1fr;
+	grid-template-columns: 0.5fr 1fr 0.5fr;
 	grid-template-rows: auto 1fr auto;
 	gap: 25px;
 	margin-bottom: 40px;
@@ -4542,6 +4542,11 @@ margin-top:0
 	grid-column: 3;
 	grid-row: 3;
 }
+
+.hebrew-card-top-left,
+.hebrew-card-bottom-left { border: 6px solid #4D7AE8; border-width: 6px 0 0 6px;}
+.hebrew-card-top-right,
+.hebrew-card-bottom-right { border: 6px solid #4D7AE8; border-width: 6px 6px 0 0;}
 
 /* Feature Cards */
 .hebrew-feature-card {
@@ -4722,11 +4727,9 @@ margin-top:0
 	}
 
 	.hebrew-hero-illustration {
-		grid-column: 1;
-		grid-row: auto;
-		min-height: 250px;
-		margin: 20px 0;
+	
 	}
+	.hebrew-hero-illustration {}
 
 	.hebrew-doctors-placeholder {
 		max-width: 100%;

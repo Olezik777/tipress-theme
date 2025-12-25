@@ -4576,8 +4576,8 @@ margin-top:0
 }
 
 .hebrew-feature-icon img {
-	width: 60px;
-	height: 60px;
+	width: 46px;
+	height: 46px;
 	display: block;
 	object-fit: contain;
 }
@@ -4603,7 +4603,7 @@ margin-top:0
 .hebrew-hero-header {
 	background-color: #47C38C;
 	border-radius: 12px;
-	padding: 30px 40px;
+	padding: 10px 20px;
 	text-align: center;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 	display: flex;
@@ -4613,8 +4613,8 @@ margin-top:0
 
 .hebrew-hero-title {
 	color: #FFFFFF;
-	font-size: 50px;
-	font-weight: bold;
+	font-size: 46px;
+	font-weight: 600;
 	margin: 0;
 	line-height: 1.2;
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
@@ -4769,8 +4769,8 @@ margin-top:0
 	}
 
 	.hebrew-feature-icon img {
-		width: 50px;
-		height: 50px;
+		width: 40px;
+		height: 40px;
 		object-fit: contain;
 	}
 

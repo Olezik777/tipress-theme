@@ -4737,8 +4737,11 @@ margin-top:0
 
 	/* Bottom Section - 1 column on mobile */
 	.hebrew-hero-bottom-section {
-		grid-template-columns: 1fr;
-		gap: 20px;
+		display: flex;
+		flex-direction: column-reverse;
+		gap: 15px;
+		min-height: 500px;
+		align-items: flex-start;
 	}
 
 	.hebrew-hero-header {

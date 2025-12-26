@@ -4452,7 +4452,7 @@ margin-top:0
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: #E4EDF6; /* Fallback color if image doesn't load */
-	padding: 60px 20px;
+	padding: 60px 0;
 	overflow: hidden;
 }
 
@@ -4622,7 +4622,7 @@ margin-top:0
 
 /* Blue Description Block */
 .hebrew-hero-description {
-	background-color: #336699;
+	background-color: #4D7AE8;
 	border-radius: 12px;
 	padding: 30px 40px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -4722,7 +4722,7 @@ margin-top:0
 	.hebrew-card-top-right,
 	.hebrew-card-bottom-left,
 	.hebrew-card-bottom-right {
-		grid-column: 1;
+		grid-column: 2;
 		grid-row: auto;
 	}
 

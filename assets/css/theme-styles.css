@@ -4704,6 +4704,8 @@ margin-top:0
 
 	.hebrew-hero-container {
 		padding: 0;
+		display: flex;
+        flex-direction: column-reverse;
 	}
 
 	/* Main Grid - 1 column on mobile */
@@ -4800,7 +4802,10 @@ margin-top:0
 	}
 
 	.hebrew-hero-bottom-section {
+		display: flex;
+		flex-direction: column-reverse;
 		gap: 15px;
+		min-height: 500px;
 	}
 
 	.hebrew-hero-header {

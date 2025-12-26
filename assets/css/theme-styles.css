@@ -4473,6 +4473,7 @@ margin-top:0
 	position: relative;
 	z-index: 1;
 	width: 100%;
+	box-sizing: border-box;
 }
 
 /* Main Grid: Cards around doctors (3x3 grid) */
@@ -4704,7 +4705,7 @@ margin-top:0
 	}
 
 	.hebrew-hero-container {
-		padding: 0;
+		padding: 0 30px;
 		display: flex;
         flex-direction: column-reverse;
 	}

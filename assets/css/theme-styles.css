@@ -4700,6 +4700,7 @@ margin-top:0
 		padding: 40px 15px;
 		background-size: cover;
 		background-position: center;
+		background-image: url('https://topichilov.co.il/wp-content/uploads/2025/12/background-mob.webp') no-repeat center center;
 	}
 
 	.hebrew-hero-container {
@@ -4738,14 +4739,15 @@ margin-top:0
 	/* Bottom Section - 1 column on mobile */
 	.hebrew-hero-bottom-section {
 		display: flex;
-		flex-direction: column-reverse;
-		gap: 15px;
-		min-height: 500px;
-		align-items: flex-start;
+        flex-direction: column;
+        gap: 15px;
+        min-height: 500px;
+        align-items: center;
+        justify-content: space-between;
 	}
 
 	.hebrew-hero-header {
-		padding: 25px 30px;
+		padding: 15px 30px;
 		border-radius: 10px;
 		order: 1;
 	}

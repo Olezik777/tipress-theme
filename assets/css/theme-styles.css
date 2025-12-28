@@ -4712,16 +4712,14 @@ margin-top:0
 
 	/* Main Grid - 1 column on mobile */
 	.hebrew-hero-main-grid {
-		grid-template-columns: 2fr;
-		grid-template-rows: auto;
 		gap: 20px;
-		margin-bottom: 30px;
+		margin-bottom: 0;
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
 	}
 	.hebrew-hero-illustration { display: none;}
-	.hebrew-hero-main-grid .hebrew-feature-card { width: 44%;}
+	.hebrew-hero-main-grid .hebrew-feature-card { width: 44%; box-sizing: border-box;}
 
 	/* Reset grid positions for mobile */
 	.hebrew-card-top-left,

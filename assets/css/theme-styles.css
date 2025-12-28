@@ -2353,7 +2353,7 @@ margin-top:0
 		max-width: 40px;
 		margin-top: 20px;
 	}
-	.front-content .wp-block-column {  flex-basis: 30% !important;}
+	#primary .front-content .wp-block-column {  flex-basis: 30% !important;}
 
 }
 
@@ -3366,7 +3366,7 @@ margin-top:0
 	.footer-bottom {
 		padding: 24px 4%;
 	}
-	.front-content .wp-block-column {  flex-basis: 44% !important;}
+	#primary .front-content .wp-block-column {  flex-basis: 44% !important;}
 }
 
 /* RTL Support for RTL languages (Hebrew, Arabic, etc.) */

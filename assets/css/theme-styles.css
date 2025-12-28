@@ -4717,6 +4717,7 @@ margin-top:0
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
+		padding: 30px 0;
 	}
 	.hebrew-hero-illustration { display: none;}
 	.hebrew-hero-main-grid .hebrew-feature-card { width: 44%; box-sizing: border-box;}

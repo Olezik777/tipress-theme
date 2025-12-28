@@ -4712,12 +4712,13 @@ margin-top:0
 
 	/* Main Grid - 1 column on mobile */
 	.hebrew-hero-main-grid {
-		grid-template-columns: 1fr;
+		grid-template-columns: 2fr;
 		grid-template-rows: auto;
 		gap: 20px;
 		margin-bottom: 30px;
 		display: flex;
 		justify-content: space-between;
+		flex-wrap: wrap;
 	}
 
 	/* Reset grid positions for mobile */

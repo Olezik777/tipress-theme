@@ -4721,6 +4721,7 @@ margin-top:0
 		flex-wrap: wrap;
 	}
 	.hebrew-hero-illustration { display: none;}
+	.hebrew-hero-main-grid .hebrew-feature-card { width: 44%;}
 
 	/* Reset grid positions for mobile */
 	.hebrew-card-top-left,

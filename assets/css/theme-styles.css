@@ -4811,12 +4811,7 @@ margin-top:0
 		min-height: 200px;
 	}
 
-	.hebrew-hero-bottom-section {
-		display: flex;
-		flex-direction: column-reverse;
-		gap: 15px;
-		min-height: 500px;
-	}
+
 
 	.hebrew-hero-header {
 		padding: 20px 25px;
@@ -4840,8 +4835,8 @@ margin-top:0
 	}
 
 	.hebrew-feature-icon img {
-		width: 45px;
-		height: 45px;
+		width: 35px;
+		height: 35px;
 		object-fit: contain;
 	}
 

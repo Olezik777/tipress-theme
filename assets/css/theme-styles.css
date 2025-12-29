@@ -4856,4 +4856,6 @@ margin-top:0
 
 @media (max-width: 420px) {
     .hebrew-hero-main-grid .hebrew-feature-card { width: 100%;}
+	.hebrew-hero-block { padding-bottom: 0;}
+	.hebrew-hero-main-grid { gap: 12px; padding-bottom: 0;}
 }

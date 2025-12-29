@@ -3367,7 +3367,7 @@ margin-top:0
 		padding: 24px 4%;
 	}
 	#primary .front-content .wp-block-column {  flex-basis: 44% !important;}
-	.hebrew-card-top-right, .hebrew-card-bottom-right { border-width: 2px 4px 4px 4px;}
+	.hebrew-hero-main-grid .hebrew-feature-card { border-width: 2px 4px 4px 4px;}
 }
 
 /* RTL Support for RTL languages (Hebrew, Arabic, etc.) */

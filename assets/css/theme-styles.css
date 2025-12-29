@@ -4796,6 +4796,10 @@ margin-top:0
 	}
 }
 
+@media (max-width: 580px) {
+	.hebrew-hero-main-grid .hebrew-feature-card { width: 47%; padding: 12px;}
+}
+
 @media (max-width: 480px) {
 	.hebrew-hero-block {
 		padding: 30px 0;
@@ -4803,7 +4807,7 @@ margin-top:0
 
 	.hebrew-hero-main-grid {
 		gap: 15px;
-		margin-bottom: 25px;
+		margin-bottom: 0;
 	}
 
 	.hebrew-hero-illustration {
@@ -4815,10 +4819,8 @@ margin-top:0
 		min-height: 200px;
 	}
 
-
-
 	.hebrew-hero-header {
-		padding: 20px 25px;
+		padding: 12px 22px;
 	}
 
 	.hebrew-hero-title {
@@ -4848,5 +4850,10 @@ margin-top:0
 		font-size: 14px;
 		line-height: 1.4;
 	}
+	.hebrew-hero-bottom-section { min-height: 430px;}
 }
   
+
+@media (max-width: 380px) {
+
+}

@@ -4854,6 +4854,6 @@ margin-top:0
 }
   
 
-@media (max-width: 380px) {
-
+@media (max-width: 420px) {
+    .hebrew-hero-main-grid .hebrew-feature-card { width: 100%;}
 }

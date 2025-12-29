@@ -4455,7 +4455,7 @@ margin-top:0
 	background-position: center;
 	background-repeat: no-repeat;
 	background-color: #E4EDF6; /* Fallback color if image doesn't load */
-	padding: 60px 0;
+	padding: 60px 0 0;
 	overflow: hidden;
 }
 

@@ -26,6 +26,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		html, body {
 			font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 			margin: 0;
+			line-height: 1.4;
 		}
 		:root {
                 --wp--preset--aspect-ratio--square: 1;

@@ -50,7 +50,7 @@ $theme_uri = get_stylesheet_directory_uri();
 								} else {
 									?>
 									<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-										<img src="<?php echo esc_url( $theme_uri . '/assets/images/mini-icons.png' ); ?>" alt="<?php bloginfo( 'name' ); ?>">
+										<img src="https://topichilov.co.il/wp-content/uploads/2026/01/logo-ichilov.webp" alt="<?php bloginfo( 'name' ); ?>">
 									</a>
 									<?php
 								}

@@ -25,6 +25,14 @@ function tipress_theme_setup() {
 	add_theme_support( 'post-thumbnails' );
 	add_theme_support( 'html5', [ 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script' ] );
 
+	// Custom logo support - позволяет менять логотип через админку
+	add_theme_support( 'custom-logo', [
+		'height'      => 100,
+		'width'       => 400,
+		'flex-height' => true,
+		'flex-width'  => true,
+	] );
+
 	// Register navigation menus
 	// Using separate locations for each language to avoid Polylang auto-combinations
 	register_nav_menus(

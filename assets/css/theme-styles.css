@@ -20,7 +20,8 @@
 
 
 :lang(en-GB) .wp-block-navigation ul { gap: 1em;}
-:dir(rtl) h2.wp-block-heading { padding-right:16px; border-right:3px solid #c20f0f}
+:dir(rtl) h2.wp-block-heading,
+:dir(rtl) .site-content h2 { padding-right:16px; border-right:3px solid #c20f0f}
 
 :dir(rtl) .sidebar figure.wp-block-image img.wp-image-57877 { display:none }
 :dir(rtl) .content .wp-block-group { border-left:none!important}
@@ -4087,7 +4088,7 @@ margin-top:0
 	background: #f9f9f9;
 	padding: var(--wp--preset--spacing--90) var(--wp--preset--spacing--30);
 }
-.spec-team-section h2 {padding-right: 0; border-right: none}
+.spec-team-section h2 {padding-right: 0!important; border-right: none!important}
 
 .spec-team-section .wp-block-group {
 	max-width: 1200px;

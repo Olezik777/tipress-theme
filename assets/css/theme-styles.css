@@ -22,6 +22,7 @@
 :lang(en-GB) .wp-block-navigation ul { gap: 1em;}
 :dir(rtl) h2.wp-block-heading,
 :dir(rtl) .site-content h2 { padding-right:16px; border-right:3px solid #c20f0f}
+:dir(rtl) .site-content h3 { padding-right:14px; border-right:3px solid #c20f0f}
 
 :dir(rtl) .sidebar figure.wp-block-image img.wp-image-57877 { display:none }
 :dir(rtl) .content .wp-block-group { border-left:none!important}

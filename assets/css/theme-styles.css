@@ -3168,6 +3168,7 @@ margin-top:0
 	display: flex;
 	flex-direction: column;
 	gap: 12px;
+	display: none!important;
 }
 
 .footer-social-link {
@@ -4089,7 +4090,8 @@ margin-top:0
 	background: #f9f9f9;
 	padding: var(--wp--preset--spacing--90) var(--wp--preset--spacing--30);
 }
-.spec-team-section h2 {padding-right: 0!important; border-right: none!important}
+.spec-team-section h2,
+.spec-team-section h3  {padding-right: 0!important; border-right: none!important}
 
 .spec-team-section .wp-block-group {
 	max-width: 1200px;

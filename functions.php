@@ -520,6 +520,9 @@ add_action('init', function() {
 	pll_register_string('Назад', 'Назад', 'Search');
 	pll_register_string('Вперед', 'Вперед', 'Search');
 	pll_register_string('Последние публикации', 'Последние публикации', 'Search');
+	
+	// Taxonomy strings
+	pll_register_string('Врачи специализации', 'Врачи специализации', 'Taxonomy');
 });
 
 //Функция переопределения SEO мета-тегов для Departments

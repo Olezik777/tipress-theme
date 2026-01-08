@@ -4087,6 +4087,7 @@ margin-top:0
 	background: #f9f9f9;
 	padding: var(--wp--preset--spacing--90) var(--wp--preset--spacing--30);
 }
+.spec-team-section h2 {padding-right: 0; border-right: none}
 
 .spec-team-section .wp-block-group {
 	max-width: 1200px;

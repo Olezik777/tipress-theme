@@ -357,36 +357,7 @@ $term_slug = $term->slug;
 			</section>
 		<?php endif; ?>
 
-		<!-- Author Section -->
-		<?php
-		$author_label = get_field( 'spec_author_label', $term_field_context );
-		$author_name = get_field( 'spec_author_name', $term_field_context );
-		$author_link = get_field( 'spec_author_link', $term_field_context );
 		
-		if ( ! empty( $author_name ) ) :
-			?>
-			<section class="spec-author-section">
-				<div class="wp-block-group">
-					<?php if ( ! empty( $author_label ) ) : ?>
-						<p>
-							<?php echo esc_html( $author_label ); ?>
-						</p>
-					<?php endif; ?>
-					
-					<?php if ( ! empty( $author_link ) ) : ?>
-						<a href="<?php echo esc_url( $author_link ); ?>">
-							<h3>
-								<?php echo esc_html( $author_name ); ?>
-							</h3>
-						</a>
-					<?php else : ?>
-						<h3>
-							<?php echo esc_html( $author_name ); ?>
-						</h3>
-					<?php endif; ?>
-				</div>
-			</section>
-		<?php endif; ?>
 
 		<!-- Taxonomy Description (if any) -->
 		<?php if ( ! empty( $term->description ) ) : ?>
@@ -430,6 +401,37 @@ $term_slug = $term->slug;
 						wp_reset_postdata();
 						?>
 					</div>
+				</div>
+			</section>
+		<?php endif; ?>
+
+		<!-- Author Section -->
+		<?php
+		$author_label = get_field( 'spec_author_label', $term_field_context );
+		$author_name = get_field( 'spec_author_name', $term_field_context );
+		$author_link = get_field( 'spec_author_link', $term_field_context );
+		
+		if ( ! empty( $author_name ) ) :
+			?>
+			<section class="spec-author-section">
+				<div class="wp-block-group">
+					<?php if ( ! empty( $author_label ) ) : ?>
+						<p>
+							<?php echo esc_html( $author_label ); ?>
+						</p>
+					<?php endif; ?>
+					
+					<?php if ( ! empty( $author_link ) ) : ?>
+						<a href="<?php echo esc_url( $author_link ); ?>">
+							<h3>
+								<?php echo esc_html( $author_name ); ?>
+							</h3>
+						</a>
+					<?php else : ?>
+						<h3>
+							<?php echo esc_html( $author_name ); ?>
+						</h3>
+					<?php endif; ?>
 				</div>
 			</section>
 		<?php endif; ?>

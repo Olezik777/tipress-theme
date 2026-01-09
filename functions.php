@@ -1049,6 +1049,7 @@ function tipress_render_doctors_grid( $term_slug = 'all', $paged = 1, $lang = ''
     );
 
     if ( $term_slug && $term_slug !== 'all' ) {
+        // Конкретная специализация
         $args['tax_query'] = array(
             array(
                 'taxonomy' => 'specialization',
@@ -1056,6 +1057,25 @@ function tipress_render_doctors_grid( $term_slug = 'all', $paged = 1, $lang = ''
                 'terms'    => $term_slug,
             ),
         );
+    } else {
+        // Для "all": получаем все термины специализаций и фильтруем только врачей с заполненной специализацией
+        $all_specializations = get_terms( array(
+            'taxonomy'   => 'specialization',
+            'hide_empty' => false,
+            'fields'     => 'ids',
+        ) );
+        
+        // Если есть термины специализаций, фильтруем по ним
+        if ( ! empty( $all_specializations ) && ! is_wp_error( $all_specializations ) ) {
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => 'specialization',
+                    'field'    => 'term_id',
+                    'terms'    => $all_specializations,
+                    'operator' => 'IN',
+                ),
+            );
+        }
     }
 
     // Polylang: фильтруем по текущему языку
@@ -1073,6 +1093,13 @@ function tipress_render_doctors_grid( $term_slug = 'all', $paged = 1, $lang = ''
             <?php
             while ( $q->have_posts() ) :
                 $q->the_post();
+                
+                // Дополнительная проверка: пропускаем врачей без специализаций (на случай, если что-то прошло мимо фильтра)
+                $specializations = wp_get_post_terms( get_the_ID(), 'specialization', array( 'fields' => 'ids' ) );
+                if ( empty( $specializations ) || is_wp_error( $specializations ) ) {
+                    continue;
+                }
+                
                 get_template_part( 'template-parts/content', 'doctors' );
             endwhile;
             ?>

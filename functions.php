@@ -1040,8 +1040,7 @@ function tipress_render_doctors_grid( $term_slug = 'all', $paged = 1, $lang = ''
     $args = array(
         'post_type'      => 'doctors',
         'post_status'    => 'publish',
-        'posts_per_page' => 20,
-        'paged'          => max( 1, (int) $paged ),
+        'posts_per_page' => -1, // Получаем все посты для фильтрации
         'orderby'        => array(
             'menu_order' => 'ASC',
             'title'      => 'ASC',
@@ -1049,6 +1048,7 @@ function tipress_render_doctors_grid( $term_slug = 'all', $paged = 1, $lang = ''
     );
 
     if ( $term_slug && $term_slug !== 'all' ) {
+        // Если выбрана конкретная специализация, фильтруем по ней
         $args['tax_query'] = array(
             array(
                 'taxonomy' => 'specialization',
@@ -1065,28 +1065,54 @@ function tipress_render_doctors_grid( $term_slug = 'all', $paged = 1, $lang = ''
 
     $q = new WP_Query( $args );
 
+    // Фильтруем врачей: оставляем только тех, у кого есть хотя бы одна специализация
+    $doctors_with_spec = array();
+    if ( $q->have_posts() ) {
+        while ( $q->have_posts() ) {
+            $q->the_post();
+            $doctor_id = get_the_ID();
+            $specializations = wp_get_post_terms( $doctor_id, 'specialization', array( 'fields' => 'ids' ) );
+            
+            // Пропускаем врачей без специализаций
+            if ( ! empty( $specializations ) && ! is_wp_error( $specializations ) ) {
+                $doctors_with_spec[] = $doctor_id;
+            }
+        }
+        wp_reset_postdata();
+    }
+
+    // Применяем пагинацию к отфильтрованному списку
+    $posts_per_page = 20;
+    $total_doctors = count( $doctors_with_spec );
+    $total_pages = ceil( $total_doctors / $posts_per_page );
+    $current_page = max( 1, (int) $paged );
+    $offset = ( $current_page - 1 ) * $posts_per_page;
+    $paged_doctors = array_slice( $doctors_with_spec, $offset, $posts_per_page );
+
     ob_start();
     ?>
 
     <div class="doctors-grid">
-        <?php if ( $q->have_posts() ) : ?>
+        <?php if ( ! empty( $paged_doctors ) ) : ?>
             <?php
-            while ( $q->have_posts() ) :
-                $q->the_post();
+            foreach ( $paged_doctors as $doctor_id ) :
+                $post = get_post( $doctor_id );
+                setup_postdata( $post );
                 get_template_part( 'template-parts/content', 'doctors' );
-            endwhile;
+            endforeach;
+            wp_reset_postdata();
             ?>
         <?php else : ?>
             <p class="no-doctors"><?php _e( 'Врачи не найдены.', 'tipress' ); ?></p>
         <?php endif; ?>
     </div>
 
-    <?php if ( $q->max_num_pages > 1 ) : ?>
+    <?php if ( $total_pages > 1 ) : ?>
         <nav class="doctors-pagination" aria-label="<?php esc_attr_e( 'Doctors pagination', 'tipress' ); ?>">
             <ul>
                 <?php
                 $current = max( 1, (int) $paged );
-                $max     = (int) $q->max_num_pages;
+                $max     = (int) $total_pages;
 
                 // prev
                 if ( $current > 1 ) {

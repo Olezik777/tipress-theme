@@ -380,11 +380,28 @@ $term_slug = $term->slug;
 					'taxonomy' => 'specialization',
 					'field' => 'term_id',
 					'terms' => $term_id,
+					'operator' => 'IN',
 				],
 			],
 		]);
 		
-		if ( $doctors_query->have_posts() ) :
+		// Filter out doctors without specialization terms
+		$doctors_with_spec = [];
+		if ( $doctors_query->have_posts() ) {
+			while ( $doctors_query->have_posts() ) {
+				$doctors_query->the_post();
+				$doctor_id = get_the_ID();
+				$specializations = wp_get_post_terms( $doctor_id, 'specialization', [ 'fields' => 'ids' ] );
+				
+				// Only include doctors that have at least one specialization term
+				if ( ! empty( $specializations ) && ! is_wp_error( $specializations ) ) {
+					$doctors_with_spec[] = $doctor_id;
+				}
+			}
+			wp_reset_postdata();
+		}
+		
+		if ( ! empty( $doctors_with_spec ) ) :
 			?>
 			<section class="spec-doctors-archive">
 				<div class="wp-block-group">
@@ -394,10 +411,11 @@ $term_slug = $term->slug;
 					
 					<div class="doctors-list">
 						<?php
-						while ( $doctors_query->have_posts() ) :
-							$doctors_query->the_post();
+						foreach ( $doctors_with_spec as $doctor_id ) :
+							$post = get_post( $doctor_id );
+							setup_postdata( $post );
 							get_template_part( 'template-parts/content', 'doctors' );
-						endwhile;
+						endforeach;
 						wp_reset_postdata();
 						?>
 					</div>

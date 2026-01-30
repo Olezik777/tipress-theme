@@ -24,6 +24,7 @@ $show_sidebar  = $is_hebrew;
 			<div class="ti-column single-template-sidebar">
 				<?php get_sidebar(); ?>
 			</div>
+			
 			<?php endif; ?>
 			<div class="ti-column single-template-content"<?php echo ( $is_english || $is_arabic ) ? ' style="flex-basis: 100%;"' : ''; ?>>
 				<?php

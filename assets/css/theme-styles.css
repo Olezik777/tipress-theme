@@ -3157,6 +3157,8 @@ margin-top:0
 	height: auto;
 }
 
+.red {color: #d22f1e;}
+
 .footer-logo {
 	display: flex;
 	align-items: flex-end;

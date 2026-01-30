@@ -7,21 +7,25 @@
 
 get_header();
 
-// Определяем текущий язык
-$current_lang = function_exists( 'pll_current_language' ) ? pll_current_language() : 'ru';
-$is_english = ( $current_lang === 'en' );
+// Языки сайта: иврит (по умолчанию, код il), английский (en), арабский (ar)
+$current_lang  = function_exists( 'pll_current_language' ) ? pll_current_language() : 'il';
+$is_english    = ( $current_lang === 'en' );
+$is_arabic     = ( $current_lang === 'ar' );
+$is_hebrew     = ( $current_lang === 'il' );
+// Временно без сайдбара для арабского; сайдбар только для иврита
+$show_sidebar  = $is_hebrew;
 ?>
 
 <main id="primary" class="site-main single-departments">
 	<div class="wp-block-group single-template-container">
 		<?php tipress_display_breadcrumbs(); ?>
 		<div class="ti-columns reverse-mobile single-template-columns">
-			<?php if ( ! $is_english ) : ?>
+			<?php if ( $show_sidebar ) : ?>
 			<div class="ti-column single-template-sidebar">
 				<?php get_sidebar(); ?>
 			</div>
 			<?php endif; ?>
-			<div class="ti-column single-template-content"<?php echo $is_english ? ' style="flex-basis: 100%;"' : ''; ?>>
+			<div class="ti-column single-template-content"<?php echo ( $is_english || $is_arabic ) ? ' style="flex-basis: 100%;"' : ''; ?>>
 				<?php
 				while ( have_posts() ) :
 					the_post();

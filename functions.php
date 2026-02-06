@@ -162,8 +162,8 @@ function block_editor_styles() {
     wp_enqueue_style(
         'admin-styles',
         get_stylesheet_directory_uri().'/assets/css/style-editor.css',
-				array(),
-				filemtime(get_template_directory() . '/assets/css/style-editor.css')
+		array(),
+		filemtime(get_template_directory() . '/assets/css/style-editor.css')
     );
 }
 add_action( 'admin_enqueue_scripts', 'block_editor_styles' );
@@ -260,18 +260,20 @@ function modify_meta_field_position($post_id) {
         return $post_id;
 
     // Перевірка прав доступу
-    if ('post' == $_POST['post_type']) {
+    if ( isset($_POST['post_type']) && 'post' == $_POST['post_type'] ) {
         if (!current_user_can('edit_post', $post_id))
             return $post_id;
     } elseif (!current_user_can('edit_page', $post_id)) {
         return $post_id;
     }
 
-		$_title = get_the_title($post_id);
-		$filed_value = explode( ' ', $doc_title , 3);
+	$_title = get_the_title($post_id);
+
+	// FIX: ранее было $filed_value = explode( ' ', $doc_title , 3);
+	$field_value = explode( ' ', (string) $_title, 3 );
 
     // Встановлення значення метаполя
-    update_post_meta($post_id, '_meta_fields_position', $filed_value);
+    update_post_meta($post_id, '_meta_fields_position', $field_value);
 }
 
 add_action('save_post', 'modify_meta_field_position');
@@ -406,7 +408,7 @@ function custom_posts_shortcode($atts) {
 
     // Запрос постов из текущей рубрики
     $query = new WP_Query(array(
-        'category_name' => $current_category->slug,
+        'category_name' => isset($current_category->slug) ? $current_category->slug : '',
         'posts_per_page' => $atts['posts_per_page'],
         'paged' => $paged,
     ));
@@ -454,9 +456,6 @@ if ( ! function_exists( 'tipress_pll__' ) ) {
 	function tipress_pll__( $string ) {
 		if ( function_exists( 'pll__' ) ) {
 			$translated = pll__( $string );
-			// Polylang возвращает оригинальную строку, если перевод не найден
-			// Проверяем, что перевод отличается от оригинала (значит перевод найден)
-			// или возвращаем то, что вернул Polylang (может быть оригинал или перевод)
 			return $translated;
 		}
 		return $string;
@@ -510,8 +509,6 @@ add_action('init', function() {
 	pll_register_string('Введите свой номер телефона, и с Вами свяжется в течение <strong>15 минут</strong> врач-консультант нашей клиники, который расскажет о методах лечения и сообщит <strong>точные цены</strong>.', 'Введите свой номер телефона, и с Вами свяжется в течение <strong>15 минут</strong> врач-консультант нашей клиники, который расскажет о методах лечения и сообщит <strong>точные цены</strong>.', 'Popup');
 	
 	// Search page strings
-	// Используем формат: pll_register_string( $name, $string, $group )
-	// где $name и $string одинаковые для простоты поиска по строке
 	pll_register_string('Результаты поиска', 'Результаты поиска', 'Search');
 	pll_register_string('Найдено результатов: %d', 'Найдено результатов: %d', 'Search');
 	pll_register_string('Ничего не найдено', 'Ничего не найдено', 'Search');
@@ -525,157 +522,33 @@ add_action('init', function() {
 	pll_register_string('Врачи специализации', 'Врачи специализации', 'Taxonomy');
 });
 
-//Функция переопределения SEO мета-тегов для Departments
-function custom_seo_title_for_departments_aioseo( $title ) {
-    // Получаем текущий URL
-    $current_url = $_SERVER['REQUEST_URI'];
 
-    // Проверяем, что это страница с URL, содержащим 'departments'
-    if (is_post_type_archive('departments')) {
-        // Получаем перевод строки 'seo_title' для текущего языка
-        $translated_title = pll__('Отделения');
-        
-        // Если строка перевода существует, возвращаем её в качестве нового заголовка
-        if ($translated_title) {
-            return $translated_title;
-        }
-    } elseif (is_post_type_archive('doctors')) {
-        // Получаем перевод строки 'seo_title' для архива 'doctors'
-        $translated_title = pll__('Заголовок Врачи');
-        
-        // Если строка перевода существует, возвращаем её в качестве нового заголовка
-        if ($translated_title) {
-            return $translated_title;
-        }
-    }
+/**
+ * Helper: URL физической страницы каталога doctors/departments (с учётом Polylang перевода)
+ */
+function tipress_get_catalog_page_url( $base_slug, $lang = '' ) {
+	$page = get_page_by_path( $base_slug );
+	if ( ! $page ) {
+		return home_url( '/' . trim($base_slug, '/') . '/' );
+	}
 
-    // Возвращаем оригинальный заголовок, если это не 'departments'
-    return $title;
-}
+	$page_id = $page->ID;
 
-// Подключаем функцию к фильтру All in One SEO для изменения заголовка title
-add_filter('aioseo_title', 'custom_seo_title_for_departments_aioseo');
-// Функция для изменения description
-function custom_seo_description_for_departments_aioseo( $description ) {
-    // Получаем текущий URL
-    $current_url = $_SERVER['REQUEST_URI'];
-
-    // Проверяем, что это страница с URL, содержащим 'departments'
-    if (is_post_type_archive('departments')) {
-        // Получаем перевод строки 'seo_description' для текущего языка
-        $translated_description = pll__('Описание');
-        
-        // Если строка перевода существует, возвращаем её в качестве нового мета описания
-        if ($translated_description) {
-            return $translated_description;
-        }
-    } elseif (is_post_type_archive('doctors')) {
-        // Получаем перевод строки 'seo_description' для текущего языка
-        $translated_description = pll__('Описание Врачи');
-        
-        // Если строка перевода существует, возвращаем её в качестве нового мета описания
-        if ($translated_description) {
-            return $translated_description;
-        }
-    }
-
-    // Возвращаем оригинальное описание, если это не 'departments'
-    return $description;
-}
-
-// Подключаем функции к фильтрам All in One SEO для изменения заголовка и описания
-add_filter('aioseo_description', 'custom_seo_description_for_departments_aioseo');
-
-add_action('wp_footer', function () {
-    // Проверяем, чтобы код выполнялся только на страницах с URL "/il/doctors"
-    if (strpos($_SERVER['REQUEST_URI'], '/il/doctors') !== false) {
-        ?>
-        <script>
-            jQuery(document).ready(function ($) {
-                // Заменяем текст "Врачи" на "רופאים" на всей странице
-                $('.breadcrumb-items').html(function (index, html) {
-                    return html.replace(/Врачи/g, 'רופאים');
-                });
-            });
-        </script>
-        <?php
-    }
-});
-
-
-// custom breadcrumbs
-function custom_breadcrumbs_shortcode() {
-    // Получаем текущий язык с помощью Polylang
-    $current_lang = function_exists('pll_current_language') ? pll_current_language() : null;
-
-    // Если язык иврит
-    if ($current_lang === 'il') {
-        // Для архива типа "doctors"
-        if (is_post_type_archive('doctors')) {
-            $breadcrumbs = '<ul class="breadcrumbs_custom">';
-            $breadcrumbs .= '<li><a href="https://www.topichilov.com/il/">טופ איכילוב</a></li>';
-            $breadcrumbs .= '<li>רופאים</li>'; // Заголовок архива
-            $breadcrumbs .= '</ul>';
-            return $breadcrumbs;
-        }
-
-        // Для архива типа "departments"
-        if (is_post_type_archive('departments')) {
-            $breadcrumbs = '<ul class="breadcrumbs_custom">';
-            $breadcrumbs .= '<li><a href="https://www.topichilov.com/il/">טופ איכילוב</a></li>';
-            $breadcrumbs .= '<li>מחלקות</li>'; // Заголовок архива
-            $breadcrumbs .= '</ul>';
-            return $breadcrumbs;
-        }
-
-        // Для записи типа "doctors"
-        if (!is_archive() && get_post_type() === 'doctors') {
-            $post_title = get_the_title();
-            $breadcrumbs = '<ul class="breadcrumbs_custom">';
-            $breadcrumbs .= '<li><a href="https://www.topichilov.com/il/">טופ איכילוב</a></li>';
-            $breadcrumbs .= '<li><a href="https://www.topichilov.com/il/doctors/">רופאים</a></li>';
-            $breadcrumbs .= '<li>' . esc_html($post_title) . '</li>';
-            $breadcrumbs .= '</ul>';
-            return $breadcrumbs;
-        }
-		
-		// Для записи типа "Departments"
-        if (!is_archive() && get_post_type() === 'departments') {
-            $post_title = get_the_title();
-            $breadcrumbs = '<ul class="breadcrumbs_custom">';
-            $breadcrumbs .= '<li><a href="https://www.topichilov.com/il/">טופ איכילוב</a></li>';
-            $breadcrumbs .= '<li><a href="https://www.topichilov.com/il/departments/">מחלקות</a></li>';
-            $breadcrumbs .= '<li>' . esc_html($post_title) . '</li>';
-            $breadcrumbs .= '</ul>';
-            return $breadcrumbs;
-        }
-		
-		//для всех остальных страниц
-		else {
-			$post_title = get_the_title();
-            $breadcrumbs = '<ul class="breadcrumbs_custom">';
-            $breadcrumbs .= '<li><a href="https://www.topichilov.com/il/">טופ איכילוב</a></li>';
-            $breadcrumbs .= '<li>' . esc_html($post_title) . '</li>';
-            $breadcrumbs .= '</ul>';
-            return $breadcrumbs;
+	if ( function_exists('pll_get_post') ) {
+		$lang = $lang ?: ( function_exists('pll_current_language') ? pll_current_language() : '' );
+		if ( $lang ) {
+			$translated_id = pll_get_post( $page_id, $lang );
+			if ( $translated_id ) {
+				$page_id = $translated_id;
+			}
 		}
-    }
+	}
 
-    // Вывод другого кода для других языков
-    if ($current_lang !== 'il') {
-        return '<!-- Custom breadcrumbs for other languages can go here -->';
-    }
-
-    return ''; // Если условия не выполняются, ничего не выводим
+	return get_permalink( $page_id );
 }
-
-// Регистрируем шорткод [custom_breadcrumbs]
-add_shortcode('custom_breadcrumbs', 'custom_breadcrumbs_shortcode');
 
 /**
  * Custom breadcrumbs with Polylang support and Schema markup
- * 
- * @return void
  */
 function tipress_display_breadcrumbs() {
 	// Не показываем на главной странице
@@ -708,28 +581,17 @@ function tipress_display_breadcrumbs() {
 		$post = get_queried_object();
 		$post_type = get_post_type();
 		
-		// Для кастомных типов постов добавляем архив
-		if ( in_array( $post_type, [ 'doctors', 'departments' ] ) ) {
-			$archive_url = get_post_type_archive_link( $post_type );
-			
-			// Получаем перевод URL архива для текущего языка через Polylang
-			if ( function_exists( 'pll_translate_url' ) && $current_lang ) {
-				$archive_url = pll_translate_url( $archive_url, $current_lang );
-			}
-			
-			$archive_title = '';
-			if ( $post_type === 'doctors' ) {
-				$archive_title = tipress_pll__( 'Врачи' );
-			} elseif ( $post_type === 'departments' ) {
-				$archive_title = tipress_pll__( 'Отделения' );
-			}
-			
-			if ( $archive_url && $archive_title ) {
-				$breadcrumbs[] = [
-					'name' => $archive_title,
-					'url'  => $archive_url,
-				];
-			}
+		// Для кастомных типов постов doctors/departments: ведем на ФИЗИЧЕСКИЕ страницы /doctors и /departments
+		if ( $post_type === 'doctors' ) {
+			$breadcrumbs[] = [
+				'name' => tipress_pll__( 'Врачи' ),
+				'url'  => tipress_get_catalog_page_url( 'doctors', $current_lang ?: '' ),
+			];
+		} elseif ( $post_type === 'departments' ) {
+			$breadcrumbs[] = [
+				'name' => tipress_pll__( 'Отделения' ),
+				'url'  => tipress_get_catalog_page_url( 'departments', $current_lang ?: '' ),
+			];
 		}
 		
 		// Для обычных постов добавляем категорию, если есть
@@ -792,35 +654,14 @@ function tipress_display_breadcrumbs() {
 		];
 		
 	} elseif ( is_archive() ) {
-		if ( is_post_type_archive() ) {
-			$post_type = get_post_type();
-			$archive_title = '';
-			
-			if ( $post_type === 'doctors' ) {
-				$archive_title = tipress_pll__( 'Врачи' );
-			} elseif ( $post_type === 'departments' ) {
-				$archive_title = tipress_pll__( 'Отделения' );
-			} else {
-				$archive_title = post_type_archive_title( '', false );
-			}
-			
-			$archive_url = get_post_type_archive_link( $post_type );
-			
-			// Получаем перевод URL архива для текущего языка через Polylang
-			if ( function_exists( 'pll_translate_url' ) && $current_lang ) {
-				$archive_url = pll_translate_url( $archive_url, $current_lang );
-			}
-			
-			$breadcrumbs[] = [
-				'name' => $archive_title,
-				'url'  => $archive_url,
-			];
-			
-		} elseif ( is_category() ) {
+
+		// УБРАЛИ: is_post_type_archive() для doctors/departments (легаси виртуальных страниц)
+		// Остальные архивы оставляем как есть.
+		
+		if ( is_category() ) {
 			$category = get_queried_object();
 			$category_url = get_category_link( $category->term_id );
 			
-			// Получаем перевод категории, если доступен
 			if ( function_exists( 'pll_get_term' ) && $current_lang ) {
 				$translated_term = pll_get_term( $category->term_id, $current_lang );
 				if ( $translated_term ) {
@@ -838,7 +679,6 @@ function tipress_display_breadcrumbs() {
 			$tag = get_queried_object();
 			$tag_url = get_tag_link( $tag->term_id );
 			
-			// Получаем перевод тега, если доступен
 			if ( function_exists( 'pll_get_term' ) && $current_lang ) {
 				$translated_term = pll_get_term( $tag->term_id, $current_lang );
 				if ( $translated_term ) {
@@ -856,7 +696,6 @@ function tipress_display_breadcrumbs() {
 			$term = get_queried_object();
 			$term_url = get_term_link( $term );
 			
-			// Получаем перевод термина, если доступен
 			if ( function_exists( 'pll_get_term' ) && $current_lang ) {
 				$translated_term = pll_get_term( $term->term_id, $current_lang );
 				if ( $translated_term ) {
@@ -872,7 +711,7 @@ function tipress_display_breadcrumbs() {
 			
 		} else {
 			$archive_title = get_the_archive_title();
-			$archive_url = get_post_type_archive_link( get_post_type() );
+			$archive_url = get_pagenum_link();
 			
 			if ( $archive_title ) {
 				$breadcrumbs[] = [
@@ -938,10 +777,8 @@ function tipress_display_breadcrumbs() {
 	
 	foreach ( $breadcrumbs as $index => $crumb ) {
 		$is_last = ( $index === count( $breadcrumbs ) - 1 );
-		// Для последнего элемента используем текущий URL, если он пустой
 		$item_url = ! empty( $crumb['url'] ) ? $crumb['url'] : '';
 		if ( $is_last && empty( $item_url ) ) {
-			// Для последнего элемента используем текущий URL страницы
 			if ( is_singular() ) {
 				$item_url = get_permalink();
 			} elseif ( is_archive() ) {
@@ -1011,7 +848,6 @@ add_filter( 'pll_rel_hreflang_attributes', function( $hreflangs ) {
         foreach ( $locales as $loc ) {
             $parts  = explode( '_', $loc, 2 );          // ['he','IL']
             $code   = strtolower( $parts[0] );          // 'he'
-            $w3c    = $parts[1] ? $parts[0] . '-' . $parts[1] : $parts[0]; // 'he-IL'
             $w3c    = strtolower( $parts[0] ) . ( $parts[1] ? '-' . strtoupper( $parts[1] ) : '' );
 
             if ( isset( $hreflangs[ $code ] ) ) {

@@ -423,7 +423,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		}
 		.ti-header__menu-list a {
 			display: flex;
-			flex-direction: column;
+			flex-direction: row;
 			align-items: center;
 			gap: 4px;
 			text-decoration: none;

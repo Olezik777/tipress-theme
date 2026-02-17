@@ -520,6 +520,15 @@ add_action('init', function() {
 	
 	// Taxonomy strings
 	pll_register_string('Врачи специализации', 'Врачи специализации', 'Taxonomy');
+
+	// Sidebar strings
+	pll_register_string('О нас', 'О нас', 'Sidebar');
+	pll_register_string('Как к нам приехать?', 'Как к нам приехать?', 'Sidebar');
+	pll_register_string('Вопросы - ответы', 'Вопросы - ответы', 'Sidebar');
+	pll_register_string('ВРАЧИ ОТДЕЛЕНИЯ', 'ВРАЧИ ОТДЕЛЕНИЯ', 'Sidebar');
+	pll_register_string('Whatsapp', 'Whatsapp', 'Sidebar');
+	pll_register_string('Viber', 'Viber', 'Sidebar');
+	pll_register_string('Mail', 'Mail', 'Sidebar');
 });
 
 
@@ -545,6 +554,61 @@ function tipress_get_catalog_page_url( $base_slug, $lang = '' ) {
 	}
 
 	return get_permalink( $page_id );
+}
+
+/**
+ * Helper: URL страницы по базовому slug с учётом Polylang перевода.
+ * Полезно, чтобы не хардкодить домен/URL в шаблонах (например, в сайдбаре).
+ */
+if ( ! function_exists( 'tipress_get_page_url_by_slug' ) ) {
+	function tipress_get_page_url_by_slug( $base_slug, $lang = '' ) {
+		$base_slug = trim( (string) $base_slug, '/' );
+		if ( $base_slug === '' ) {
+			return home_url( '/' );
+		}
+
+		$page = get_page_by_path( $base_slug );
+		if ( ! $page ) {
+			return home_url( '/' . $base_slug . '/' );
+		}
+
+		$page_id = $page->ID;
+
+		if ( function_exists( 'pll_get_post' ) ) {
+			$lang = $lang ?: ( function_exists( 'pll_current_language' ) ? pll_current_language() : '' );
+			if ( $lang ) {
+				$translated_id = pll_get_post( $page_id, $lang );
+				if ( $translated_id ) {
+					$page_id = $translated_id;
+				}
+			}
+		}
+
+		return get_permalink( $page_id );
+	}
+}
+
+/**
+ * Helper: попробуй несколько slug и верни первый существующий URL (с переводом).
+ */
+if ( ! function_exists( 'tipress_get_first_existing_page_url' ) ) {
+	function tipress_get_first_existing_page_url( array $base_slugs, $lang = '' ) {
+		foreach ( $base_slugs as $slug ) {
+			$slug = trim( (string) $slug, '/' );
+			if ( $slug === '' ) {
+				continue;
+			}
+
+			$page = get_page_by_path( $slug );
+			if ( $page ) {
+				return tipress_get_page_url_by_slug( $slug, $lang );
+			}
+		}
+
+		// Fallback: на первый переданный slug (даже если страницы нет)
+		$fallback = isset( $base_slugs[0] ) ? trim( (string) $base_slugs[0], '/' ) : '';
+		return $fallback ? home_url( '/' . $fallback . '/' ) : home_url( '/' );
+	}
 }
 
 /**

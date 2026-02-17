@@ -7,13 +7,12 @@
 
 get_header();
 
-// Языки сайта: иврит (по умолчанию, код il), английский (en), арабский (ar)
-$current_lang  = function_exists( 'pll_current_language' ) ? pll_current_language() : 'il';
-$is_english    = ( $current_lang === 'en' );
-$is_arabic     = ( $current_lang === 'ar' );
-$is_hebrew     = ( $current_lang === 'il' );
-// Временно без сайдбара для арабского; сайдбар только для иврита
-$show_sidebar  = $is_hebrew;
+// Языки сайта (Polylang): he/en/ar/ru и т.д.
+$current_lang = function_exists( 'pll_current_language' ) ? pll_current_language() : '';
+$is_english   = ( $current_lang === 'en' );
+$is_arabic    = ( $current_lang === 'ar' );
+// Сайдбар должен отображаться одинаково во всех языках
+$show_sidebar = true;
 ?>
 
 <main id="primary" class="site-main single-departments">
@@ -26,7 +25,7 @@ $show_sidebar  = $is_hebrew;
 			</div>
 			
 			<?php endif; ?>
-			<div class="ti-column single-template-content"<?php echo ( $is_english || $is_arabic ) ? ' style="flex-basis: 100%;"' : ''; ?>>
+			<div class="ti-column single-template-content"<?php echo ( ! $show_sidebar && ( $is_english || $is_arabic ) ) ? ' style="flex-basis: 100%;"' : ''; ?>>
 				<?php
 				while ( have_posts() ) :
 					the_post();

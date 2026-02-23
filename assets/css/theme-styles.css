@@ -65,6 +65,17 @@
 :dir(rtl) .site-content .kt-accodion-icon-side-left .kt-blocks-accordion-icon-trigger { right:auto; left:15px;}
 :dir(rtl) .footer-logo {flex-direction: row-reverse;justify-content: flex-end;}
 
+/* Переносим длинные ссылки/слова внутри контента */
+.single-template-content a,
+.single-template-content p,
+.single-template-content li,
+.single-template-content {
+  overflow-wrap: anywhere;   /* лучший вариант для URL */
+  word-break: break-word;    /* запасной вариант */
+}
+
+.ti-columns .ti-column { min-width: 0;}
+
 @media only screen and (max-width: 1100px) {
 	:lang(en-GB) .wp-block-navigation ul { gap: 0.5em;}
 }

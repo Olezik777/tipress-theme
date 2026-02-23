@@ -52,21 +52,6 @@ table tr {
 
 
 
-/* Переносим длинные ссылки/слова внутри контента */
-.single-template-content a,
-.single-template-content p,
-.single-template-content li,
-.single-template-content {
-  overflow-wrap: anywhere;   /* лучший вариант для URL */
-  word-break: break-word;    /* запасной вариант */
-}
-
-.ti-columns .ti-column { min-width: 0;}
-
-
-
-
-
 
 .wp-block-search__inside-wrapper {
 	border-color: #a1b5b8;

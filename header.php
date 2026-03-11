@@ -840,8 +840,8 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				$phone_number = '03-3760386';
 				$phone_tel = 'tel:033760386';
 			} else {
-				$phone_number = '+972-37621629';
-				$phone_tel = 'tel:+97237621629';
+				$phone_number = '03-3760386';
+				$phone_tel = 'tel:033760386';
 			}
 			?>
 			<div class="ti-header__phone-wrapper">

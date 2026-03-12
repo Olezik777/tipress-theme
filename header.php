@@ -815,7 +815,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			.ti-header__brand {
 				gap: 2px;
 			}
-			.messenger-banner
+			.messenger-banner { display: block;}
 		}
 	</style>
 </head>

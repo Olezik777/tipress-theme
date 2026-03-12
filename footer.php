@@ -163,7 +163,11 @@ $theme_uri = get_stylesheet_directory_uri();
 			</div>
 		</div>
 	</footer>
-
+	<div class="messenger-banner">
+		<a href="https://api.whatsapp.com/send?phone=972524375575&amp;text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20%D0%BB%D0%B5%D1%87%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%B2%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B5%20%D0%98%D1%85%D0%B8%D0%BB%D0%BE%D0%B2." class="messenger-banner__btn messenger-banner__btn--whatsapp messenger-banner__btn--hidden" data-messenger-type="whatsapp" onclick="return !window.location(this.href)"><br>
+            <img decoding="async" src="https://topichilov.co.il/wp-content/uploads/2026/03/plashkawhatsapp.png.svg" alt="Написать в WhatsApp"><br>
+        </a>
+	</div>
 	<!-- Callback Popup Modal -->
 	<div role="dialog" aria-modal="true" aria-labelledby="bodModalAriaTitle2" aria-describedby="bodModalAriaContent2" class="bod-block-popup-wrap modal-1" id="callback-popup">
 		<div style="background-color:#ffffff;border-radius:10px" class="bod-block-popup size-m fade" data-transition="fade">

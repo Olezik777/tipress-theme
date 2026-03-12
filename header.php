@@ -617,6 +617,16 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		.sticky-header .ti-header__lang-switcher { width: 32px; height: 32px;}
 		.sticky-header .ti-header__lang-switcher img { width: 16px; height: 16px;}
 		.sticky-header .ti-header__lang-switcher span { font-size: 14px;}
+
+		.messenger-banner {
+			display: none;
+			position: fixed;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			z-index:99;
+		}
+
 		/* Tablet Responsive */
 		@media (max-width: 1200px) {
 			.ti-header__title {
@@ -805,6 +815,7 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			.ti-header__brand {
 				gap: 2px;
 			}
+			.messenger-banner
 		}
 	</style>
 </head>

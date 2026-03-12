@@ -626,6 +626,14 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			right: 0;
 			z-index:99;
 		}
+		.messenger-banner img { width: 100%; height: auto; max-width: 100%;}
+		.messenger-banner__btn {
+			display: block;
+			width: 100%;
+			height: auto;
+			max-width: 100%;
+			text-align: center;
+		}
 
 		/* Tablet Responsive */
 		@media (max-width: 1200px) {

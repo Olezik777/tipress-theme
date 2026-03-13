@@ -71,16 +71,6 @@ if ( $lang ) {
             }
             ?>
 
-            <header class="page-header single-template-header">
-                <?php
-                the_archive_title(
-                    '<h1 class="page-title" style="text-transform:uppercase;font-style:normal;font-weight:700;">',
-                    '</h1>'
-                );
-                the_archive_description( '<div class="archive-description">', '</div>' );
-                ?>
-            </header>
-
             <?php
             // 1. Навигационные ссылки - кастомный блок
             tipress_render_departments_navigation();

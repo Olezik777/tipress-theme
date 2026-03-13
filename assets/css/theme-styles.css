@@ -50,7 +50,7 @@
 /* Заголовок страницы врача: бордер и отступы с учётом RTL/LTR */
 body.single-doctors .single-template-content .entry-title,
 #primary.single-doctors .single-doctor .entry-title {
-	border-inline-end: 3px solid var(--wp--preset--color--base, currentColor);
+	border-inline-start: 3px solid var(--wp--preset--color--base, currentColor);
 	padding-inline-start: 16px;
 	padding-inline-end: 16px;
 }

@@ -47,6 +47,15 @@
 :dir(rtl) .single-departments .wp-site-blocks > .wp-block-group > .wp-block-columns  .wp-block-columns:first-child p,
 :dir(rtl) .single-doctors .wp-site-blocks > .wp-block-group > .wp-block-columns  .wp-block-columns:first-child p { margin-top:0; }
 
+/* Заголовок страницы врача: бордер и отступы с учётом RTL/LTR */
+.single-doctors .single-doctor .entry-title {
+	border-inline-end-color: var(--wp--preset--color--base);
+	border-inline-end-width: 3px;
+	border-inline-end-style: solid;
+	padding-inline-start: 16px;
+	padding-inline-end: 16px;
+}
+
 .breadcrumbs_custom {display: flex;    flex-wrap: wrap;    gap: var(--bb--crumb-gap, .4em);    list-style: none;    margin: 0;    padding: 20px 0 10px;}
 :dir(rtl) .breadcrumbs_custom {
 	justify-content: flex-end;

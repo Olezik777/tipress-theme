@@ -164,7 +164,7 @@ $theme_uri = get_stylesheet_directory_uri();
 		</div>
 	</footer>
 	<div class="messenger-banner">
-		<a href="https://api.whatsapp.com/send?phone=972524375575&amp;text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%AF%20%D1%85%D0%BE%D1%87%D1%83%20%D1%83%D0%B7%D0%BD%D0%B0%D1%82%D1%8C%20%D0%BF%D0%BE%D0%B4%D1%80%D0%BE%D0%B1%D0%BD%D0%BE%D1%81%D1%82%D0%B8%20%D0%BB%D0%B5%D1%87%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%B2%20%D0%BA%D0%BB%D0%B8%D0%BD%D0%B8%D0%BA%D0%B5%20%D0%98%D1%85%D0%B8%D0%BB%D0%BE%D0%B2." class="messenger-banner__btn messenger-banner__btn--whatsapp messenger-banner__btn--hidden" data-messenger-type="whatsapp" onclick="return !window.location(this.href)">
+		<a href="https://wa.me/972524375575?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%A7%D7%91%D7%99%D7%A2%D7%AA%20%D7%AA%D7%95%D7%A8%20%D7%91%D7%9E%D7%A8%D7%A4%D7%90%D7%94%20%D7%94%D7%A4%D7%A8%D7%98%D7%99%D7%AA%20%D7%98%D7%95%D7%A4%20%D7%90%D7%99%D7%9B%D7%99%D7%9C%D7%95%D7%91." class="messenger-banner__btn messenger-banner__btn--whatsapp messenger-banner__btn--hidden" data-messenger-type="whatsapp" onclick="return !window.location(this.href)">
 			<div class="messenger-banner__inner">
 				<div class="messenger-banner__icon">
 					<img decoding="async" src="/wp-content/uploads/2026/03/whatsapp-symbol-logo-svgrepo-com.svg" alt="send WhatsApp">

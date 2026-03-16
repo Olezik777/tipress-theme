@@ -2535,6 +2535,7 @@ margin-top:0
 @media only screen and (min-width: 1200px) {
 	.single-departments .wp-block-buttons .wp-block-button {
 		flex-grow: unset;
+		text-align: center;
 	}
 	.single-departments .content .wp-block-buttons .wp-block-button .wp-block-button__link {
 		width: 550px;
@@ -2545,6 +2546,9 @@ margin-top:0
 	.content .lang-list {
 		flex-wrap: wrap !important;
 	}
+	.footer-callback-section input[type="tel"], 
+	.footer-callback-section input[type="text"], 
+	.footer-callback-section input[type="email"] { margin: 5px 0;}
 }
 @media only screen and (min-width: 1200px) {
 	.content .lang-list {

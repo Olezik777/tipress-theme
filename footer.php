@@ -207,13 +207,13 @@ $theme_uri = get_stylesheet_directory_uri();
 			.messenger-banner__inner {
 				display: flex;
 				align-items: center;
-				justify-content: space-between;
+				justify-content: space-around;
 				gap: 10px;
 			}
 
 			.messenger-banner__icon img {
-				width: 32px;
-				height: 32px;
+				width: 40px;
+				height: 40px;
 				object-fit: contain;
 				display: block;
 			}

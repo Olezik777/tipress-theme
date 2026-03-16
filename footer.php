@@ -190,6 +190,7 @@ $theme_uri = get_stylesheet_directory_uri();
 				padding: 8px 12px;
 				background-color: #ffffff;
 				box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.18);
+				display: block;
 			}
 
 			.messenger-banner__btn {

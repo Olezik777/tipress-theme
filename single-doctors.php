@@ -28,7 +28,7 @@ get_header();
 					?>
 					<article id="post-<?php the_ID(); ?>" <?php post_class( 'single-doctor' ); ?>>
 
-						<div class="entry-content">
+						<div class="entry-content test77">
 							<?php the_content(); ?>
 						</div>
 

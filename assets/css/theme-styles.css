@@ -2593,6 +2593,56 @@ margin-top:0
 }
 
 /* Popup Modal Base Styles */
+/* Local copy of key Cover block styles so the callback
+   popup does not depend on core `blocks/cover` CSS. */
+#callback-popup .wp-block-cover {
+	align-items: center;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	min-height: 280px;
+	overflow: hidden;
+	overflow: clip;
+	padding: 1em;
+	position: relative;
+}
+
+#callback-popup .wp-block-cover__background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0.5;
+}
+
+#callback-popup .wp-block-cover__background.has-background-dim-0 {
+	opacity: 0;
+}
+
+#callback-popup .wp-block-cover__inner-container {
+	color: inherit;
+	position: relative;
+	width: 100%;
+}
+
+#callback-popup .wp-block-cover__image-background {
+	border: none;
+	bottom: 0;
+	box-shadow: none;
+	height: 100%;
+	left: 0;
+	margin: 0;
+	max-height: none;
+	max-width: none;
+	outline: none;
+	padding: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 100%;
+}
+
 .bod-block-popup-wrap {
 	position: fixed;
 	top: 0;

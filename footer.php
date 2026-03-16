@@ -180,7 +180,7 @@ $theme_uri = get_stylesheet_directory_uri();
 			display: none;
 		}
 
-		@media (max-width: 767px) {
+		@media (max-width: 480px) {
 			.messenger-banner {
 				position: fixed;
 				left: 0;
@@ -188,7 +188,7 @@ $theme_uri = get_stylesheet_directory_uri();
 				bottom: 0;
 				z-index: 9999;
 				padding: 8px 12px;
-				background-color: #25d366;
+				background-color: #ffffff;
 				box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.18);
 			}
 
@@ -196,7 +196,7 @@ $theme_uri = get_stylesheet_directory_uri();
 				display: block;
 				width: 100%;
 				text-decoration: none;
-				color: #ffffff;
+				color: #000000;
 			}
 
 			.messenger-banner__btn--hidden {
@@ -222,6 +222,7 @@ $theme_uri = get_stylesheet_directory_uri();
 				line-height: 1.4;
 				font-weight: 600;
 				text-align: right;
+				color: #000000;
 			}
 
 			@media (max-width: 360px) {

@@ -2226,6 +2226,62 @@ margin-top:0
 }
 
 
+.contact-box {
+	border: 2px solid #2b82c2;
+	border-radius: 8px;
+	padding: 20px;
+	max-width: 320px;
+	background: #fff;
+	font-family: Arial, sans-serif;
+  }
+  
+  .contact-item {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-bottom: 20px;
+  }
+  
+  .contact-item:last-child {
+	margin-bottom: 0;
+  }
+  
+  .contact-item img {
+	width: 42px;
+	height: 42px;
+	object-fit: contain;
+  }
+  
+  .contact-item .label {
+	font-size: 14px;
+	color: #666;
+  }
+  
+  .contact-item a {
+	display: block;
+	font-size: 18px;
+	font-weight: 600;
+	text-decoration: none;
+	color: #000;
+  }
+  
+  .contact-item a:hover {
+	text-decoration: underline;
+  }
+  
+  .contact-item.whatsapp a {
+	color: #25D366;
+  }
+  
+  .contact-item.telegram a {
+	color: #0088cc;
+  }
+  
+  .contact-item.email a {
+	color: #2b82c2;
+  }
+
+
 
 @media only screen and (max-width: 575px) {
 	.counter {
@@ -2531,6 +2587,8 @@ margin-top:0
 .single-departments .wp-block-buttons .wp-block-button .wp-block-button__link:hover {
 	background-color: #860f12 !important;
 }
+
+
 
 @media only screen and (min-width: 1200px) {
 	.single-departments .wp-block-buttons .wp-block-button {

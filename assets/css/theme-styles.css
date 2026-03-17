@@ -2281,9 +2281,56 @@ margin-top:0
 	color: #2b82c2;
   }
 
+/* Sidebar contacts: responsive improvements */
+  .contact-item > div {
+	min-width: 0;
+  }
+  .contact-item a {
+	overflow-wrap: anywhere;
+	word-break: break-word;
+  }
 
+@media (max-width: 980px) {
+	.contact-box {
+		max-width: 100%;
+		padding: 16px;
+	}
+  .contact-item {
+		gap: 12px;
+		margin-bottom: 16px;
+  }
+  .contact-item img {
+		width: 38px;
+		height: 38px;
+  }
+  .contact-item .label {
+		font-size: 13px;
+  }
+  .contact-item a {
+		font-size: 16px;
+  }
+}
 
 @media only screen and (max-width: 575px) {
+	.contact-box {
+		max-width: 100%;
+		padding: 14px;
+		border-width: 1px;
+	}
+  .contact-item {
+		gap: 10px;
+		margin-bottom: 14px;
+  }
+  .contact-item img {
+		width: 34px;
+		height: 34px;
+  }
+  .contact-item .label {
+		font-size: 12px;
+  }
+  .contact-item a {
+		font-size: 15px;
+  }
 	.counter {
 		text-align: center;
 	}

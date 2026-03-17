@@ -317,6 +317,9 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			height: 17px;
 			fill: #fff;
 		}
+		.ti-header__whatsapp-icon {
+			display: none;
+		}
 		.ti-header__mobile-toggle {
 			display: none;
 			background: #d22f1e;
@@ -666,6 +669,26 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 				font-size: clamp(18px, 2vw, 24px);
 			}
 		}
+		/* Header WhatsApp icon: visible only on viewport < 980px */
+		@media (max-width: 979px) {
+			.ti-header__whatsapp-icon {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				flex-shrink: 0;
+				text-decoration: none;
+			}
+			.ti-header__whatsapp-icon img {
+				width: 30px;
+				height: 30px;
+				display: block;
+			}
+		}
+		@media (min-width: 980px) {
+			.ti-header__whatsapp-icon {
+				display: none !important;
+			}
+		}
 		/* Mobile Responsive */
 		@media (max-width: 980px) {
 			.ti-header__container {
@@ -871,6 +894,9 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 					<svg viewBox="0 0 24 24">
 						<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
 					</svg>
+				</a>
+				<a href="https://wa.me/972524375575?text=%D7%A9%D7%9C%D7%95%D7%9D%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%A7%D7%91%D7%99%D7%A2%D7%AA%20%D7%AA%D7%95%D7%A8%20%D7%91%D7%9E%D7%A8%D7%A4%D7%90%D7%94%20%D7%94%D7%A4%D7%A8%D7%98%D7%99%D7%AA%20%D7%98%D7%95%D7%A3%20%D7%90%D7%99%D7%9B%D7%99%D7%9C%D7%95%D7%91." class="ti-header__whatsapp-icon" target="_blank" rel="noopener" aria-label="<?php echo esc_attr( tipress_pll__( 'WhatsApp' ) ); ?>">
+					<img decoding="async" src="/wp-content/uploads/2026/03/whatsapp-symbol-logo-svgrepo-com.svg" alt="WhatsApp" width="30" height="30">
 				</a>
 			</div>
 

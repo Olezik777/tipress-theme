@@ -12,6 +12,7 @@ $theme_uri = get_stylesheet_directory_uri();
 	<footer id="colophon" class="site-footer">
 		<!-- Callback Form Section -->
 		<div class="footer-callback-section">
+		<h2 class="footer-form-title"><?php echo esc_html( tipress_pll__( 'יצירת קשר' ) ); ?></h2>
 			<div class="footer-callback-container">
 				<?php echo do_shortcode( '[contact-form-7 id="9fc7b4d" title="Callback_he"]' ); ?>
 			</div>
@@ -148,7 +149,6 @@ $theme_uri = get_stylesheet_directory_uri();
 
 		<!-- Footer Bottom: Disclaimer + Copyright -->
 		<div class="footer-bottom">
-			<h2 class="footer-form-title"><?php echo esc_html( tipress_pll__( 'יצירת קשר' ) ); ?></h2>
 			<div class="footer-bottom-container">
 				<?php if ( is_active_sidebar( 'footer-disclaimer' ) ) : ?>
 					<div class="footer-disclaimer">

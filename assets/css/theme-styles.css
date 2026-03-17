@@ -2840,8 +2840,10 @@ margin-top:0
 		object-fit: none;
 		object-position: 126% 100%;
 	}
-
-
+	#callback-popup .wp-block-cover__image-background { right: -40px;}
+}
+@media (max-width: 480px) {
+	#callback-popup .wp-block-cover__image-background { right: -50px;}
 }
 .bod-block-popup-wrap button.bod-block-title-closer:not(:hover):not(:active) {
 	opacity: .4;

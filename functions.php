@@ -495,6 +495,7 @@ add_action('init', function() {
 	pll_register_string('Основное меню футера (левая колонка)', 'Основное меню футера (левая колонка)', 'Footer');
 	pll_register_string('Основное меню футера (правая колонка)', 'Основное меню футера (правая колонка)', 'Footer');
 	pll_register_string('Please Call Back', 'Please Call Back', 'Footer');
+	pll_register_string('יצירת קשר', 'יצירת קשר', 'Footer');
 	
 	// Breadcrumbs strings
 	pll_register_string('Хлебные крошки', 'Хлебные крошки', 'Breadcrumbs');

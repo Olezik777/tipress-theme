@@ -279,6 +279,18 @@ function modify_meta_field_position($post_id) {
 add_action('save_post', 'modify_meta_field_position');
 add_filter('wpcf7_autop_or_not', '__return_false');
 
+/**
+ * CF-7: redirect user to thank page after successful submit.
+ */
+add_filter(
+	'wpcf7_redirect',
+	function ( $url, $contact_form = null, $submission = null ) {
+		return 'https://topichilov.co.il/thank-page/';
+	},
+	999,
+	3
+);
+
 
 /**
  * Recent post shortcode

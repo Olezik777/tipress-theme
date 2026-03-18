@@ -190,6 +190,7 @@ body {
 	.header-top {
 		padding-bottom: 8px !important;
 	}
+	.single-departments .wp-block-buttons .wp-block-button { text-align: center;}
 }
 
 .home .br-group,

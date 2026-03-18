@@ -480,8 +480,8 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			background: rgba(0,0,0,0.06);
 		}
 		.ti-header__mobile-menu-close svg {
-			width: 20px;
-			height: 20px;
+			width: 30px;
+			height: 30px;
 			display: block;
 		}
 		/* Fallback for older browsers without logical properties */

@@ -657,3 +657,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	}
 });
+
+document.addEventListener('wpcf7mailsent', function (event) {
+    if (event.detail.contactFormId == 123) {
+        window.location.href = 'https://topichilov.co.il/thank-page/';
+    }
+}, false);

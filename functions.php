@@ -279,18 +279,6 @@ function modify_meta_field_position($post_id) {
 add_action('save_post', 'modify_meta_field_position');
 add_filter('wpcf7_autop_or_not', '__return_false');
 
-/**
- * CF-7: redirect user to thank page after successful submit.
- */
-add_filter(
-	'wpcf7_redirect',
-	function ( $url, $contact_form = null, $submission = null ) {
-		return 'https://topichilov.co.il/thank-page/';
-	},
-	999,
-	3
-);
-
 
 /**
  * Recent post shortcode
@@ -507,7 +495,6 @@ add_action('init', function() {
 	pll_register_string('Основное меню футера (левая колонка)', 'Основное меню футера (левая колонка)', 'Footer');
 	pll_register_string('Основное меню футера (правая колонка)', 'Основное меню футера (правая колонка)', 'Footer');
 	pll_register_string('Please Call Back', 'Please Call Back', 'Footer');
-	pll_register_string('יצירת קשר', 'יצירת קשר', 'Footer');
 	
 	// Breadcrumbs strings
 	pll_register_string('Хлебные крошки', 'Хлебные крошки', 'Breadcrumbs');

@@ -171,7 +171,7 @@ $theme_uri = get_stylesheet_directory_uri();
 					<img decoding="async" src="/wp-content/uploads/2026/03/whatsapp-symbol-logo-svgrepo-com.svg" alt="send WhatsApp">
 				</div>
 				<div class="messenger-banner__text">
-					לקבלת פרטים וקביעת תור ב-WhatsApp לחצו כאן
+					לקבלת פרטים וקביעת תור ב-WhatsApp <br> לחצו כאן
 				</div>
 			</div>
 		</a>

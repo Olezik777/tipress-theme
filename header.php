@@ -458,7 +458,35 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 			overflow-y: auto;
 			transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 			padding: 80px 20px 20px;
+			box-sizing: border-box;
 		}
+		.ti-header__mobile-menu-close {
+			position: absolute;
+			top: 15px;
+			inset-inline-end: 15px;
+			width: 44px;
+			height: 44px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			background: transparent;
+			border: 0;
+			color: #333;
+			cursor: pointer;
+			border-radius: 10px;
+			-webkit-tap-highlight-color: transparent;
+		}
+		.ti-header__mobile-menu-close:hover {
+			background: rgba(0,0,0,0.06);
+		}
+		.ti-header__mobile-menu-close svg {
+			width: 20px;
+			height: 20px;
+			display: block;
+		}
+		/* Fallback for older browsers without logical properties */
+		.ti-header__mobile-menu-close { right: 15px; }
+		:dir(rtl) .ti-header__mobile-menu-close { right: auto; left: 15px; }
 		.ti-header__mobile-menu.is-open {
 			left: 0;
 		}
@@ -516,6 +544,32 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		.ti-header__mobile-menu-list .sub-menu a {
 			font-size: 14px;
 			padding: 10px 16px;
+		}
+		.ti-header__mobile-menu .contact-item.whatsapp {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			margin-top: 16px;
+			padding: 12px 14px;
+			border: 1px solid rgba(0,0,0,0.08);
+			border-radius: 10px;
+			background: #fff;
+		}
+		.ti-header__mobile-menu .contact-item.whatsapp img {
+			width: 22px;
+			height: 22px;
+			flex: 0 0 22px;
+		}
+		.ti-header__mobile-menu .contact-item.whatsapp a {
+			color: #111;
+			text-decoration: none;
+			font-weight: 600;
+			font-size: 16px;
+			line-height: 1.2;
+			white-space: nowrap;
+		}
+		.ti-header__mobile-menu .contact-item.whatsapp a:hover {
+			text-decoration: underline;
 		}
 		.ti-header__right {
 			display: flex;
@@ -1006,6 +1060,12 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 <!-- Mobile Sidebar Menu -->
 <div class="ti-header__mobile-menu-overlay"></div>
 <aside class="ti-header__mobile-menu" aria-label="<?php echo esc_attr( tipress_pll__( 'Мобильное меню' ) ); ?>">
+	<button class="ti-header__mobile-menu-close" type="button" aria-label="<?php echo esc_attr( tipress_pll__( 'Закрыть меню' ) ); ?>">
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+			<path d="M18 6L6 18"></path>
+			<path d="M6 6l12 12"></path>
+		</svg>
+	</button>
 	<?php
 	wp_nav_menu(
 		[
@@ -1018,6 +1078,10 @@ $current_lang = function_exists( 'pll_current_language' ) ? pll_current_language
 		]
 	);
 	?>
+	<div class="contact-item whatsapp">
+		<img src="https://www.topichilov.com/wp-content/uploads/2023/12/whatsapp.png" alt="WhatsApp">
+		<a href="https://wa.me/+972524375575" target="_blank" rel="noopener">+972524375575</a>
+	</div>
 </aside>
 
 <script>

@@ -11,19 +11,24 @@ domReady(function () {
 	const mobileToggle = document.querySelector('.ti-header__mobile-toggle');
 	const mobileMenu = document.querySelector('.ti-header__mobile-menu');
 	const mobileOverlay = document.querySelector('.ti-header__mobile-menu-overlay');
+	const mobileClose = document.querySelector('.ti-header__mobile-menu-close');
 	
 	if (mobileToggle && mobileMenu && mobileOverlay) {
+		function closeMobileMenu() {
+			mobileMenu.classList.remove('is-open');
+			mobileOverlay.classList.remove('is-active');
+			mobileToggle.classList.remove('is-active');
+			mobileToggle.setAttribute('aria-expanded', 'false');
+			document.body.style.overflow = '';
+		}
+
 		mobileToggle.addEventListener('click', function(e) {
 			e.stopPropagation();
 			const isOpen = mobileMenu.classList.contains('is-open');
 			
 			if (isOpen) {
 				// Close menu
-				mobileMenu.classList.remove('is-open');
-				mobileOverlay.classList.remove('is-active');
-				mobileToggle.classList.remove('is-active');
-				mobileToggle.setAttribute('aria-expanded', 'false');
-				document.body.style.overflow = '';
+				closeMobileMenu();
 			} else {
 				// Open menu
 				mobileMenu.classList.add('is-open');
@@ -33,24 +38,25 @@ domReady(function () {
 				document.body.style.overflow = 'hidden';
 			}
 		});
+
+		// Close menu on close button click
+		if (mobileClose) {
+			mobileClose.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				closeMobileMenu();
+			});
+		}
 		
 		// Close menu on overlay click
 		mobileOverlay.addEventListener('click', function() {
-			mobileMenu.classList.remove('is-open');
-			mobileOverlay.classList.remove('is-active');
-			mobileToggle.classList.remove('is-active');
-			mobileToggle.setAttribute('aria-expanded', 'false');
-			document.body.style.overflow = '';
+			closeMobileMenu();
 		});
 		
 		// Close menu on escape key
 		document.addEventListener('keydown', function(e) {
 			if (e.key === 'Escape' && mobileMenu.classList.contains('is-open')) {
-				mobileMenu.classList.remove('is-open');
-				mobileOverlay.classList.remove('is-active');
-				mobileToggle.classList.remove('is-active');
-				mobileToggle.setAttribute('aria-expanded', 'false');
-				document.body.style.overflow = '';
+				closeMobileMenu();
 			}
 		});
 		
@@ -60,11 +66,7 @@ domReady(function () {
 			link.addEventListener('click', function() {
 				// Small delay to allow navigation
 				setTimeout(function() {
-					mobileMenu.classList.remove('is-open');
-					mobileOverlay.classList.remove('is-active');
-					mobileToggle.classList.remove('is-active');
-					mobileToggle.setAttribute('aria-expanded', 'false');
-					document.body.style.overflow = '';
+					closeMobileMenu();
 				}, 300);
 			});
 		});

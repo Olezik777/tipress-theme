@@ -3873,7 +3873,7 @@ margin-top:0
 
 /* ==== Search (sidebar) =================================================== */
 @media (min-width: 769px) {
-	.ti-column.single-template-sidebar {
+	#secondary {
 		position: sticky;
 		top: 80px;
 	}

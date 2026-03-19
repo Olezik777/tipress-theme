@@ -3873,6 +3873,10 @@ margin-top:0
 
 /* ==== Search (sidebar) =================================================== */
 @media (min-width: 769px) {
+	.single-template-sidebar {
+		align-self: flex-start;
+	}
+
 	#secondary #custom_html-2 {
 		position: sticky;
 		top: 50px;

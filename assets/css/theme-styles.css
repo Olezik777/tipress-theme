@@ -3872,6 +3872,13 @@ margin-top:0
 }
 
 /* ==== Search (sidebar) =================================================== */
+@media (min-width: 769px) {
+	#secondary #custom_html-2 {
+		position: sticky;
+		top: 50px;
+	}
+}
+
 #secondary .search-form{
 	position: relative;
 	display: flex;

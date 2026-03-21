@@ -15,6 +15,26 @@ if ( !defined( 'THEME_PATH' ) ) {
 remove_filter('pre_user_description', 'wp_filter_kses');
 remove_filter('edit_user_description', 'wp_filter_kses');
 
+/**
+ * Redirect all URLs containing /doctors/ to homepage.
+ */
+function tipress_redirect_doctors_urls_to_home() {
+	if ( is_admin() || wp_doing_ajax() || ( defined( 'REST_REQUEST' ) && REST_REQUEST ) ) {
+		return;
+	}
+
+	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( (string) $_SERVER['REQUEST_URI'] ) : '';
+	if ( $request_uri === '' ) {
+		return;
+	}
+
+	if ( strpos( $request_uri, '/doctors/' ) !== false ) {
+		wp_safe_redirect( home_url( '/' ), 301 );
+		exit;
+	}
+}
+add_action( 'template_redirect', 'tipress_redirect_doctors_urls_to_home', 0 );
+
 //////////////////////////////////////////////////////////////////
 // Theme Setup
 //////////////////////////////////////////////////////////////////

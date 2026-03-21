@@ -23,17 +23,30 @@ function tipress_redirect_doctors_urls_to_home() {
 		return;
 	}
 
-	// Redirect only on Hebrew (default) language version.
-	if ( ! function_exists( 'pll_current_language' ) || pll_current_language() !== 'il' ) {
-		return;
-	}
-
 	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( (string) $_SERVER['REQUEST_URI'] ) : '';
 	if ( $request_uri === '' ) {
 		return;
 	}
 
-	if ( strpos( $request_uri, '/doctors/' ) !== false ) {
+	$request_path = wp_parse_url( $request_uri, PHP_URL_PATH );
+	$request_path = is_string( $request_path ) ? $request_path : '';
+	if ( $request_path === '' ) {
+		return;
+	}
+
+	// Skip redirect for non-default language prefixes like /en/... or /ru/...
+	if ( function_exists( 'pll_languages_list' ) && function_exists( 'pll_default_language' ) ) {
+		$segments = explode( '/', trim( $request_path, '/' ) );
+		$first_segment = isset( $segments[0] ) ? $segments[0] : '';
+		$languages = pll_languages_list( array( 'fields' => 'slug' ) );
+		$default_lang = pll_default_language();
+
+		if ( $first_segment && is_array( $languages ) && in_array( $first_segment, $languages, true ) && $first_segment !== $default_lang ) {
+			return;
+		}
+	}
+
+	if ( preg_match( '#(^|/)doctors(/|$)#', $request_path ) ) {
 		wp_safe_redirect( home_url( '/' ), 301 );
 		exit;
 	}

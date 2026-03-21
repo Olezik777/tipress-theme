@@ -23,6 +23,11 @@ function tipress_redirect_doctors_urls_to_home() {
 		return;
 	}
 
+	// Redirect only on Hebrew (default) language version.
+	if ( ! function_exists( 'pll_current_language' ) || pll_current_language() !== 'il' ) {
+		return;
+	}
+
 	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( (string) $_SERVER['REQUEST_URI'] ) : '';
 	if ( $request_uri === '' ) {
 		return;

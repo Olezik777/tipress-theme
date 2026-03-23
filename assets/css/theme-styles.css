@@ -17,7 +17,7 @@
 
 .modal_title { font-size:19px; padding:12px 0; display:inline-block; font-weight:bold;}
 
-:lang(he-IL) .ti-column.single-template-content .wp-block-columns-is-layout-flex .wp-block-column:first-child { display: none;}
+.ti-column.single-template-content .wp-block-columns-is-layout-flex .wp-block-column:first-child { display: none;}
 
 
 

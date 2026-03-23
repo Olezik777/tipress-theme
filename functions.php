@@ -34,18 +34,6 @@ function tipress_redirect_doctors_urls_to_home() {
 		return;
 	}
 
-	// Skip redirect for non-default language prefixes like /en/... or /ru/...
-	if ( function_exists( 'pll_languages_list' ) && function_exists( 'pll_default_language' ) ) {
-		$segments = explode( '/', trim( $request_path, '/' ) );
-		$first_segment = isset( $segments[0] ) ? $segments[0] : '';
-		$languages = pll_languages_list( array( 'fields' => 'slug' ) );
-		$default_lang = pll_default_language();
-
-		if ( $first_segment && is_array( $languages ) && in_array( $first_segment, $languages, true ) && $first_segment !== $default_lang ) {
-			return;
-		}
-	}
-
 	if ( preg_match( '#(^|/)doctors(/|$)#', $request_path ) ) {
 		wp_safe_redirect( home_url( '/' ), 301 );
 		exit;

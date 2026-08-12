@@ -73,7 +73,7 @@ $is_hebrew = ( $current_lang === 'he' || $current_lang === 'he_IL' || ( $is_rtl 
 
 					<!-- Blue Description Block -->
 					<div class="hebrew-hero-description">
-						<p class="hebrew-description-text">מרפאה פרטית מתקדמת, ממוקמת ליד איכילוב. צוות רופאים מומחים, זמינות מיידית, שירות אישי ומקצועי. מענה רפואי כולל למגוון תחומים, ללא המתנות ארוכות.</p>
+						<p class="hebrew-description-text">חדרים רופאים ממוקמים ליד איכילוב. צוות רופאים מומחים, זמינות מיידית, שירות אישי ומקצועי. מענה רפואי כולל למגוון תחומים, ללא המתנות ארוכות.</p>
 					</div>
 				</div>
 			</div>

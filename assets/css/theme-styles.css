@@ -3504,8 +3504,10 @@ margin-top:0
 	line-height: 1.6;
 }
 
+.footer-disclaimer .textwidget p { font-size: 1.4rem;}
+
 .footer-copyright {
-	font-size: 10px;
+	font-size: 1.3rem;
 	text-align: center;
 	color: #666;
 	line-height: 1.6;
@@ -4853,7 +4855,9 @@ margin-top:0
 	margin: 0;
 	text-align: right;
 	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+	direction: rtl;
 }
+:lang(en-GB) .hebrew-description-text { direction: ltr; text-align: left;}
 
 /* RTL Support */
 :dir(rtl) .hebrew-hero-block,

@@ -52,7 +52,7 @@ $is_hebrew = ( $current_lang === 'he' || $current_lang === 'he_IL' || ( $is_rtl 
 						<div class="hebrew-feature-icon">
 							<img src="https://topichilov.co.il/wp-content/uploads/2025/12/v3.svg" alt="Second Opinion" />
 						</div>
-						<p class="hebrew-feature-text">חוות דעת שנייה ממיטב הרופאים של איכילוב</p>
+						<p class="hebrew-feature-text">חוות דעת שנייה מהמומחים המובילים בתחומם</p>
 					</div>
 
 					<!-- Bottom Right Card: Confidentiality -->

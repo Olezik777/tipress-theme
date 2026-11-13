@@ -19,6 +19,8 @@
 
 .single-departments .ti-column.single-template-content .wp-block-columns-is-layout-flex .wp-block-column:first-child { display: none;}
 
+.gscf7-frontend-gdpr-notice { display:none!important;}
+
 
 
 :lang(en-GB) .wp-block-navigation ul { gap: 1em;}
@@ -1481,11 +1483,10 @@ ul.marker-blue li::marker {
 
 .doc-tile figure {
 	transition: .125s;
-	/* border-color: #e0e0e0!important; */
-	border: 2px solid #e0e0e0!important;
-	padding: 1px;
+	padding: 0;
 	border-radius: 5px;
 	overflow: hidden!important;
+	border: 2px solid #4d7ae7 !important;
 }
 .doc-tile figure:hover {
 	border-color: #018be6!important;
@@ -1496,6 +1497,7 @@ ul.marker-blue li::marker {
 
 .doc-tile img {
 	transform: scale(1.04);
+	vertical-align: middle;
 }
 
 .doc-tile-sideber .wp-block-group:not(.doc-label) p:nth-child(2){
